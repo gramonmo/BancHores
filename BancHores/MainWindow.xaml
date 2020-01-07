@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BancHores"
         mc:Ignorable="d" FontSize="16" FontFamily="Calibri"
-        Title="BancHores" Height="320" Width="700" ResizeMode="NoResize" WindowStyle="None">
+        Title="BancoHoras" Height="320" Width="700" ResizeMode="NoResize" WindowStyle="None" Loaded="Window_Loaded">
 
     <Window.Resources>
         <Style TargetType="{x:Type Button}">
@@ -16,7 +16,7 @@
             </Style.Resources>
         </Style>
     </Window.Resources>
-    <Grid Background="WhiteSmoke">
+    <Grid Background="#FFF0F0F0">
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
             <RowDefinition Height="Auto"/>
@@ -42,7 +42,7 @@
             <DockPanel.Effect>
                 <DropShadowEffect Direction="270" BlurRadius="9" Opacity="0.995" ShadowDepth="2"/>
             </DockPanel.Effect>
-            <Label Content="BANC HORES" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="32" 
+            <Label Content="BANCO HORAS" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="32" 
                    FontWeight="Bold" FontFamily="Verdana"/>
         </DockPanel>
 
@@ -53,24 +53,24 @@
 
         <Label Grid.Row="1" Grid.Column="2" Content="   __   " Margin="0,23,0,0"/>
 
-        <Button x:Name="btSortida" Grid.Row="1" Grid.Column="3" Content="Marcar Sortida" MinHeight="30"
+        <Button x:Name="btSalida" Grid.Row="1" Grid.Column="3" Content="Marcar Salida" MinHeight="30"
                 MinWidth="130" FontWeight="SemiBold" Background="#FF8EFFCA" BorderBrush="Black" 
                 Margin="10, 30, 10,0"/>
-        <Label x:Name="lbSortida" Grid.Row="2" Grid.Column="3" Content="Sortida:" FontSize="12" Visibility="Visible"/>
+        <Label x:Name="lbSalida" Grid.Row="2" Grid.Column="3" Content="Salida:" FontSize="12" Visibility="Visible"/>
 
         <Separator Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="3" Margin="10"/>
 
-        <Button x:Name="btSumarHores" Grid.Row="4" Grid.Column="1" Content="+ H.Treballades" MinHeight="30" 
+        <Button x:Name="btSumarHoras" Grid.Row="4" Grid.Column="1" Content="+ H.Trabajadas" MinHeight="30" 
                 MinWidth="130" FontWeight="SemiBold" Background="#FF8EF5FF" BorderBrush="Black" 
                 Margin="10"/>
-        <Button x:Name="btRestarHores" Grid.Row="5" Grid.Column="1" Content="- H.Treballades" MinHeight="30" 
+        <Button x:Name="btRestarHoras" Grid.Row="5" Grid.Column="1" Content="- H.Trabajadas" MinHeight="30" 
                 MinWidth="130" FontWeight="SemiBold" Background="#FF8EF5FF" BorderBrush="Black" 
                 Margin="10"/>
 
-        <Button x:Name="btSumarDeute" Grid.Row="4" Grid.Column="3" Content="+ H.Deute" MinHeight="30" 
+        <Button x:Name="btSumarDeuda" Grid.Row="4" Grid.Column="3" Content="+ H.Deuda" MinHeight="30" 
                 MinWidth="130" FontWeight="SemiBold" Background="#FFE4B964" BorderBrush="Black" 
                 Margin="10"/>
-        <Button x:Name="btRestarDeute" Grid.Row="5" Grid.Column="3" Content="- H.Deute" MinHeight="30" 
+        <Button x:Name="btRestarDeuda" Grid.Row="5" Grid.Column="3" Content="- H.Deuda" MinHeight="30" 
                 MinWidth="130" FontWeight="SemiBold" Background="#FFE4B964" BorderBrush="Black" 
                 Margin="10"/>
 
@@ -78,7 +78,7 @@
         <Label Grid.Row="5" Grid.Column="2" Content="   __   " Margin="0,4,0,0"/>
 
         <!-- TAULA RESUM-->
-        <Grid x:Name="taula" Grid.Row="1" Grid.Column="4" Grid.RowSpan="5" Margin="30,15" >
+        <Grid x:Name="tablaResumen" Grid.Row="1" Grid.Column="4" Grid.RowSpan="5" Margin="30,15" >
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
@@ -94,33 +94,36 @@
             <Rectangle Grid.Row="0" Grid.Column="0" Grid.RowSpan="5" Grid.ColumnSpan="2" Stroke="Black" StrokeThickness="2" Fill="Transparent" />
 
             <Rectangle Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Stroke="Black" StrokeThickness="2" Fill="#FF50DC9B"/>
-            <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Content="RESUM" FontSize="28" 
+            <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Content="RESUMEN" FontSize="28" 
                     FontWeight="Bold" FontFamily="Verdana" HorizontalAlignment="Center"/>
 
             <Rectangle Grid.Row="1" Grid.Column="0" Stroke="Black" Fill="Transparent"/>
-            <Label Grid.Row="1" Grid.Column="0" Content="Hores treballades aquest mes"/>
+            <Label Grid.Row="1" Grid.Column="0" Content="Horas trabajadas este mes"/>
             <Rectangle Grid.Row="1" Grid.Column="1" Stroke="Black" Fill="Transparent"/>
-            <Label x:Name="lbHoresMes" Grid.Row="1" Grid.Column="1" Content="0" HorizontalAlignment="Center"/>
+            <Label x:Name="lbHorasMes" Grid.Row="1" Grid.Column="1" Content="0" HorizontalAlignment="Center"/>
 
             <Rectangle Grid.Row="2" Grid.Column="0" Stroke="Black" Fill="Transparent"/>
-            <Label Grid.Row="2" Grid.Column="0" Content="Hores treballades setmana"/>
+            <Label Grid.Row="2" Grid.Column="0" Content="Horas trabajadas semana"/>
             <Rectangle Grid.Row="2" Grid.Column="1" Stroke="Black" Fill="Transparent"/>
-            <Label x:Name="lbHoresSetmana" Grid.Row="2" Grid.Column="1" Content="0" HorizontalAlignment="Center"/>
+            <Label x:Name="lbHorasSemana" Grid.Row="2" Grid.Column="1" Content="0" HorizontalAlignment="Center"/>
 
             <Rectangle Grid.Row="3" Grid.Column="0" Stroke="Black" Fill="Transparent"/>
-            <Label Grid.Row="3" Grid.Column="0" Content="Acumulat banc hores"/>
+            <Label Grid.Row="3" Grid.Column="0" Content="Acumulado banco horas" Foreground="Blue" FontWeight="SemiBold"/>
             <Rectangle Grid.Row="3" Grid.Column="1" Stroke="Black" Fill="Transparent"/>
-            <Label x:Name="lbHoresAcumulades" Grid.Row="3" Grid.Column="1" Content="0" HorizontalAlignment="Center"/>
+            <Label x:Name="lbHorasAcumuladas" Grid.Row="3" Grid.Column="1" Content="0" Foreground="Blue" FontWeight="SemiBold" HorizontalAlignment="Center"/>
 
             <Rectangle Grid.Row="4" Grid.Column="0" Stroke="Black" Fill="Transparent"/>
-            <Label Grid.Row="4" Grid.Column="0" Content="Hores deute"/>
+            <Label Grid.Row="4" Grid.Column="0" Content="Horas deuda" Foreground="Red" FontWeight="SemiBold"/>
             <Rectangle Grid.Row="4" Grid.Column="1" Stroke="Black" Fill="Transparent"/>
-            <Label x:Name="lbHoresDeute" Grid.Row="4" Grid.Column="1" Content="0" HorizontalAlignment="Center"/>
+            <Label x:Name="lbHorasDeuda" Grid.Row="4" Grid.Column="1" Content="0" Foreground="Red" FontWeight="SemiBold" HorizontalAlignment="Center"/>
         </Grid>
-        
+        <!-- FI TAULA RESUM -->
+
+        <Label x:Name="lbFecha" Grid.Row="6" Grid.Column="4" Content="Fecha Aqui" HorizontalAlignment="Right" VerticalAlignment="Bottom"/>
+
         <Label x:Name="lbClose" Grid.Row="0" Grid.Column="4" Content="X" VerticalAlignment="Top" 
                HorizontalAlignment="Right" FontSize="20" FontWeight="Bold" FontFamily="Verdana"
-               Cursor="Hand">
+               Cursor="Hand" MouseDown="lbClose_MouseDown">
             <Label.Style>
                 <Style TargetType="{x:Type Label}">
                     <Setter Property="Foreground" Value="Black"/>
@@ -132,6 +135,5 @@
                 </Style>
             </Label.Style>
         </Label>
-        
     </Grid>
 </Window>

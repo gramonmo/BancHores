@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BancHores.Clases;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,7 +23,27 @@ namespace BancHores
     {
         public MainWindow()
         {
-            InitializeComponent();
+            InitializeComponent();           
         }
+
+        MetodosGenerales metodosGenerales = new MetodosGenerales();
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            metodosGenerales.InsertarFecha(lbFecha);
+        }      
+
+        private void lbClose_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            this.Close();
+        }
+
+        // Permite que se pueda arrastrar la ventana haciendo click en qualquier lado.
+        protected override void OnMouseLeftButtonDown(MouseButtonEventArgs e)
+        {
+            base.OnMouseLeftButtonDown(e);
+            this.DragMove();
+        }
+
     }
 }
