@@ -1,0 +1,137 @@
+﻿<Window x:Class="BancHores.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BancHores"
+        mc:Ignorable="d" FontSize="16" FontFamily="Calibri"
+        Title="BancHores" Height="320" Width="700" ResizeMode="NoResize" WindowStyle="None">
+
+    <Window.Resources>
+        <Style TargetType="{x:Type Button}">
+            <Style.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="15" />
+                </Style>
+            </Style.Resources>
+        </Style>
+    </Window.Resources>
+    <Grid Background="WhiteSmoke">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="10"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="20"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="10"/>
+        </Grid.ColumnDefinitions>
+
+        <Rectangle Grid.Row="0" Grid.Column="0" Grid.RowSpan="8" Grid.ColumnSpan="6" Stroke="Black"/>
+
+        <DockPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="6" Background="#FF50DC9B">
+            <DockPanel.Effect>
+                <DropShadowEffect Direction="270" BlurRadius="9" Opacity="0.995" ShadowDepth="2"/>
+            </DockPanel.Effect>
+            <Label Content="BANC HORES" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="32" 
+                   FontWeight="Bold" FontFamily="Verdana"/>
+        </DockPanel>
+
+        <Button x:Name="btEntrada" Grid.Row="1" Grid.Column="1" Content="Marcar Entrada" MinHeight="30" 
+                MinWidth="130" FontWeight="SemiBold" Background="#FF8EFFCA" BorderBrush="Black" 
+                Margin="10, 30, 10,0"/>
+        <Label x:Name="lbEntrada" Grid.Row="2" Grid.Column="1" Content="Entrada:" FontSize="12" Visibility="Visible"/>
+
+        <Label Grid.Row="1" Grid.Column="2" Content="   __   " Margin="0,23,0,0"/>
+
+        <Button x:Name="btSortida" Grid.Row="1" Grid.Column="3" Content="Marcar Sortida" MinHeight="30"
+                MinWidth="130" FontWeight="SemiBold" Background="#FF8EFFCA" BorderBrush="Black" 
+                Margin="10, 30, 10,0"/>
+        <Label x:Name="lbSortida" Grid.Row="2" Grid.Column="3" Content="Sortida:" FontSize="12" Visibility="Visible"/>
+
+        <Separator Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="3" Margin="10"/>
+
+        <Button x:Name="btSumarHores" Grid.Row="4" Grid.Column="1" Content="+ H.Treballades" MinHeight="30" 
+                MinWidth="130" FontWeight="SemiBold" Background="#FF8EF5FF" BorderBrush="Black" 
+                Margin="10"/>
+        <Button x:Name="btRestarHores" Grid.Row="5" Grid.Column="1" Content="- H.Treballades" MinHeight="30" 
+                MinWidth="130" FontWeight="SemiBold" Background="#FF8EF5FF" BorderBrush="Black" 
+                Margin="10"/>
+
+        <Button x:Name="btSumarDeute" Grid.Row="4" Grid.Column="3" Content="+ H.Deute" MinHeight="30" 
+                MinWidth="130" FontWeight="SemiBold" Background="#FFE4B964" BorderBrush="Black" 
+                Margin="10"/>
+        <Button x:Name="btRestarDeute" Grid.Row="5" Grid.Column="3" Content="- H.Deute" MinHeight="30" 
+                MinWidth="130" FontWeight="SemiBold" Background="#FFE4B964" BorderBrush="Black" 
+                Margin="10"/>
+
+        <Label Grid.Row="4" Grid.Column="2" Content="   __   " Margin="0,4,0,0"/>
+        <Label Grid.Row="5" Grid.Column="2" Content="   __   " Margin="0,4,0,0"/>
+
+        <!-- TAULA RESUM-->
+        <Grid x:Name="taula" Grid.Row="1" Grid.Column="4" Grid.RowSpan="5" Margin="30,15" >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="45"/>
+            </Grid.ColumnDefinitions>
+
+            <Rectangle Grid.Row="0" Grid.Column="0" Grid.RowSpan="5" Grid.ColumnSpan="2" Stroke="Black" StrokeThickness="2" Fill="Transparent" />
+
+            <Rectangle Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Stroke="Black" StrokeThickness="2" Fill="#FF50DC9B"/>
+            <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Content="RESUM" FontSize="28" 
+                    FontWeight="Bold" FontFamily="Verdana" HorizontalAlignment="Center"/>
+
+            <Rectangle Grid.Row="1" Grid.Column="0" Stroke="Black" Fill="Transparent"/>
+            <Label Grid.Row="1" Grid.Column="0" Content="Hores treballades aquest mes"/>
+            <Rectangle Grid.Row="1" Grid.Column="1" Stroke="Black" Fill="Transparent"/>
+            <Label x:Name="lbHoresMes" Grid.Row="1" Grid.Column="1" Content="0" HorizontalAlignment="Center"/>
+
+            <Rectangle Grid.Row="2" Grid.Column="0" Stroke="Black" Fill="Transparent"/>
+            <Label Grid.Row="2" Grid.Column="0" Content="Hores treballades setmana"/>
+            <Rectangle Grid.Row="2" Grid.Column="1" Stroke="Black" Fill="Transparent"/>
+            <Label x:Name="lbHoresSetmana" Grid.Row="2" Grid.Column="1" Content="0" HorizontalAlignment="Center"/>
+
+            <Rectangle Grid.Row="3" Grid.Column="0" Stroke="Black" Fill="Transparent"/>
+            <Label Grid.Row="3" Grid.Column="0" Content="Acumulat banc hores"/>
+            <Rectangle Grid.Row="3" Grid.Column="1" Stroke="Black" Fill="Transparent"/>
+            <Label x:Name="lbHoresAcumulades" Grid.Row="3" Grid.Column="1" Content="0" HorizontalAlignment="Center"/>
+
+            <Rectangle Grid.Row="4" Grid.Column="0" Stroke="Black" Fill="Transparent"/>
+            <Label Grid.Row="4" Grid.Column="0" Content="Hores deute"/>
+            <Rectangle Grid.Row="4" Grid.Column="1" Stroke="Black" Fill="Transparent"/>
+            <Label x:Name="lbHoresDeute" Grid.Row="4" Grid.Column="1" Content="0" HorizontalAlignment="Center"/>
+        </Grid>
+        
+        <Label x:Name="lbClose" Grid.Row="0" Grid.Column="4" Content="X" VerticalAlignment="Top" 
+               HorizontalAlignment="Right" FontSize="20" FontWeight="Bold" FontFamily="Verdana"
+               Cursor="Hand">
+            <Label.Style>
+                <Style TargetType="{x:Type Label}">
+                    <Setter Property="Foreground" Value="Black"/>
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Foreground" Value="WhiteSmoke"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Label.Style>
+        </Label>
+        
+    </Grid>
+</Window>
