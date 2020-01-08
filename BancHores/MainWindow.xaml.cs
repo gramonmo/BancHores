@@ -1,9 +1,9 @@
-﻿using BancHores.Clases;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using BancHores;
 using System.Collections.Generic;
+using BancHores.Clases;
+using BancHores.ClasesBBDD;
 
 namespace BancHores
 {
@@ -18,6 +18,9 @@ namespace BancHores
         }
 
         MetodosGenerales metodosGenerales = new MetodosGenerales();
+        Persona gerard = new Persona("Gerard", 0, 0, 0, 0);
+
+
 
         // Permite que se pueda arrastrar la ventana haciendo click en qualquier lado.
         protected override void OnMouseLeftButtonDown(MouseButtonEventArgs e)
