@@ -30,7 +30,7 @@
                    FontWeight="Bold" FontFamily="Verdana"/>
         </DockPanel>
         
-        <DataGrid x:Name="dgRegistro" Grid.Row="1" Grid.Column="1" HorizontalScrollBarVisibility="Visible" Margin="0,15,0,0">
+        <DataGrid x:Name="dgRegistro" Grid.Row="1" Grid.Column="1" Margin="0,15,0,0">
             <DataGrid.Resources>
                 <Style TargetType="{x:Type DataGridColumnHeader}">
                     <Setter Property="Background" Value="#FF50DC9B"/>
