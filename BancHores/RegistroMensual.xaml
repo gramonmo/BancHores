@@ -4,19 +4,62 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BancHores"
-        mc:Ignorable="d"
-        Title="RegistroMensual" Height="450" Width="800">
+        mc:Ignorable="d" FontSize="16" FontFamily="Calibri" WindowStartupLocation="CenterScreen"
+        Title="RegistroMensual" Height="450" Width="800" ResizeMode="NoResize" WindowStyle="None">
     <Grid Background="#FFF0F0F0">
         <Grid.RowDefinitions>
-            <RowDefinition Height="20"/>
+            <RowDefinition Height="50"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="20"/>
         </Grid.RowDefinitions>
 
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="20"/>
+            <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="20"/>
+            <ColumnDefinition Width="10"/>
         </Grid.ColumnDefinitions>
+
+        <Rectangle Grid.Row="0" Grid.Column="0" Grid.RowSpan="3" Grid.ColumnSpan="4" Stroke="Black"/>
+        
+        <DockPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="6" Background="#FF50DC9B">
+            <DockPanel.Effect>
+                <DropShadowEffect Direction="270" BlurRadius="9" Opacity="0.995" ShadowDepth="2"/>
+            </DockPanel.Effect>
+            <Label Content="REGISTRO MENSUAL" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="32" 
+                   FontWeight="Bold" FontFamily="Verdana"/>
+        </DockPanel>
+        
+        <DataGrid x:Name="dgRegistro" Grid.Row="1" Grid.Column="1" HorizontalScrollBarVisibility="Visible" Margin="0,15,0,0">
+            <DataGrid.Resources>
+                <Style TargetType="{x:Type DataGridColumnHeader}">
+                    <Setter Property="Background" Value="#FF50DC9B"/>
+                    <Setter Property="FontWeight" Value="Bold"/>
+                    <Setter Property="BorderThickness" Value="0,0,1,2"/>
+                    <Setter Property="BorderBrush" Value="Black"/>
+                </Style>
+            </DataGrid.Resources>
+
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Dia" Width="Auto" Binding="{Binding HuntID}"/>
+                <DataGridTextColumn Header="Horas" Width="Auto" Binding="{Binding Respawn}"/>
+                <DataGridTextColumn Header="Resumen Dia" Width="Auto" Binding="{Binding Respawn}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <Label x:Name="lbClose" Grid.Row="0" Grid.Column="2" Content="X" VerticalAlignment="Top" 
+               HorizontalAlignment="Right" FontSize="20" FontWeight="Bold" FontFamily="Verdana"
+               Cursor="Hand" MouseDown="lbClose_MouseDown">
+            <Label.Style>
+                <Style TargetType="{x:Type Label}">
+                    <Setter Property="Foreground" Value="Black"/>
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Foreground" Value="WhiteSmoke"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Label.Style>
+        </Label>
     </Grid>
 </Window>

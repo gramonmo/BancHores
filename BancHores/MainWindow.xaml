@@ -5,18 +5,20 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BancHores"
         mc:Ignorable="d" FontSize="16" FontFamily="Calibri"
-        Title="BancoHoras" Height="320" Width="700" ResizeMode="NoResize" WindowStyle="None" Loaded="Window_Loaded">
+        Title="BancoHoras" Height="320" Width="670" ResizeMode="NoResize" WindowStyle="None" Loaded="Window_Loaded">
 
     <Window.Resources>
         <Style TargetType="{x:Type Button}">
             <Style.Resources>
                 <Style TargetType="{x:Type Border}">
                     <Setter Property="CornerRadius" Value="15" />
+                    <Setter Property="BorderBrush" Value="Red"/>
+                    <Setter Property="BorderThickness" Value="3"/>
                 </Style>
             </Style.Resources>
         </Style>
     </Window.Resources>
-    <Grid Background="#FFF0F0F0">
+    <Grid Background="#FFF0F0F0" >
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
             <RowDefinition Height="Auto"/>
@@ -47,15 +49,13 @@
         </DockPanel>
 
         <Button x:Name="btEntrada" Grid.Row="1" Grid.Column="1" Content="Marcar Entrada" MinHeight="30" 
-                MinWidth="130" FontWeight="SemiBold" Background="#FF8EFFCA" BorderBrush="Black" 
-                Margin="10, 30, 10,0"/>
+                MinWidth="130" FontWeight="SemiBold" Background="#FF8EFFCA" BorderBrush="Black" Margin="10, 30, 10,0"/>
         <Label x:Name="lbEntrada" Grid.Row="2" Grid.Column="1" Content="Entrada:" FontSize="12" Visibility="Visible"/>
 
         <Label Grid.Row="1" Grid.Column="2" Content="   __   " Margin="0,23,0,0"/>
 
         <Button x:Name="btSalida" Grid.Row="1" Grid.Column="3" Content="Marcar Salida" MinHeight="30"
-                MinWidth="130" FontWeight="SemiBold" Background="#FF8EFFCA" BorderBrush="Black" 
-                Margin="10, 30, 10,0"/>
+                MinWidth="130" FontWeight="SemiBold" Background="#FF8EFFCA" BorderBrush="Black" Margin="10, 30, 10,0"/>
         <Label x:Name="lbSalida" Grid.Row="2" Grid.Column="3" Content="Salida:" FontSize="12" Visibility="Visible"/>
 
         <Separator Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="3" Margin="10"/>
@@ -77,8 +77,8 @@
         <Label Grid.Row="4" Grid.Column="2" Content="   __   " Margin="0,4,0,0"/>
         <Label Grid.Row="5" Grid.Column="2" Content="   __   " Margin="0,4,0,0"/>
 
-        <!-- TAULA RESUM-->
-        <Grid x:Name="tablaResumen" Grid.Row="1" Grid.Column="4" Grid.RowSpan="5" Margin="30,15" >
+        <!-- TABLA RESUMEN -->
+        <Grid x:Name="tablaResumen" Grid.Row="1" Grid.Column="4" Grid.RowSpan="5" Margin="30,15,0,40" >
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
@@ -117,7 +117,10 @@
             <Rectangle Grid.Row="4" Grid.Column="1" Stroke="Black" Fill="Transparent"/>
             <Label x:Name="lbHorasDeuda" Grid.Row="4" Grid.Column="1" Content="0" Foreground="Red" FontWeight="SemiBold" HorizontalAlignment="Center"/>
         </Grid>
-        <!-- FI TAULA RESUM -->
+        <!-- FIN TABLA RESUMEN -->
+
+        <Button x:Name="btRegistro" Grid.Row="5" Grid.Column="4" Content="Ver Registro" Height="30" Width="130" HorizontalAlignment="Right" VerticalAlignment="Bottom"
+                FontWeight="SemiBold" Background="#FF50DC9B" BorderBrush="Black" Margin="0,0,45,0" Click="btRegistro_Click"/>
 
         <Label x:Name="lbFecha" Grid.Row="6" Grid.Column="4" Content="Fecha Aqui" HorizontalAlignment="Right" VerticalAlignment="Bottom"/>
 

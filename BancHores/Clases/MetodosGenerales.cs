@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace BancHores.Clases
@@ -42,6 +43,12 @@ namespace BancHores.Clases
             label.Content = $"{dia} {fecha.ToString("dd/mm/yyyy")}";
         }
 
+        public void ocultarElementos(Label lbEntrada, Label lbSalida)
+        {
+            lbEntrada.Visibility = Visibility.Hidden;
+            lbSalida.Visibility = Visibility.Hidden;
+
+        }
 
     }
 }
