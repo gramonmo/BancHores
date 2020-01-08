@@ -26,6 +26,8 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="10"/>
         </Grid.RowDefinitions>
@@ -58,27 +60,30 @@
                 MinWidth="130" FontWeight="SemiBold" Background="#FF8EFFCA" BorderBrush="Black" Margin="10, 30, 10,0"/>
         <Label x:Name="lbSalida" Grid.Row="2" Grid.Column="3" Content="Salida:" FontSize="12" Visibility="Visible"/>
 
-        <Separator Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="3" Margin="10"/>
-
-        <Button x:Name="btSumarHoras" Grid.Row="4" Grid.Column="1" Content="+ H.Trabajadas" MinHeight="30" 
+        <Button x:Name="btPausa" Grid.Row="3" Grid.Column="1" Content="PAUSA" MinHeight="30" 
                 MinWidth="130" FontWeight="SemiBold" Background="#FF8EF5FF" BorderBrush="Black" 
-                Margin="10"/>
-        <Button x:Name="btRestarHoras" Grid.Row="5" Grid.Column="1" Content="- H.Trabajadas" MinHeight="30" 
-                MinWidth="130" FontWeight="SemiBold" Background="#FF8EF5FF" BorderBrush="Black" 
-                Margin="10"/>
+                Margin="10,10,10,0"/>
+        <Label x:Name="lbPausa" Grid.Row="4" Grid.Column="1" Content="Ini pausa: 00:00" FontSize="12" Visibility="Visible"/>
 
-        <Button x:Name="btSumarDeuda" Grid.Row="4" Grid.Column="3" Content="+ H.Deuda" MinHeight="30" 
+        <Button x:Name="btContinuar" Grid.Row="3" Grid.Column="3" Content="CONTINUAR" MinHeight="30" 
+                MinWidth="130" FontWeight="SemiBold" Background="#FF8EF5FF" BorderBrush="Black" 
+                Margin="10,10,10,0"/>
+        <Label x:Name="lbContinuar" Grid.Row="4" Grid.Column="3" Content="Fin pausa: 00:00" FontSize="12" Visibility="Visible"/>
+
+        <Separator Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="3" Margin="10"/>
+
+        <Button x:Name="btSumarDeuda" Grid.Row="6" Grid.Column="1" Content="+ H.Deuda" MinHeight="30" 
                 MinWidth="130" FontWeight="SemiBold" Background="#FFE4B964" BorderBrush="Black" 
                 Margin="10"/>
-        <Button x:Name="btRestarDeuda" Grid.Row="5" Grid.Column="3" Content="- H.Deuda" MinHeight="30" 
+        <Button x:Name="btRestarDeuda" Grid.Row="6" Grid.Column="3" Content="- H.Deuda" MinHeight="30" 
                 MinWidth="130" FontWeight="SemiBold" Background="#FFE4B964" BorderBrush="Black" 
                 Margin="10"/>
 
-        <Label Grid.Row="4" Grid.Column="2" Content="   __   " Margin="0,4,0,0"/>
-        <Label Grid.Row="5" Grid.Column="2" Content="   __   " Margin="0,4,0,0"/>
+        <Label Grid.Row="3" Grid.Column="2" Content="   __   " Margin="0,4,0,0"/>
+        <Label Grid.Row="6" Grid.Column="2" Content="   __   " Margin="0,4,0,0"/>
 
         <!-- TABLA RESUMEN -->
-        <Grid x:Name="tablaResumen" Grid.Row="1" Grid.Column="4" Grid.RowSpan="5" Margin="30,15,0,40" >
+        <Grid x:Name="tablaResumen" Grid.Row="1" Grid.Column="4" Grid.RowSpan="5" Margin="30,15,0,10" >
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
@@ -119,10 +124,10 @@
         </Grid>
         <!-- FIN TABLA RESUMEN -->
 
-        <Button x:Name="btRegistro" Grid.Row="5" Grid.Column="4" Content="Ver Registro" Height="30" Width="130" HorizontalAlignment="Right" VerticalAlignment="Bottom"
+        <Button x:Name="btRegistro" Grid.Row="6" Grid.Column="4" Content="Ver Registro" Height="30" Width="130" HorizontalAlignment="Right"
                 FontWeight="SemiBold" Background="#FF50DC9B" BorderBrush="Black" Margin="0,0,45,0" Click="btRegistro_Click"/>
 
-        <Label x:Name="lbFecha" Grid.Row="6" Grid.Column="4" Content="Fecha Aqui" HorizontalAlignment="Right" VerticalAlignment="Bottom"/>
+        <Label x:Name="lbFecha" Grid.Row="7" Grid.Column="4" Content="Fecha Aqui" HorizontalAlignment="Right" VerticalAlignment="Bottom"/>
 
         <Label x:Name="lbClose" Grid.Row="0" Grid.Column="4" Content="X" VerticalAlignment="Top" 
                HorizontalAlignment="Right" FontSize="20" FontWeight="Bold" FontFamily="Verdana"

@@ -43,12 +43,13 @@ namespace BancHores.Clases
             label.Content = $"{dia} {fecha.ToString("dd/mm/yyyy")}";
         }
 
-        public void ocultarElementos(Label lbEntrada, Label lbSalida)
+        public void ocultarElementos(Label[] labels)
         {
-            lbEntrada.Visibility = Visibility.Hidden;
-            lbSalida.Visibility = Visibility.Hidden;
+            foreach (var lb in labels)
+            {
+                lb.Visibility = Visibility.Hidden;
+            }
 
         }
-
     }
 }
