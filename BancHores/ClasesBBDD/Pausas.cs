@@ -13,14 +13,6 @@ namespace BancHores.ClasesBBDD
         public DateTime fin { get; set; }
         public int pausaTotal { get; set; }
 
-        public Pausas(DateTime fecha, DateTime inicio, DateTime fin, int pausaTotal)
-        {
-            this.fecha = fecha;
-            this.inicio = inicio;
-            this.fin = fin;
-            this.pausaTotal = pausaTotal;
-        }
-
     }
 
 }

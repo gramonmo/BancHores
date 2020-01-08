@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
+using System.Windows.Shapes;
 
 namespace BancHores.Clases
 {
@@ -43,13 +45,20 @@ namespace BancHores.Clases
             label.Content = $"{dia} {fecha.ToString("dd/mm/yyyy")}";
         }
 
-        public void ocultarElementos(Label[] labels)
+        public void OcultarElementos(Label[] labels)
         {
             foreach (var lb in labels)
             {
                 lb.Visibility = Visibility.Hidden;
             }
+        }
 
+
+        public void cambiarColorEllipse(Ellipse ellipse, string hexColor)
+        {
+            SolidColorBrush pincel = new SolidColorBrush();
+            pincel = (SolidColorBrush)(new BrushConverter().ConvertFrom(hexColor));
+            ellipse.Fill = pincel;
         }
     }
 }

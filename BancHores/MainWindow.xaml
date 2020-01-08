@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BancHores"
         mc:Ignorable="d" FontSize="16" FontFamily="Calibri"
-        Title="BancoHoras" Height="320" Width="670" ResizeMode="NoResize" WindowStyle="None" Loaded="Window_Loaded">
+        Title="BancoHoras" Height="350" Width="700" ResizeMode="NoResize" WindowStyle="None" Loaded="Window_Loaded">
 
     <Window.Resources>
         <Style TargetType="{x:Type Button}">
@@ -40,7 +40,7 @@
             <ColumnDefinition Width="10"/>
         </Grid.ColumnDefinitions>
 
-        <Rectangle Grid.Row="0" Grid.Column="0" Grid.RowSpan="8" Grid.ColumnSpan="6" Stroke="Black"/>
+        <Rectangle Grid.Row="0" Grid.Column="0" Grid.RowSpan="10" Grid.ColumnSpan="6" Stroke="Black"/>
 
         <DockPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="6" Background="#FF50DC9B">
             <DockPanel.Effect>
@@ -50,34 +50,41 @@
                    FontWeight="Bold" FontFamily="Verdana"/>
         </DockPanel>
 
-        <Button x:Name="btEntrada" Grid.Row="1" Grid.Column="1" Content="Marcar Entrada" MinHeight="30" 
-                MinWidth="130" FontWeight="SemiBold" Background="#FF8EFFCA" BorderBrush="Black" Margin="10, 30, 10,0"/>
+        <Button x:Name="btEntrada" Grid.Row="1" Grid.Column="1" Content="Marcar Entrada" MaxHeight="30" 
+                MaxWidth="140" FontWeight="SemiBold" Background="#FF8EFFCA" BorderBrush="Black" Margin="10, 30, 10,0" Click="btEntrada_Click"/>
         <Label x:Name="lbEntrada" Grid.Row="2" Grid.Column="1" Content="Entrada:" FontSize="12" Visibility="Visible"/>
 
         <Label Grid.Row="1" Grid.Column="2" Content="   __   " Margin="0,23,0,0"/>
 
-        <Button x:Name="btSalida" Grid.Row="1" Grid.Column="3" Content="Marcar Salida" MinHeight="30"
-                MinWidth="130" FontWeight="SemiBold" Background="#FF8EFFCA" BorderBrush="Black" Margin="10, 30, 10,0"/>
+        <Button x:Name="btSalida" Grid.Row="1" Grid.Column="3" Content="Marcar Salida" MaxHeight="30"
+                MaxWidth="140" MinWidth="130" FontWeight="SemiBold" Background="#FF8EFFCA" BorderBrush="Black" 
+                IsEnabled="False" Margin="10, 30, 10,0"  Click="btSalida_Click"/>
         <Label x:Name="lbSalida" Grid.Row="2" Grid.Column="3" Content="Salida:" FontSize="12" Visibility="Visible"/>
 
-        <Button x:Name="btPausa" Grid.Row="3" Grid.Column="1" Content="PAUSA" MinHeight="30" 
-                MinWidth="130" FontWeight="SemiBold" Background="#FF8EF5FF" BorderBrush="Black" 
-                Margin="10,10,10,0"/>
+        <Button x:Name="btPausa" Grid.Row="3" Grid.Column="1" Content="PAUSA" MaxHeight="30" 
+                MaxWidth="140" FontWeight="SemiBold" Background="#FF8EF5FF" BorderBrush="Black" 
+                Margin="10,10,10,0" IsEnabled="False" Click="btPausa_Click"/>
         <Label x:Name="lbPausa" Grid.Row="4" Grid.Column="1" Content="Ini pausa: 00:00" FontSize="12" Visibility="Visible"/>
 
-        <Button x:Name="btContinuar" Grid.Row="3" Grid.Column="3" Content="CONTINUAR" MinHeight="30" 
-                MinWidth="130" FontWeight="SemiBold" Background="#FF8EF5FF" BorderBrush="Black" 
-                Margin="10,10,10,0"/>
+        <Button x:Name="btContinuar" Grid.Row="3" Grid.Column="3" Content="CONTINUAR" MaxHeight="30" 
+                MaxWidth="140" FontWeight="SemiBold" Background="#FF8EF5FF" BorderBrush="Black" 
+                IsEnabled="False" Margin="10,10,10,0"/>
         <Label x:Name="lbContinuar" Grid.Row="4" Grid.Column="3" Content="Fin pausa: 00:00" FontSize="12" Visibility="Visible"/>
 
         <Separator Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="3" Margin="10"/>
 
-        <Button x:Name="btSumarDeuda" Grid.Row="6" Grid.Column="1" Content="+ H.Deuda" MinHeight="30" 
-                MinWidth="130" FontWeight="SemiBold" Background="#FFE4B964" BorderBrush="Black" 
-                Margin="10"/>
-        <Button x:Name="btRestarDeuda" Grid.Row="6" Grid.Column="3" Content="- H.Deuda" MinHeight="30" 
-                MinWidth="130" FontWeight="SemiBold" Background="#FFE4B964" BorderBrush="Black" 
-                Margin="10"/>
+        <Button x:Name="btSumarDeuda" Grid.Row="6" Grid.Column="1" Content="+ H.Deuda" MaxHeight="30" 
+                MaxWidth="140" FontWeight="SemiBold" Background="#FFE4B964" BorderBrush="Black" 
+                Margin="0"/>
+        <Button x:Name="btRestarDeuda" Grid.Row="6" Grid.Column="3" Content="- H.Deuda" MaxHeight="30" 
+                MaxWidth="140" FontWeight="SemiBold" Background="#FFE4B964" BorderBrush="Black" 
+                Margin="0"/>
+
+        <Ellipse x:Name="elActividad" Grid.Row="7" Grid.Column="1" Grid.RowSpan="2" Height="35" Width="35"
+                 Fill="#FFCF2A2A" HorizontalAlignment="Left" Visibility="Visible"/>
+        <Label x:Name="lbActividad" Grid.Row="7" Grid.Column="1" Grid.RowSpan="2" Content="Not Working" VerticalAlignment="Center"
+               FontWeight="SemiBold" FontSize="18" Margin="40,0"/>
+
 
         <Label Grid.Row="3" Grid.Column="2" Content="   __   " Margin="0,4,0,0"/>
         <Label Grid.Row="6" Grid.Column="2" Content="   __   " Margin="0,4,0,0"/>
@@ -127,7 +134,8 @@
         <Button x:Name="btRegistro" Grid.Row="6" Grid.Column="4" Content="Ver Registro" Height="30" Width="130" HorizontalAlignment="Right"
                 FontWeight="SemiBold" Background="#FF50DC9B" BorderBrush="Black" Margin="0,0,45,0" Click="btRegistro_Click"/>
 
-        <Label x:Name="lbFecha" Grid.Row="7" Grid.Column="4" Content="Fecha Aqui" HorizontalAlignment="Right" VerticalAlignment="Bottom"/>
+        <Label x:Name="lbFecha" Grid.Row="8" Grid.Column="4" Content="Fecha Aqui" HorizontalAlignment="Right" 
+               VerticalAlignment="Bottom" Margin="0"/>
 
         <Label x:Name="lbClose" Grid.Row="0" Grid.Column="4" Content="X" VerticalAlignment="Top" 
                HorizontalAlignment="Right" FontSize="20" FontWeight="Bold" FontFamily="Verdana"

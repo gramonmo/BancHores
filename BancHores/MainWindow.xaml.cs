@@ -4,6 +4,7 @@ using System.Windows.Input;
 using System.Collections.Generic;
 using BancHores.Clases;
 using BancHores.ClasesBBDD;
+using System;
 
 namespace BancHores
 {
@@ -11,13 +12,12 @@ namespace BancHores
     {
         public MainWindow()
         {
-            InitializeComponent();           
-        }
+            InitializeComponent();
+        }     
 
         MetodosGenerales metodosGenerales = new MetodosGenerales();
         Persona gerard = new Persona("Gerard", 0, 0, 0, 0);
-
-
+        Jornada jornada = new Jornada();
 
         // Permite que se pueda arrastrar la ventana haciendo click en qualquier lado.
         protected override void OnMouseLeftButtonDown(MouseButtonEventArgs e)
@@ -37,8 +37,8 @@ namespace BancHores
             metodosGenerales.InsertarFecha(lbFecha);
 
             Label[] elementos = { lbEntrada, lbSalida, lbPausa, lbContinuar };
-            metodosGenerales.ocultarElementos(elementos);
-        }              
+            metodosGenerales.OcultarElementos(elementos);
+        }
 
         // Eventos botones
         private void btRegistro_Click(object sender, RoutedEventArgs e)
@@ -47,6 +47,45 @@ namespace BancHores
             ventanaRegistro.ShowDialog();
         }
 
+        private void btEntrada_Click(object sender, RoutedEventArgs e)
+        {
+            DateTime fechaYHora = DateTime.Now;
+            jornada.RegistrarMarcaje(jornada, fechaYHora, lbEntrada, 0);
+            btEntrada.IsEnabled = false;
+            btSalida.IsEnabled = true;
+            btPausa.IsEnabled = true;
+            btContinuar.IsEnabled = false;
+            metodosGenerales.cambiarColorEllipse(elActividad, "#FF49DA49"); // Color verde es: #FF49DA49
+            lbActividad.Content = "Jornada en curso";
+        }
 
+        private void btSalida_Click(object sender, RoutedEventArgs e)
+        {
+            DateTime fechaYHora = DateTime.Now;
+            if (MessageBox.Show($"Estás seguro que quieres marcar tu salida a las {fechaYHora.ToString("hh:mm")}", "Confirmar salida", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+            {
+                jornada.RegistrarMarcaje(jornada, fechaYHora, lbSalida, 1);
+                btEntrada.IsEnabled = true;
+                btSalida.IsEnabled = false;
+                btPausa.IsEnabled = false;
+                btContinuar.IsEnabled = false;             
+                lbEntrada.Visibility = Visibility.Hidden;
+                metodosGenerales.cambiarColorEllipse(elActividad, "#FF49DA49"); // Color rojo es: #FFCF2A2A
+                lbActividad.Content = "Jornada Finalizada";
+            }
+        }
+
+        private void btPausa_Click(object sender, RoutedEventArgs e)
+        {
+            DateTime fechaYHora = DateTime.Now;
+            if (MessageBox.Show($"Estás seguro que quieres pausar tu jornada {fechaYHora.ToString("hh:mm")}", "Confirmar pausa", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+            {
+                jornada.RegistrarMarcaje(jornada, fechaYHora, lbPausa, 2);
+                btPausa.IsEnabled = false;
+                btContinuar.IsEnabled = true;
+
+
+            }
+        }
     }
 }
