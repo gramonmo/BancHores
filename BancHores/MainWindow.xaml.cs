@@ -62,15 +62,14 @@ namespace BancHores
         private void btSalida_Click(object sender, RoutedEventArgs e)
         {
             DateTime fechaYHora = DateTime.Now;
-            if (MessageBox.Show($"Estás seguro que quieres marcar tu salida a las {fechaYHora.ToString("hh:mm")}", "Confirmar salida", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+            if (MessageBox.Show($"Estás seguro que quieres marcar tu salida?/n Són las {fechaYHora.ToString("HH:mm")}", "Confirmar salida", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
             {
                 jornada.RegistrarMarcaje(jornada, fechaYHora, lbSalida, 1);
                 btEntrada.IsEnabled = true;
                 btSalida.IsEnabled = false;
                 btPausa.IsEnabled = false;
                 btContinuar.IsEnabled = false;             
-                lbEntrada.Visibility = Visibility.Hidden;
-                metodosGenerales.cambiarColorEllipse(elActividad, "#FF49DA49"); // Color rojo es: #FFCF2A2A
+                metodosGenerales.cambiarColorEllipse(elActividad, "#FFCF2A2A"); // Color rojo es: #FFCF2A2A
                 lbActividad.Content = "Jornada Finalizada";
             }
         }
@@ -78,14 +77,25 @@ namespace BancHores
         private void btPausa_Click(object sender, RoutedEventArgs e)
         {
             DateTime fechaYHora = DateTime.Now;
-            if (MessageBox.Show($"Estás seguro que quieres pausar tu jornada {fechaYHora.ToString("hh:mm")}", "Confirmar pausa", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+            if (MessageBox.Show("Estás seguro que quieres pausar tu jornada?", "Confirmar pausa", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
             {
                 jornada.RegistrarMarcaje(jornada, fechaYHora, lbPausa, 2);
                 btPausa.IsEnabled = false;
                 btContinuar.IsEnabled = true;
-
-
+                metodosGenerales.cambiarColorEllipse(elActividad, "#FF2D2DE8"); // Color azul es: #FF2D2DE8
+                lbActividad.Content = "Jornada Pausada";
             }
+        }
+
+        private void btContinuar_Click(object sender, RoutedEventArgs e)
+        {
+            DateTime fechaYHora = DateTime.Now;
+            jornada.RegistrarMarcaje(jornada, fechaYHora, lbContinuar, 3);
+            btPausa.IsEnabled = true;
+            btContinuar.IsEnabled = false;
+            metodosGenerales.cambiarColorEllipse(elActividad, "#FF49DA49"); // Color verde es: #FF49DA49
+            lbActividad.Content = "Jornada en curso";
+
         }
     }
 }

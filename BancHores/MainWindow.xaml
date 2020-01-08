@@ -68,7 +68,7 @@
 
         <Button x:Name="btContinuar" Grid.Row="3" Grid.Column="3" Content="CONTINUAR" MaxHeight="30" 
                 MaxWidth="140" FontWeight="SemiBold" Background="#FF8EF5FF" BorderBrush="Black" 
-                IsEnabled="False" Margin="10,10,10,0"/>
+                IsEnabled="False" Margin="10,10,10,0" Click="btContinuar_Click"/>
         <Label x:Name="lbContinuar" Grid.Row="4" Grid.Column="3" Content="Fin pausa: 00:00" FontSize="12" Visibility="Visible"/>
 
         <Separator Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="3" Margin="10"/>
@@ -81,9 +81,9 @@
                 Margin="0"/>
 
         <Ellipse x:Name="elActividad" Grid.Row="7" Grid.Column="1" Grid.RowSpan="2" Height="35" Width="35"
-                 Fill="#FFCF2A2A" HorizontalAlignment="Left" Visibility="Visible"/>
-        <Label x:Name="lbActividad" Grid.Row="7" Grid.Column="1" Grid.RowSpan="2" Content="Not Working" VerticalAlignment="Center"
-               FontWeight="SemiBold" FontSize="18" Margin="40,0"/>
+                 Fill="#FFCF2A2A" HorizontalAlignment="Left" Stroke="Black" Visibility="Visible"/>
+        <Label x:Name="lbActividad" Grid.Row="7" Grid.Column="1" Grid.RowSpan="2" Content="Fuera de jornada" VerticalAlignment="Center"
+               FontWeight="SemiBold" FontSize="18" Margin="40,0,0,0"/>
 
 
         <Label Grid.Row="3" Grid.Column="2" Content="   __   " Margin="0,4,0,0"/>
