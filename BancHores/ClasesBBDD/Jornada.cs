@@ -10,6 +10,8 @@ namespace BancHores.ClasesBBDD
         public DateTime fecha { get; set; }
         public DateTime entrada { get; set; }
         public DateTime salida { get; set; }
+        public DateTime inicioPausa { get; set; }
+        public DateTime finPausa { get; set; }
         public int horasTotales { get; set; }
         public string resumen { get; set; }
 

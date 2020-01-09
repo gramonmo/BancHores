@@ -1,0 +1,51 @@
+﻿<Window x:Class="BancHores.VentanaTrabajoReaunudado"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BancHores"
+        mc:Ignorable="d" FontSize="17" FontFamily="Calibri" WindowStartupLocation="CenterScreen"
+        Title="Completar Pausa" Height="190" Width="410">
+    <Grid Background="#FFF0F0F0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="10"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="20"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="20"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="10"/>
+        </Grid.ColumnDefinitions>
+
+        <TextBlock Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="4" Margin="0,0,0,10">
+            Intentas terminar tu jornada con una pausa en curso.
+            <LineBreak />
+            Introduce a que hora has retomado el trabajo.
+        </TextBlock>
+
+        <Label Grid.Row="2" Grid.Column="1" Content="Hora" VerticalAlignment="Bottom"/>
+        <ComboBox x:Name="cbHora" Grid.Row="3" Grid.Column="1" Height="25" Width="65">
+
+        </ComboBox>
+
+        <Label Grid.Row="3" Grid.Column="2" Content=" : "/>
+
+        <Label Grid.Row="2" Grid.Column="3" Content="Minuto" VerticalAlignment="Bottom"/>
+        <ComboBox x:Name="cbMinuto" Grid.Row="3" Grid.Column="3" Height="25" Width="65" ItemsSource="{Binding horas}">
+        </ComboBox>
+
+        <Button x:Name="btCancelar" Grid.Row="2" Grid.Column="4" Content="Cancelar" Height="30" Width="75" 
+                Margin="3" Click="btCancelar_Click"/>
+        <Button x:Name="btAceptar" Grid.Row="3" Grid.Column="4" Content="Aceptar" Height="30" Width="75" 
+                Margin="3"/>
+
+
+    </Grid>
+</Window>

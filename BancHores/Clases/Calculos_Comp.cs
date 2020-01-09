@@ -18,26 +18,27 @@ namespace BancHores.Clases
         // Retorna solamente la fecha del string que reciba
         public string ObtenerFechaDeString(string fechaYHora)
         {
-            return fechaYHora.Substring(0, 10);           
+            return fechaYHora.Substring(0, 10);
         }
 
         public string ObtenerHoraDeDateTime(DateTime fechaYHora)
         {
             return string.Format($"{fechaYHora.Hour}:{fechaYHora.Minute}");
         }
-        
-        // Retorna la hora del string que reciba
-        public string ObtenerHoraDeDateString(string fechaYHora)
+
+        // Retorna la hora del string que reciba en función del flag.
+        // flag=0 entrada/salida/pausa flag=1 pausa, flag=1 continuar
+        public string ObtenerHoraDeString(string fechaYHora, int flag)
         {
-            if(fechaYHora.Length == 18)
+            if (flag == 0)
             {
-                return fechaYHora.Substring(11, 4);
+                return fechaYHora.Split(' ')[1];
             }
             else
             {
-                return fechaYHora.Substring(11, 5);
+                return fechaYHora.Split(' ')[4];
             }
-            
+
         }
 
         // Comprueba si en el dia actual ya hay una entrada registrada.
@@ -58,7 +59,7 @@ namespace BancHores.Clases
             {
                 ultimaEntrada = "";
                 return false;
-            }         
+            }
         }
 
         // Comprueba si la ultima pausa está cerrada o sigue en curso. 

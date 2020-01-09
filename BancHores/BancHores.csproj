@@ -62,6 +62,9 @@
     <Compile Include="RegistroMensual.xaml.cs">
       <DependentUpon>RegistroMensual.xaml</DependentUpon>
     </Compile>
+    <Compile Include="VentanaTrabajoReaunudado.xaml.cs">
+      <DependentUpon>VentanaTrabajoReaunudado.xaml</DependentUpon>
+    </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -76,6 +79,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="RegistroMensual.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="VentanaTrabajoReaunudado.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

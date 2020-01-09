@@ -39,6 +39,8 @@ namespace BancHores
             EstablecerUI();
 
             Jornada test = new Jornada();
+            VentanaTrabajoReaunudado vent = new VentanaTrabajoReaunudado();
+            vent.ShowDialog();
             
         }
 
@@ -67,6 +69,11 @@ namespace BancHores
             DateTime fechaYHora = DateTime.Now;
             if (MessageBox.Show($"Estás seguro que quieres marcar tu salida?/n Són las {fechaYHora.ToString("HH:mm")}", "Confirmar salida", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
             {
+                //comprovar si hi ha pausa en curs
+                if (calc_comp.HayPaysaEnCurso())
+                {
+                    //mostrar finestra, obtenir dades i escriure al document de pausa
+                }
                 jornada.RegistrarMarcaje(jornada, fechaYHora, lbSalida, 1);
                 btEntrada.IsEnabled = true;
                 btSalida.IsEnabled = false;
@@ -114,7 +121,7 @@ namespace BancHores
             {
                 btEntrada.IsEnabled = false;
                 btSalida.IsEnabled = true;
-                string hora = calc_comp.ObtenerHoraDeDateString(ultimaEntrada);
+                string hora = calc_comp.ObtenerHoraDeString(ultimaEntrada, 0);
                 lbEntrada.Content = $"Entrada: {hora}";
                 if (calc_comp.HayPaysaEnCurso()) // Si hay una pausa en curso
                 {
