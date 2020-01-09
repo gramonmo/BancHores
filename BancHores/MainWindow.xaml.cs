@@ -17,6 +17,7 @@ namespace BancHores
 
         MetodosGenerales metodosGenerales = new MetodosGenerales();
         ControlArchivos ctrlArchivos = new ControlArchivos();
+        Calculos_Comp calc_comp = new Calculos_Comp();
         Jornada jornada = new Jornada();
 
         // Permite que se pueda arrastrar la ventana haciendo click en qualquier lado.
@@ -33,14 +34,12 @@ namespace BancHores
 
         // Window_Loaded, Para que se ejecute al abrir el programa
         private void Window_Loaded(object sender, RoutedEventArgs e)
-        {
-            metodosGenerales.InsertarFecha(lbFecha);
-
-            Label[] elementos = { lbEntrada, lbSalida, lbPausa, lbContinuar };
-            metodosGenerales.OcultarElementos(elementos);
+        {      
             ctrlArchivos.ComprovarArchivos();
+            EstablecerUI();
         }
 
+        #region Eventos Botones
         // Eventos botones
         private void btRegistro_Click(object sender, RoutedEventArgs e)
         {
@@ -98,5 +97,19 @@ namespace BancHores
             lbActividad.Content = "Jornada en curso";
 
         }
+        #endregion
+
+        #region Metodos
+        // Metodos
+        public void EstablecerUI()
+        {
+            metodosGenerales.InsertarFecha(lbFecha);
+            calc_comp.YaHayEntradaEseDia();
+            Label[] elementos = { lbEntrada, lbSalida, lbPausa, lbContinuar };
+            metodosGenerales.OcultarElementos(elementos);
+
+
+        }
+        #endregion
     }
 }

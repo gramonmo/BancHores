@@ -13,12 +13,11 @@ namespace BancHores.ClasesBBDD
         public int horasTotales { get; set; }
         public string resumen { get; set; }
 
+        ControlArchivos ctrlArchivos = new ControlArchivos();
+        Calculos_Comp calc_comp = new Calculos_Comp();
+
         // Retorna un String con la Hora y Minuto del DateTime que recibe como parametro
-        public string HoraToString(DateTime fechaYHora)
-        {
-            string hora = $"{fechaYHora.Hour}:{fechaYHora.Minute}";
-            return hora;
-        }
+        
 
         // Registra la hora del marcaje de la jornada y lo muestra en el label en función del flag
         // (flag=0 entrada, flag=1 salida, flag=2 pausa, flag=3 continuar)
@@ -30,9 +29,8 @@ namespace BancHores.ClasesBBDD
                 return;
             }
 
-            string hora = HoraToString(fechaYHora);
+            string hora = calc_comp.ObtenerHoraDeDateTime(fechaYHora);
             lbEscritura.Visibility = Visibility.Visible;
-            ControlArchivos ctrlArchivos = new ControlArchivos();
             if (flag == 0) // Entrada
             {
                 jornada.entrada = fechaYHora;
@@ -44,6 +42,7 @@ namespace BancHores.ClasesBBDD
                 jornada.salida = fechaYHora;
                 lbEscritura.Content = $"Salida: {hora}";
                 ctrlArchivos.EscribirEntradaSalida("Salidas.txt", fechaYHora);
+
             }
             else if (flag == 2) // Pausa
             {

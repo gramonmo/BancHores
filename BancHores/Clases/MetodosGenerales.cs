@@ -42,7 +42,6 @@ namespace BancHores.Clases
                     dia = "Domingo";
                     break;
             }
-
             label.Content = $"{dia} {fecha.ToString("dd/mm/yyyy")}";
         }
 

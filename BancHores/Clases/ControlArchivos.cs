@@ -27,6 +27,10 @@ namespace BancHores.Clases
             {
                 File.Create("Usuario.txt");
             }
+            if (!File.Exists("Registro.txt"))
+            {
+                File.Create("Registro.txt");
+            }
         }
 
         public void EscribirEntradaSalida(string path, DateTime fechaYHora)
