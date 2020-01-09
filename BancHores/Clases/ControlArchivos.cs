@@ -9,11 +9,31 @@ namespace BancHores.Clases
 {
     class ControlArchivos
     {
+        public void ComprovarArchivos()
+        {
+            if (!File.Exists("Entradas.txt"))
+            {
+                File.Create("Entradas.txt");
+            }
+            if (!File.Exists("Salidas.txt"))
+            {
+                File.Create("Salidas.txt");
+            }
+            if (!File.Exists("Pausas.txt"))
+            {
+                File.Create("Pausas.txt");
+            }
+            if (!File.Exists("Usuario.txt"))
+            {
+                File.Create("Usuario.txt");
+            }
+        }
 
         public void EscribirEntradaSalida(string path, DateTime fechaYHora)
         {
             StreamWriter sw = File.AppendText(path);
             sw.WriteLine(fechaYHora);
+            sw.Close();
         }
 
         // flag=0 Pausa, flag=1 continuar.
@@ -28,6 +48,7 @@ namespace BancHores.Clases
             {
                 sw.WriteLine(fechaYHora);
             }
+            sw.Close();
         }
 
         public string LeerUltimoRegistro(string path)

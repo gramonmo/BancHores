@@ -16,7 +16,7 @@ namespace BancHores
         }     
 
         MetodosGenerales metodosGenerales = new MetodosGenerales();
-        Persona gerard = new Persona("Gerard", 0, 0, 0, 0);
+        ControlArchivos ctrlArchivos = new ControlArchivos();
         Jornada jornada = new Jornada();
 
         // Permite que se pueda arrastrar la ventana haciendo click en qualquier lado.
@@ -38,7 +38,7 @@ namespace BancHores
 
             Label[] elementos = { lbEntrada, lbSalida, lbPausa, lbContinuar };
             metodosGenerales.OcultarElementos(elementos);
-            metodosGenerales.ComprovarArchivos();
+            ctrlArchivos.ComprovarArchivos();
         }
 
         // Eventos botones
