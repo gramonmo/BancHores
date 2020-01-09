@@ -38,6 +38,7 @@ namespace BancHores
 
             Label[] elementos = { lbEntrada, lbSalida, lbPausa, lbContinuar };
             metodosGenerales.OcultarElementos(elementos);
+            metodosGenerales.ComprovarArchivos();
         }
 
         // Eventos botones

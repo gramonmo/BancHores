@@ -58,6 +58,8 @@
     <Compile Include="ClasesBBDD\Jornada.cs" />
     <Compile Include="ClasesBBDD\Pausas.cs" />
     <Compile Include="ClasesBBDD\Persona.cs" />
+    <Compile Include="Clases\Calculos.cs" />
+    <Compile Include="Clases\ControlArchivos.cs" />
     <Compile Include="RegistroMensual.xaml.cs">
       <DependentUpon>RegistroMensual.xaml</DependentUpon>
     </Compile>

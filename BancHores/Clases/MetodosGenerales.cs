@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -53,12 +54,31 @@ namespace BancHores.Clases
             }
         }
 
-
         public void cambiarColorEllipse(Ellipse ellipse, string hexColor)
         {
             SolidColorBrush pincel = new SolidColorBrush();
             pincel = (SolidColorBrush)(new BrushConverter().ConvertFrom(hexColor));
             ellipse.Fill = pincel;
+        }
+
+        public void ComprovarArchivos()
+        {
+            if (!File.Exists("Entradas.txt"))
+            {
+                File.Create("Entradas.txt");
+            }
+            if (!File.Exists("Salidas.txt"))
+            {
+                File.Create("Salidas.txt");
+            }
+            if (!File.Exists("Pausas.txt"))
+            {
+                File.Create("Pausas.txt");
+            }
+            if (!File.Exists("Usuario.txt"))
+            {
+                File.Create("Usuario.txt");
+            }
         }
     }
 }
