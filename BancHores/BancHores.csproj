@@ -56,7 +56,6 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="ClasesBBDD\Jornada.cs" />
-    <Compile Include="ClasesBBDD\Pausas.cs" />
     <Compile Include="ClasesBBDD\Persona.cs" />
     <Compile Include="Clases\Calculos_Comp.cs" />
     <Compile Include="Clases\ControlArchivos.cs" />

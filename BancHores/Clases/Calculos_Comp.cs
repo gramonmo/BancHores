@@ -12,7 +12,7 @@ namespace BancHores.Clases
         // Retorna solamente la fecha del DateTime que recibe
         public string ObtenerFechaDeDateTime(DateTime fechaYHora)
         {
-            return fechaYHora.Date.ToString();
+            return fechaYHora.ToShortDateString();
         }
 
         // Retorna solamente la fecha del string que reciba
@@ -25,12 +25,30 @@ namespace BancHores.Clases
         {
             return string.Format($"{fechaYHora.Hour}:{fechaYHora.Minute}");
         }
+        public string ObtenerHoraDeDateString(string fechaYHora)
+        {
+            
+        }
 
+        // Comprueba si en el dia actual ya hay una entrada registrada.
+        // Retorna true si hay entrada ese dia, false en caso contrario.
         public bool YaHayEntradaEseDia()
         {
-            string fecha = DateTime.Now.Date.ToString();
+            string fecha = DateTime.Now.ToShortDateString();
             string ultimaEntrada = File.ReadLines("Entradas.txt").Last();
             if (ObtenerFechaDeString(ultimaEntrada) == fecha)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        // Comprueba si la ultima pausa está cerrada o sigue en curso. 
+        // Retorna true en caso de que esté abierta, false en caso de cerrada.
+        public bool PausaAbierta()
+        {
+            string ultimaEntrada = File.ReadLines("Entradas.txt").Last();
+            if (ultimaEntrada.Length < 25) // Eso significaria que la ultima pausa no está cerrada
             {
                 return true;
             }

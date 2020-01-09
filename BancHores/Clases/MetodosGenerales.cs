@@ -45,7 +45,7 @@ namespace BancHores.Clases
             label.Content = $"{dia} {fecha.ToString("dd/mm/yyyy")}";
         }
 
-        public void OcultarElementos(Label[] labels)
+        public void OcultarLabels(Label[] labels)
         {
             foreach (var lb in labels)
             {

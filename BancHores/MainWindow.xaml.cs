@@ -37,6 +37,9 @@ namespace BancHores
         {      
             ctrlArchivos.ComprovarArchivos();
             EstablecerUI();
+
+            Jornada test = new Jornada();
+            
         }
 
         #region Eventos Botones
@@ -70,7 +73,7 @@ namespace BancHores
                 btPausa.IsEnabled = false;
                 btContinuar.IsEnabled = false;             
                 metodosGenerales.cambiarColorEllipse(elActividad, "#FFCF2A2A"); // Color rojo es: #FFCF2A2A
-                lbActividad.Content = "Jornada Finalizada";
+                lbActividad.Content = "Jornada finalizada";
             }
         }
 
@@ -83,7 +86,7 @@ namespace BancHores
                 btPausa.IsEnabled = false;
                 btContinuar.IsEnabled = true;
                 metodosGenerales.cambiarColorEllipse(elActividad, "#FF2D2DE8"); // Color azul es: #FF2D2DE8
-                lbActividad.Content = "Jornada Pausada";
+                lbActividad.Content = "Jornada pausada";
             }
         }
 
@@ -105,9 +108,27 @@ namespace BancHores
         {
             metodosGenerales.InsertarFecha(lbFecha);
             calc_comp.YaHayEntradaEseDia();
-            Label[] elementos = { lbEntrada, lbSalida, lbPausa, lbContinuar };
-            metodosGenerales.OcultarElementos(elementos);
+            Label[] labels = { lbEntrada, lbSalida, lbPausa, lbContinuar };
+            metodosGenerales.OcultarLabels(labels);
+            if (calc_comp.YaHayEntradaEseDia())
+            {
+                btEntrada.IsEnabled = false;
+                btSalida.IsEnabled = true;
+                // llegir ultim registre, separar hora i escriure al label
 
+                if (calc_comp.PausaAbierta())
+                {
+                    btPausa.IsEnabled = false;
+                    btContinuar.IsEnabled = true;
+                    metodosGenerales.cambiarColorEllipse(elActividad, "#FF2D2DE8");
+                    lbActividad.Content = "Jornada pausada";
+                }
+                else
+                {
+                    metodosGenerales.cambiarColorEllipse(elActividad, "#FF49DA49");
+                    lbActividad.Content = "Jornada en curso";
+                }
+            }
 
         }
         #endregion
