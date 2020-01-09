@@ -58,7 +58,7 @@ namespace BancHores
             btSalida.IsEnabled = true;
             btPausa.IsEnabled = true;
             btContinuar.IsEnabled = false;
-            metodosGenerales.cambiarColorEllipse(elActividad, "#FF49DA49"); // Color verde es: #FF49DA49
+            metodosGenerales.cambiarColorEllipse(elActividad, "#FF49DA49"); // Pintamos Ellipse verde: #FF49DA49
             lbActividad.Content = "Jornada en curso";
         }
 
@@ -72,7 +72,7 @@ namespace BancHores
                 btSalida.IsEnabled = false;
                 btPausa.IsEnabled = false;
                 btContinuar.IsEnabled = false;             
-                metodosGenerales.cambiarColorEllipse(elActividad, "#FFCF2A2A"); // Color rojo es: #FFCF2A2A
+                metodosGenerales.cambiarColorEllipse(elActividad, "#FFCF2A2A"); // Pintamos Ellipse roja: #FFCF2A2A
                 lbActividad.Content = "Jornada finalizada";
             }
         }
@@ -85,7 +85,7 @@ namespace BancHores
                 jornada.RegistrarMarcaje(jornada, fechaYHora, lbPausa, 2);
                 btPausa.IsEnabled = false;
                 btContinuar.IsEnabled = true;
-                metodosGenerales.cambiarColorEllipse(elActividad, "#FF2D2DE8"); // Color azul es: #FF2D2DE8
+                metodosGenerales.cambiarColorEllipse(elActividad, "#FF2D2DE8"); // Pintamos Ellipse azul: #FF2D2DE8
                 lbActividad.Content = "Jornada pausada";
             }
         }
@@ -96,7 +96,7 @@ namespace BancHores
             jornada.RegistrarMarcaje(jornada, fechaYHora, lbContinuar, 3);
             btPausa.IsEnabled = true;
             btContinuar.IsEnabled = false;
-            metodosGenerales.cambiarColorEllipse(elActividad, "#FF49DA49"); // Color verde es: #FF49DA49
+            metodosGenerales.cambiarColorEllipse(elActividad, "#FF49DA49"); // Pintamos Ellipse verde: #FF49DA49
             lbActividad.Content = "Jornada en curso";
 
         }
@@ -107,27 +107,38 @@ namespace BancHores
         public void EstablecerUI()
         {
             metodosGenerales.InsertarFecha(lbFecha);
-            calc_comp.YaHayEntradaEseDia();
             Label[] labels = { lbEntrada, lbSalida, lbPausa, lbContinuar };
             metodosGenerales.OcultarLabels(labels);
-            if (calc_comp.YaHayEntradaEseDia())
+            string ultimaEntrada;
+            if (calc_comp.YaHayEntradaEseDia(out ultimaEntrada))
             {
                 btEntrada.IsEnabled = false;
                 btSalida.IsEnabled = true;
-                // llegir ultim registre, separar hora i escriure al label
-
-                if (calc_comp.PausaAbierta())
+                string hora = calc_comp.ObtenerHoraDeDateString(ultimaEntrada);
+                lbEntrada.Content = $"Entrada: {hora}";
+                if (calc_comp.HayPaysaEnCurso()) // Si hay una pausa en curso
                 {
                     btPausa.IsEnabled = false;
                     btContinuar.IsEnabled = true;
-                    metodosGenerales.cambiarColorEllipse(elActividad, "#FF2D2DE8");
+                    metodosGenerales.cambiarColorEllipse(elActividad, "#FF2D2DE8"); // Pintamos ellipse azul
                     lbActividad.Content = "Jornada pausada";
                 }
-                else
+                else // Si NO hay pausa en curso
                 {
-                    metodosGenerales.cambiarColorEllipse(elActividad, "#FF49DA49");
+                    btPausa.IsEnabled = true;
+                    btContinuar.IsEnabled = false;
+                    metodosGenerales.cambiarColorEllipse(elActividad, "#FF49DA49"); // Pintamos ellipse verde
                     lbActividad.Content = "Jornada en curso";
                 }
+            }
+            else
+            {
+                btEntrada.IsEnabled = true;
+                btSalida.IsEnabled = false;
+                btPausa.IsEnabled = true;
+                btContinuar.IsEnabled = true;
+                metodosGenerales.cambiarColorEllipse(elActividad, "#FFCF2A2A"); // Pintamos ellipse roja
+                lbActividad.Content = "Fuera de jornada";
             }
 
         }
