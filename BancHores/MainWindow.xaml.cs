@@ -37,11 +37,6 @@ namespace BancHores
         {      
             ctrlArchivos.ComprovarArchivos();
             EstablecerUI();
-
-            Jornada test = new Jornada();
-            VentanaTrabajoReaunudado vent = new VentanaTrabajoReaunudado();
-            vent.ShowDialog();
-            
         }
 
         #region Eventos Botones
@@ -67,12 +62,20 @@ namespace BancHores
         private void btSalida_Click(object sender, RoutedEventArgs e)
         {
             DateTime fechaYHora = DateTime.Now;
-            if (MessageBox.Show($"Estás seguro que quieres marcar tu salida?/n Són las {fechaYHora.ToString("HH:mm")}", "Confirmar salida", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+            if (MessageBox.Show($"Estás seguro que quieres marcar tu salida?{Environment.NewLine}Són las {fechaYHora.ToString("HH:mm")}", "Confirmar salida", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
             {
-                //comprovar si hi ha pausa en curs
+                // Si hay una pausa en curso, pregunta a que hora se ha vuelto a poner a trabajar.
                 if (calc_comp.HayPaysaEnCurso())
                 {
-                    //mostrar finestra, obtenir dades i escriure al document de pausa
+                    VentanaTrabajoReaunudado vent = new VentanaTrabajoReaunudado();
+                    vent.ShowDialog();
+
+                    // Si no Cierra la ventana emergente o cancela (la pausa sigue) deja de ejecutar la salida
+                    if (calc_comp.HayPaysaEnCurso())
+                    {
+                        MessageBox.Show("No se ha completado la pausa. No sé ha registrado la salida", "ATENCION!", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                        return;
+                    }
                 }
                 jornada.RegistrarMarcaje(jornada, fechaYHora, lbSalida, 1);
                 btEntrada.IsEnabled = true;
@@ -105,7 +108,6 @@ namespace BancHores
             btContinuar.IsEnabled = false;
             metodosGenerales.cambiarColorEllipse(elActividad, "#FF49DA49"); // Pintamos Ellipse verde: #FF49DA49
             lbActividad.Content = "Jornada en curso";
-
         }
         #endregion
 
@@ -142,12 +144,11 @@ namespace BancHores
             {
                 btEntrada.IsEnabled = true;
                 btSalida.IsEnabled = false;
-                btPausa.IsEnabled = true;
-                btContinuar.IsEnabled = true;
+                btPausa.IsEnabled = false;
+                btContinuar.IsEnabled = false;
                 metodosGenerales.cambiarColorEllipse(elActividad, "#FFCF2A2A"); // Pintamos ellipse roja
                 lbActividad.Content = "Fuera de jornada";
             }
-
         }
         #endregion
     }

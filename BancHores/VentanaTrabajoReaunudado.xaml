@@ -44,7 +44,7 @@
         <Button x:Name="btCancelar" Grid.Row="2" Grid.Column="4" Content="Cancelar" Height="30" Width="75" 
                 Margin="3" Click="btCancelar_Click"/>
         <Button x:Name="btAceptar" Grid.Row="3" Grid.Column="4" Content="Aceptar" Height="30" Width="75" 
-                Margin="3"/>
+                Margin="3" Click="btAceptar_Click"/>
 
 
     </Grid>

@@ -38,7 +38,6 @@ namespace BancHores.Clases
             {
                 return fechaYHora.Split(' ')[4];
             }
-
         }
 
         // Comprueba si en el dia actual ya hay una entrada registrada.
