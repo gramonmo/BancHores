@@ -128,13 +128,16 @@ namespace BancHores
             metodosGenerales.InsertarFecha(lbFecha);
             Label[] labels = { lbEntrada, lbSalida, lbPausa, lbContinuar };
             metodosGenerales.OcultarLabels(labels);
+            
             string ultimaEntrada;
             if (calculos_comp.YaHayEntradaEseDia(out ultimaEntrada))
             {
                 btEntrada.IsEnabled = false;
                 btSalida.IsEnabled = true;
-                Thread th = new Thread(MetodoThread);
-                th.Start();              
+                string hora = calculos_comp.ObtenerHoraDeString(ultimaEntrada, 0);
+                lbEntrada.Content = $"Entrada: {hora}";
+                lbEntrada.Visibility = Visibility.Visible;
+
                 if (calculos_comp.HayPausaEnCurso()) // Si hay una pausa en curso
                 {
                     btPausa.IsEnabled = false;
@@ -147,7 +150,7 @@ namespace BancHores
                     btPausa.IsEnabled = true;
                     btContinuar.IsEnabled = false;
                     metodosGenerales.cambiarColorEllipse(elActividad, "#FF49DA49"); // Pintamos ellipse verde
-                    lbActividad.Content = "Jornada en curso";
+                    lbActividad.Content = $"Jornada en curso desde las {hora}";
                 }
             }
             else // Si no hay entrada registrada de ese dia
@@ -169,14 +172,6 @@ namespace BancHores
             lbHorasSemana.Content = calculos_comp.SepararHorasYMinutos(usuario.horasSemana);
             lbHorasAcumuladas.Content= calculos_comp.SepararHorasYMinutos(usuario.bancoHoras);
             lbHorasDeuda.Content= calculos_comp.SepararHorasYMinutos(usuario.horasDeuda);
-        }
-
-        private void MetodoThread(object args)
-        {
-            string ultimaEntrada;
-            calculos_comp.YaHayEntradaEseDia(out ultimaEntrada);
-            string hora = calculos_comp.ObtenerHoraDeString(ultimaEntrada, 0);
-            lbEntrada.Content = $"Entrada: {hora}";
         }
         #endregion
     }
