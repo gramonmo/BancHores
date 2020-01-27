@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace BancHores.Clases
 {
@@ -63,7 +65,7 @@ namespace BancHores.Clases
 
         // Comprueba si la ultima pausa está cerrada o sigue en curso. 
         // Retorna true en caso de que esté abierta, false en caso de cerrada.
-        public bool HayPaysaEnCurso()
+        public bool HayPausaEnCurso()
         {
             try
             {
@@ -78,6 +80,42 @@ namespace BancHores.Clases
             {
                 return false;
             }            
+        }
+
+        // Calcula las horas de difernecia que hay entre la de inicio y fin
+        public double CalcularDiferenciaHoras(string hInicio, string hFin)
+        {
+            DateTime inicio = DateTime.Parse(hInicio);
+            DateTime fin = DateTime.Parse(hFin);
+
+            return (fin - inicio).TotalHours;
+        }
+        
+        // Calcula las horas totales de pausa del dia actual.
+        public double SumarPausasDia()
+        {
+            string fecha = ObtenerFechaDeDateTime(DateTime.Now);           
+
+            string textoPausas = File.ReadAllText("Pausas.txt");
+            string[] pausas = textoPausas.Split(new[] { Environment.NewLine }, StringSplitOptions.None); // Para rellenar el array con las lineas del string
+
+            double horasPausas = 0;
+            foreach (var pausa in pausas)
+            {
+                if (pausa.StartsWith(fecha.ToString()))
+                {
+                    horasPausas += ProcesarPausaCompleta(pausa);
+                }
+            }
+            return horasPausas;            
+        }
+
+        // Procesa la pausa que recibe y retorna las horas totales
+        public double ProcesarPausaCompleta(string pausaCompleta)
+        {
+            string hInicio = ObtenerHoraDeString(pausaCompleta, 0);
+            string hFin = ObtenerHoraDeString(pausaCompleta, 1);
+            return CalcularDiferenciaHoras(hInicio, hFin);
         }
     }
 }

@@ -1,17 +1,6 @@
 ﻿using BancHores.Clases;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace BancHores
 {
@@ -41,10 +30,9 @@ namespace BancHores
             string fecha = DateTime.Now.Date.ToShortDateString();
             string hora = cbHora.SelectedItem.ToString();
             string minuto = cbMinuto.SelectedItem.ToString();
-            string strGenerado = $"{fecha} {hora}:{minuto}";
-            DateTime fechaYHora = DateTime.Parse(strGenerado);
+            string fechaYHoraStr = $"{fecha} {hora}:{minuto}";
 
-            ctrlArchivos.EscribirPausaContinuar("Pausas.txt", fechaYHora, 1);
+            ctrlArchivos.EscribirPausaContinuar("Pausas.txt", fechaYHoraStr, 1);
             this.Close();
         }
 

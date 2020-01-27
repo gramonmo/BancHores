@@ -37,6 +37,7 @@ namespace BancHores
         {      
             ctrlArchivos.ComprovarArchivos();
             EstablecerUI();
+            jornada.ObtenerJornadaDia();
         }
 
         #region Eventos Botones
@@ -65,13 +66,13 @@ namespace BancHores
             if (MessageBox.Show($"Estás seguro que quieres marcar tu salida?{Environment.NewLine}Són las {fechaYHora.ToString("HH:mm")}", "Confirmar salida", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
             {
                 // Si hay una pausa en curso, pregunta a que hora se ha vuelto a poner a trabajar.
-                if (calculos_comp.HayPaysaEnCurso())
+                if (calculos_comp.HayPausaEnCurso())
                 {
                     VentanaTrabajoReaunudado vent = new VentanaTrabajoReaunudado();
                     vent.ShowDialog();
 
                     // Si no Cierra la ventana emergente o cancela (la pausa sigue) deja de ejecutar la salida
-                    if (calculos_comp.HayPaysaEnCurso())
+                    if (calculos_comp.HayPausaEnCurso())
                     {
                         MessageBox.Show("No se ha completado la pausa. No sé ha registrado la salida", "ATENCION!", MessageBoxButton.OK, MessageBoxImage.Exclamation);
                         return;
@@ -125,7 +126,7 @@ namespace BancHores
                 btSalida.IsEnabled = true;
                 string hora = calculos_comp.ObtenerHoraDeString(ultimaEntrada, 0);
                 lbEntrada.Content = $"Entrada: {hora}";
-                if (calculos_comp.HayPaysaEnCurso()) // Si hay una pausa en curso
+                if (calculos_comp.HayPausaEnCurso()) // Si hay una pausa en curso
                 {
                     btPausa.IsEnabled = false;
                     btContinuar.IsEnabled = true;

@@ -33,7 +33,7 @@ namespace BancHores.Clases
             }
         }
 
-        public void EscribirEntradaSalida(string path, DateTime fechaYHora)
+        public void EscribirEntradaSalida(string path, string fechaYHora)
         {
             StreamWriter sw = File.AppendText(path);
             sw.WriteLine(fechaYHora);
@@ -41,14 +41,14 @@ namespace BancHores.Clases
         }
 
         // flag=0 Pausa, flag=1 continuar.
-        public void EscribirPausaContinuar(string path, DateTime fechaYHora, int flag)
+        public void EscribirPausaContinuar(string path, string fechaYHora, int flag)
         {
             StreamWriter sw = File.AppendText(path);
-            if (flag==0)
+            if (flag==0) // Pausa
             {
-                sw.Write($"{fechaYHora} -> " );
+                sw.Write($"{fechaYHora} - " );
             }
-            else
+            else // Continuar
             {
                 sw.WriteLine(fechaYHora);
             }
