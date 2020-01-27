@@ -65,13 +65,19 @@ namespace BancHores.Clases
         // Retorna true en caso de que esté abierta, false en caso de cerrada.
         public bool HayPaysaEnCurso()
         {
-            string ultimaEntrada = File.ReadLines("Pausas.txt").Last();
-            if (ultimaEntrada.Length < 25) // Eso significaria que la ultima pausa no está cerrada
+            try
             {
-                return true;
+                string ultimaEntrada = File.ReadLines("Pausas.txt").Last();
+                if (ultimaEntrada.Length < 25) // Eso significaria que la ultima pausa no está cerrada
+                {
+                    return true;
+                }
+                return false;
             }
-            return false;
+            catch  // Si no se puede abrir el archivo o no hay nada escrito
+            {
+                return false;
+            }            
         }
-
     }
 }

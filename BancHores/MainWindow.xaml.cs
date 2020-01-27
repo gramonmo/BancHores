@@ -17,7 +17,7 @@ namespace BancHores
 
         MetodosGenerales metodosGenerales = new MetodosGenerales();
         ControlArchivos ctrlArchivos = new ControlArchivos();
-        Calculos_Comp calc_comp = new Calculos_Comp();
+        Calculos_Comp calculos_comp = new Calculos_Comp();
         Jornada jornada = new Jornada();
 
         // Permite que se pueda arrastrar la ventana haciendo click en qualquier lado.
@@ -65,13 +65,13 @@ namespace BancHores
             if (MessageBox.Show($"Estás seguro que quieres marcar tu salida?{Environment.NewLine}Són las {fechaYHora.ToString("HH:mm")}", "Confirmar salida", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
             {
                 // Si hay una pausa en curso, pregunta a que hora se ha vuelto a poner a trabajar.
-                if (calc_comp.HayPaysaEnCurso())
+                if (calculos_comp.HayPaysaEnCurso())
                 {
                     VentanaTrabajoReaunudado vent = new VentanaTrabajoReaunudado();
                     vent.ShowDialog();
 
                     // Si no Cierra la ventana emergente o cancela (la pausa sigue) deja de ejecutar la salida
-                    if (calc_comp.HayPaysaEnCurso())
+                    if (calculos_comp.HayPaysaEnCurso())
                     {
                         MessageBox.Show("No se ha completado la pausa. No sé ha registrado la salida", "ATENCION!", MessageBoxButton.OK, MessageBoxImage.Exclamation);
                         return;
@@ -119,13 +119,13 @@ namespace BancHores
             Label[] labels = { lbEntrada, lbSalida, lbPausa, lbContinuar };
             metodosGenerales.OcultarLabels(labels);
             string ultimaEntrada;
-            if (calc_comp.YaHayEntradaEseDia(out ultimaEntrada))
+            if (calculos_comp.YaHayEntradaEseDia(out ultimaEntrada))
             {
                 btEntrada.IsEnabled = false;
                 btSalida.IsEnabled = true;
-                string hora = calc_comp.ObtenerHoraDeString(ultimaEntrada, 0);
+                string hora = calculos_comp.ObtenerHoraDeString(ultimaEntrada, 0);
                 lbEntrada.Content = $"Entrada: {hora}";
-                if (calc_comp.HayPaysaEnCurso()) // Si hay una pausa en curso
+                if (calculos_comp.HayPaysaEnCurso()) // Si hay una pausa en curso
                 {
                     btPausa.IsEnabled = false;
                     btContinuar.IsEnabled = true;
@@ -140,7 +140,7 @@ namespace BancHores
                     lbActividad.Content = "Jornada en curso";
                 }
             }
-            else
+            else // Si no hay entrada registrada de ese dia
             {
                 btEntrada.IsEnabled = true;
                 btSalida.IsEnabled = false;
