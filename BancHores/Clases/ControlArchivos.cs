@@ -60,5 +60,11 @@ namespace BancHores.Clases
             return File.ReadLines(path).Last();
         }
 
+        public void RegistrarJornada(string fecha, double horas)
+        {
+            StreamWriter sw = File.AppendText("Registro.txt");
+            sw.WriteLine($"{fecha}: {horas}");
+            sw.Close();
+        }
     }
 }

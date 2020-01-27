@@ -42,6 +42,17 @@ namespace BancHores.Clases
             }
         }
 
+        public string SepararHorasYMinutos(double horasTotales)
+        {
+            int horas = (int)horasTotales;
+            string horasStr = horas.ToString();
+
+            double minutos = (horasTotales - horas) * 60;
+            string minutosStr = minutos.ToString();
+
+            return $"{horas} horas y {minutos} minutos.";
+        }
+
         // Comprueba si en el dia actual ya hay una entrada registrada.
         // Retorna true si hay entrada ese dia, false en caso contrario.
         public bool YaHayEntradaEseDia(out string ultimaEntrada)

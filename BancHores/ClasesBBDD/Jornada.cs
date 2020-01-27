@@ -62,6 +62,7 @@ namespace BancHores.ClasesBBDD
             }
         }
 
+        // Obtiene las horas hechas en el dia actual y lo registra en "Registro.txt"
         public double ObtenerJornadaDia()
         {
             string entrada = ctrlArchivos.LeerUltimoRegistro("Entradas.txt");
@@ -69,9 +70,8 @@ namespace BancHores.ClasesBBDD
             double jornadaEntradaSalida = calculos_Comp.CalcularDiferenciaHoras(entrada, salida);
             double jornadaPausas = calculos_Comp.SumarPausasDia();
             double jornadaFinal = jornadaEntradaSalida - jornadaPausas;
-            return 0;
+            ctrlArchivos.RegistrarJornada(DateTime.Now.ToString("dd/MM/yyyy"), jornadaFinal);
+            return jornadaFinal;
         }
-
-        
     }
 }

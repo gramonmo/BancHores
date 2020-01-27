@@ -37,7 +37,6 @@ namespace BancHores
         {      
             ctrlArchivos.ComprovarArchivos();
             EstablecerUI();
-            jornada.ObtenerJornadaDia();
         }
 
         #region Eventos Botones
@@ -78,13 +77,17 @@ namespace BancHores
                         return;
                     }
                 }
-                jornada.RegistrarMarcaje(jornada, fechaYHora, lbSalida, 1);
+                jornada.RegistrarMarcaje(jornada, fechaYHora, lbSalida, 1);                
                 btEntrada.IsEnabled = true;
                 btSalida.IsEnabled = false;
                 btPausa.IsEnabled = false;
                 btContinuar.IsEnabled = false;             
                 metodosGenerales.cambiarColorEllipse(elActividad, "#FFCF2A2A"); // Pintamos Ellipse roja: #FFCF2A2A
                 lbActividad.Content = "Jornada finalizada";
+
+                double horasTotales = jornada.ObtenerJornadaDia();
+                string horasTotalesStr = calculos_comp.SepararHorasYMinutos(horasTotales);
+                MessageBox.Show($"Hoy has trabajado {horasTotalesStr}");
             }
         }
 
