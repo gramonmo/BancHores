@@ -45,12 +45,11 @@ namespace BancHores.Clases
         public string SepararHorasYMinutos(double horasTotales)
         {
             int horas = (int)horasTotales;
-            string horasStr = horas.ToString();
 
-            double minutos = (horasTotales - horas) * 60;
-            string minutosStr = minutos.ToString();
+            double minutosDouble = (horasTotales - horas) * 60;
+            int minutosInt = (int)minutosDouble;
 
-            return $"{horas} horas y {minutos} minutos.";
+            return $"{horas} horas y {minutosInt} minutos.";
         }
 
         // Comprueba si en el dia actual ya hay una entrada registrada.
