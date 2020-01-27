@@ -50,7 +50,7 @@
                    FontWeight="Bold" FontFamily="Verdana"/>
         </DockPanel>
 
-        <Button x:Name="btEntrada" Grid.Row="1" Grid.Column="1" Content="Marcar Entrada" MaxHeight="30" 
+        <Button x:Name="btEntrada" Grid.Row="1" Grid.Column="1" Content="Marcar Entrada" MinWidth="140" MaxHeight="30" 
                 MaxWidth="140" FontWeight="SemiBold" Background="#FF8EFFCA" BorderBrush="Black" Margin="10, 30, 10,0" Click="btEntrada_Click"/>
         <Label x:Name="lbEntrada" Grid.Row="2" Grid.Column="1" Content="Entrada:" FontSize="12" Visibility="Visible"/>
 
@@ -82,7 +82,7 @@
 
         <Ellipse x:Name="elActividad" Grid.Row="7" Grid.Column="1" Grid.RowSpan="2" Height="35" Width="35"
                  Fill="#FFCF2A2A" HorizontalAlignment="Left" Stroke="Black" Visibility="Visible"/>
-        <Label x:Name="lbActividad" Grid.Row="7" Grid.Column="1" Grid.RowSpan="2" Content="Fuera de jornada" VerticalAlignment="Center"
+        <Label x:Name="lbActividad" Grid.Row="7" Grid.Column="1" Grid.RowSpan="2" Grid.ColumnSpan="3"  Content="Fuera de jornada" VerticalAlignment="Center"
                FontWeight="SemiBold" FontSize="18" Margin="40,0,0,0"/>
 
 

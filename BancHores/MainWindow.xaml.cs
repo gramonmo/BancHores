@@ -83,15 +83,14 @@ namespace BancHores
                 btSalida.IsEnabled = false;
                 btPausa.IsEnabled = false;
                 btContinuar.IsEnabled = false;             
-                metodosGenerales.cambiarColorEllipse(elActividad, "#FFCF2A2A"); // Pintamos Ellipse roja: #FFCF2A2A
-                lbActividad.Content = "Jornada finalizada";
+                metodosGenerales.cambiarColorEllipse(elActividad, "#FFCF2A2A"); // Pintamos Ellipse roja: #FFCF2A2A             
 
                 double horasTotales = jornada.ObtenerJornadaDia();
                 string horasTotalesStr = calculos_comp.SepararHorasYMinutos(horasTotales);
-                MessageBox.Show($"Hoy has trabajado {horasTotalesStr}");
+                lbActividad.Content = $"Jornada finalizada. Has trabajado {horasTotalesStr}";
 
-                //actu info usuari
                 usuario.ActualizarInfoPersona(horasTotales);
+                ActualizarTablaResumen();
             }
         }
 
