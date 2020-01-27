@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BancHores.ClasesBBDD;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -67,5 +68,16 @@ namespace BancHores.Clases
             sw.WriteLine($"{fecha}: {horas}");
             sw.Close();
         }
+
+        public void ActualizarDocumentoUsuario(double horasMesViejas, double horasSemanaViejas, double horasMesNuevas, double horasSemanaNuevas)
+        {
+            horasMesNuevas = Math.Round(horasMesNuevas, 2);
+            horasSemanaNuevas = Math.Round(horasSemanaNuevas, 2);
+
+            string datos = File.ReadAllText("Usuario.txt");
+            datos = datos.Replace($"Horas este mes: {horasMesViejas.ToString()}", $"Horas este mes: {horasMesNuevas.ToString()}");
+            datos = datos.Replace($"Horas esta semana: {horasSemanaViejas.ToString()}", $"Horas esta semana: {horasSemanaNuevas.ToString()}");
+            File.WriteAllText("Usuario.txt", datos);
+        }        
     }
 }

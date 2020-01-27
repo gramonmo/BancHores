@@ -49,7 +49,7 @@ namespace BancHores.Clases
             double minutosDouble = (horasTotales - horas) * 60;
             int minutosInt = (int)minutosDouble;
 
-            return $"{horas} horas y {minutosInt} minutos.";
+            return $"{horas}h {minutosInt}m";
         }
 
         // Comprueba si en el dia actual ya hay una entrada registrada.
@@ -127,5 +127,7 @@ namespace BancHores.Clases
             string hFin = ObtenerHoraDeString(pausaCompleta, 1);
             return CalcularDiferenciaHoras(hInicio, hFin);
         }
+
+
     }
 }

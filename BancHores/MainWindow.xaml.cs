@@ -19,6 +19,7 @@ namespace BancHores
         ControlArchivos ctrlArchivos = new ControlArchivos();
         Calculos_Comp calculos_comp = new Calculos_Comp();
         Jornada jornada = new Jornada();
+        Persona usuario = new Persona();
 
         // Permite que se pueda arrastrar la ventana haciendo click en qualquier lado.
         protected override void OnMouseLeftButtonDown(MouseButtonEventArgs e)
@@ -88,6 +89,9 @@ namespace BancHores
                 double horasTotales = jornada.ObtenerJornadaDia();
                 string horasTotalesStr = calculos_comp.SepararHorasYMinutos(horasTotales);
                 MessageBox.Show($"Hoy has trabajado {horasTotalesStr}");
+
+                //actu info usuari
+                usuario.ActualizarInfoPersona(horasTotales);
             }
         }
 
@@ -119,6 +123,7 @@ namespace BancHores
         // Metodos
         public void EstablecerUI()
         {
+            ActualizarTablaResumen();
             metodosGenerales.InsertarFecha(lbFecha);
             Label[] labels = { lbEntrada, lbSalida, lbPausa, lbContinuar };
             metodosGenerales.OcultarLabels(labels);
@@ -153,6 +158,16 @@ namespace BancHores
                 metodosGenerales.cambiarColorEllipse(elActividad, "#FFCF2A2A"); // Pintamos ellipse roja
                 lbActividad.Content = "Fuera de jornada";
             }
+        }
+
+        // Rellena la tabla resumen con la info del usuario
+        public void ActualizarTablaResumen()
+        {
+            usuario.ObtenerdatosPersona();
+            lbHorasMes.Content = calculos_comp.SepararHorasYMinutos(usuario.horasMes);
+            lbHorasSemana.Content = calculos_comp.SepararHorasYMinutos(usuario.horasSemana);
+            lbHorasAcumuladas.Content= calculos_comp.SepararHorasYMinutos(usuario.bancoHoras);
+            lbHorasDeuda.Content= calculos_comp.SepararHorasYMinutos(usuario.horasDeuda);
         }
         #endregion
     }
