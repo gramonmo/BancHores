@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using BancHores.Clases;
 using BancHores.ClasesBBDD;
 using System;
+using System.Threading;
 
 namespace BancHores
 {
@@ -51,13 +52,14 @@ namespace BancHores
         private void btEntrada_Click(object sender, RoutedEventArgs e)
         {
             DateTime fechaYHora = DateTime.Now;
+            string horaEntrada = fechaYHora.ToString("HH:MM");
             jornada.RegistrarMarcaje(jornada, fechaYHora, lbEntrada, 0);
             btEntrada.IsEnabled = false;
             btSalida.IsEnabled = true;
             btPausa.IsEnabled = true;
             btContinuar.IsEnabled = false;
             metodosGenerales.cambiarColorEllipse(elActividad, "#FF49DA49"); // Pintamos Ellipse verde: #FF49DA49
-            lbActividad.Content = "Jornada en curso";
+            lbActividad.Content = $"Jornada en curso desde las {horaEntrada}";
         }
 
         private void btSalida_Click(object sender, RoutedEventArgs e)
@@ -131,8 +133,8 @@ namespace BancHores
             {
                 btEntrada.IsEnabled = false;
                 btSalida.IsEnabled = true;
-                string hora = calculos_comp.ObtenerHoraDeString(ultimaEntrada, 0);
-                lbEntrada.Content = $"Entrada: {hora}";
+                Thread th = new Thread(MetodoThread);
+                th.Start();              
                 if (calculos_comp.HayPausaEnCurso()) // Si hay una pausa en curso
                 {
                     btPausa.IsEnabled = false;
@@ -167,6 +169,14 @@ namespace BancHores
             lbHorasSemana.Content = calculos_comp.SepararHorasYMinutos(usuario.horasSemana);
             lbHorasAcumuladas.Content= calculos_comp.SepararHorasYMinutos(usuario.bancoHoras);
             lbHorasDeuda.Content= calculos_comp.SepararHorasYMinutos(usuario.horasDeuda);
+        }
+
+        private void MetodoThread(object args)
+        {
+            string ultimaEntrada;
+            calculos_comp.YaHayEntradaEseDia(out ultimaEntrada);
+            string hora = calculos_comp.ObtenerHoraDeString(ultimaEntrada, 0);
+            lbEntrada.Content = $"Entrada: {hora}";
         }
         #endregion
     }
