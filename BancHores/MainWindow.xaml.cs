@@ -62,6 +62,16 @@ namespace BancHores
         private void btEntrada_Click(object sender, RoutedEventArgs e)
         {
             DateTime fechaYHora = DateTime.Now;
+            if (calculos_comp.YaHaySalidaEseDia())
+            {
+                // msgbox avis si vol reaunudar -> si -> esborrar ultima entrada, carregar valors entrada d'aquell dia
+                if (MessageBox.Show($"Ya has terminado tu jornada de hoy. Quieres anular tu anterior salida?", "Anular anterior salida", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+                {
+                    ctrlArchivos.EliminarUltimoRegistro("Salidas.txt");
+                    EstablecerUI();
+                }
+                return;
+            }
             jornada.RegistrarMarcaje(jornada, fechaYHora, lbEntrada, 0);
             btEntrada.IsEnabled = false;
             btSalida.IsEnabled = true;

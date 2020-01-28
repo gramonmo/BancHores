@@ -56,11 +56,11 @@ namespace BancHores.Clases
         // Retorna true si hay entrada ese dia, false en caso contrario.
         public bool YaHayEntradaEseDia(out string ultimaEntrada)
         {
-            string fecha = DateTime.Now.ToShortDateString();
+            string fechaActual = DateTime.Now.ToShortDateString();
             try
             {
                 ultimaEntrada = File.ReadLines("Entradas.txt").Last();
-                if (ObtenerFechaDeString(ultimaEntrada) == fecha)
+                if (ObtenerFechaDeString(ultimaEntrada) == fechaActual)
                 {
                     return true;
                 }
@@ -89,7 +89,18 @@ namespace BancHores.Clases
             catch  // Si no se puede abrir el archivo o no hay nada escrito
             {
                 return false;
-            }            
+            }
+        }
+
+        public bool YaHaySalidaEseDia()
+        {
+            string fechaActual = DateTime.Now.ToShortDateString();
+            string ultimaSalida = File.ReadLines("Salidas.txt").Last();
+            if (ObtenerFechaDeString(ultimaSalida) == fechaActual)
+            {
+                return true;
+            }
+            return false;
         }
 
         // Calcula las horas de difernecia que hay entre la de inicio y fin
@@ -100,11 +111,11 @@ namespace BancHores.Clases
 
             return (fin - inicio).TotalHours;
         }
-        
+
         // Calcula las horas totales de pausa del dia actual.
         public double SumarPausasDia()
         {
-            string fecha = ObtenerFechaDeDateTime(DateTime.Now);           
+            string fecha = ObtenerFechaDeDateTime(DateTime.Now);
 
             string textoPausas = File.ReadAllText("Pausas.txt");
             string[] pausas = textoPausas.Split(new[] { Environment.NewLine }, StringSplitOptions.None); // Para rellenar el array con las lineas del string
@@ -117,7 +128,7 @@ namespace BancHores.Clases
                     horasPausas += ProcesarPausaCompleta(pausa);
                 }
             }
-            return horasPausas;            
+            return horasPausas;
         }
 
         // Procesa la pausa que recibe y retorna las horas totales
@@ -143,7 +154,7 @@ namespace BancHores.Clases
         {
             string fecha = DateTime.Today.ToString("dd/MM/yyyy");
             string diaMes = fecha.Split('/')[0];
-            if (diaMes=="01")
+            if (diaMes == "01")
             {
                 return true;
             }

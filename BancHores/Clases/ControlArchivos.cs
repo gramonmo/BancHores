@@ -78,6 +78,12 @@ namespace BancHores.Clases
             datos = datos.Replace($"Horas este mes: {horasMesViejas.ToString()}", $"Horas este mes: {horasMesNuevas.ToString()}");
             datos = datos.Replace($"Horas esta semana: {horasSemanaViejas.ToString()}", $"Horas esta semana: {horasSemanaNuevas.ToString()}");
             File.WriteAllText("Usuario.txt", datos);
-        }       
+        }
+        
+        public void EliminarUltimoRegistro(string archivo)
+        {
+            string[] linias = File.ReadAllLines(archivo);
+            File.WriteAllLines(archivo, linias.Take(linias.Length - 1).ToArray());
+        }
     }
 }
