@@ -52,14 +52,13 @@ namespace BancHores
         private void btEntrada_Click(object sender, RoutedEventArgs e)
         {
             DateTime fechaYHora = DateTime.Now;
-            string horaEntrada = fechaYHora.ToString("HH:MM");
             jornada.RegistrarMarcaje(jornada, fechaYHora, lbEntrada, 0);
             btEntrada.IsEnabled = false;
             btSalida.IsEnabled = true;
             btPausa.IsEnabled = true;
             btContinuar.IsEnabled = false;
             metodosGenerales.cambiarColorEllipse(elActividad, "#FF49DA49"); // Pintamos Ellipse verde: #FF49DA49
-            lbActividad.Content = $"Jornada en curso desde las {horaEntrada}";
+            lbActividad.Content = $"Jornada en curso";
         }
 
         private void btSalida_Click(object sender, RoutedEventArgs e)
@@ -73,7 +72,7 @@ namespace BancHores
                     VentanaTrabajoReaunudado vent = new VentanaTrabajoReaunudado();
                     vent.ShowDialog();
 
-                    // Si no Cierra la ventana emergente o cancela (la pausa sigue) deja de ejecutar la salida
+                    // Si cierra la ventana emergente o cancela (la pausa sigue) deja de ejecutar la salida
                     if (calculos_comp.HayPausaEnCurso())
                     {
                         MessageBox.Show("No se ha completado la pausa. No sé ha registrado la salida", "ATENCION!", MessageBoxButton.OK, MessageBoxImage.Exclamation);
@@ -91,7 +90,8 @@ namespace BancHores
                 string horasTotalesStr = calculos_comp.SepararHorasYMinutos(horasTotales);
                 lbActividad.Content = $"Jornada finalizada. Has trabajado {horasTotalesStr}";
 
-                usuario.ActualizarInfoPersona(horasTotales);
+                usuario.CalculoBalanceHoras(horasTotales);
+
                 ActualizarTablaResumen();
             }
         }
@@ -150,7 +150,7 @@ namespace BancHores
                     btPausa.IsEnabled = true;
                     btContinuar.IsEnabled = false;
                     metodosGenerales.cambiarColorEllipse(elActividad, "#FF49DA49"); // Pintamos ellipse verde
-                    lbActividad.Content = $"Jornada en curso desde las {hora}";
+                    lbActividad.Content = $"Jornada en curso";
                 }
             }
             else // Si no hay entrada registrada de ese dia
@@ -167,7 +167,7 @@ namespace BancHores
         // Rellena la tabla resumen con la info del usuario
         public void ActualizarTablaResumen()
         {
-            usuario.ObtenerdatosPersona();
+            usuario.LeerDocumentoUsuario();
             lbHorasMes.Content = calculos_comp.SepararHorasYMinutos(usuario.horasMes);
             lbHorasSemana.Content = calculos_comp.SepararHorasYMinutos(usuario.horasSemana);
             lbHorasAcumuladas.Content= calculos_comp.SepararHorasYMinutos(usuario.bancoHoras);

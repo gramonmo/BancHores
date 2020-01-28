@@ -25,7 +25,7 @@ namespace BancHores.Clases
 
         public string ObtenerHoraDeDateTime(DateTime fechaYHora)
         {
-            return string.Format($"{fechaYHora.Hour}:{fechaYHora.Minute}");
+            return string.Format($"{fechaYHora.Hour.ToString("00.##")}:{fechaYHora.Minute.ToString("00.##")}");
         }
 
         // Retorna la hora del string que reciba en función del flag.
@@ -128,6 +128,7 @@ namespace BancHores.Clases
             return CalcularDiferenciaHoras(hInicio, hFin);
         }
 
+        
 
     }
 }
