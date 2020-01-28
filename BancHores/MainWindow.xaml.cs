@@ -67,6 +67,10 @@ namespace BancHores
                 // msgbox avis si vol reaunudar -> si -> esborrar ultima entrada, carregar valors entrada d'aquell dia
                 if (MessageBox.Show($"Ya has terminado tu jornada de hoy. Quieres anular tu anterior salida?", "Anular anterior salida", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
                 {
+                    // calcular hores x restar a hores treballades
+                    double horasTotales = jornada.ObtenerJornadaDia() * (-1);
+                    usuario.CalculoBalanceHoras(horasTotales);
+
                     ctrlArchivos.EliminarUltimoRegistro("Salidas.txt");
                     EstablecerUI();
                 }
