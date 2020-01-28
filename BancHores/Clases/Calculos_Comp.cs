@@ -128,7 +128,27 @@ namespace BancHores.Clases
             return CalcularDiferenciaHoras(hInicio, hFin);
         }
 
-        
+        public bool EsLunes()
+        {
+            DateTime fecha = DateTime.Today;
+            string dia = fecha.DayOfWeek.ToString();
+            if (dia == "Monday")
+            {
+                return true;
+            }
+            return false;
+        }
+
+        public bool EsPrimeroDeMes()
+        {
+            string fecha = DateTime.Today.ToString("dd/MM/yyyy");
+            string diaMes = fecha.Split('/')[0];
+            if (diaMes=="01")
+            {
+                return true;
+            }
+            return false;
+        }
 
     }
 }

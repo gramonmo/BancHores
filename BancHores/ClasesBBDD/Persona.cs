@@ -84,7 +84,7 @@ namespace BancHores.ClasesBBDD
                     {
                         bancoHoras += horasDeuda * (-1); // Las horas de mas, las sumamos a bancoHoras *-1 porque estará en negativo
                         horasDeuda = 0;
-                    }                   
+                    }
                 }
                 else
                 {
@@ -93,6 +93,33 @@ namespace BancHores.ClasesBBDD
             }
             ActualizarDocumentoUsuario();
         }
+
+        public void ReiniciarSemana()
+        {
+            LeerDocumentoUsuario();
+            string ultimaEntrada = ctrlArchivos.LeerUltimoRegistro("Entradas.txt");
+            string fechaUltimaEntrada = ultimaEntrada.Split(' ')[0];
+            string fechaActual = DateTime.Today.ToString("dd/MM/yyyy");
+            if (fechaActual != fechaUltimaEntrada)
+            {
+                horasSemana = 0;
+                ActualizarDocumentoUsuario();
+            }
+        }
+
+        public void ReiniciarMes()
+        {
+            LeerDocumentoUsuario();
+            string ultimaEntrada = ctrlArchivos.LeerUltimoRegistro("Entradas.txt");
+            string fechaUltimaEntrada = ultimaEntrada.Split(' ')[0];
+            string fechaActual = DateTime.Today.ToString("dd/MM/yyyy");
+            if (fechaActual !=  fechaUltimaEntrada)
+            {
+                horasMes = 0;
+                ActualizarDocumentoUsuario();
+            }                     
+        }
+
 
         public void ActualizarDocumentoUsuario()
         {
