@@ -18,6 +18,7 @@ namespace BancHores.ClasesBBDD
         public double aTrabajarSemana { get; set; }
 
         ControlArchivos ctrlArchivos = new ControlArchivos();
+        Jornada jornada = new Jornada();
 
         public Persona()
         {
@@ -88,10 +89,30 @@ namespace BancHores.ClasesBBDD
                 }
                 else
                 {
-                    bancoHoras += horasExtraSemana;
+                    bancoHoras += totalHorasDia;
                 }
             }
             ActualizarDocumentoUsuario();
+        }
+
+        public void RecalcularReEntrada()
+        {
+            LeerDocumentoUsuario();
+            double horasTotales = jornada.ObtenerJornadaDia();
+            horasDeuda += horasTotales - bancoHoras;
+            if (horasDeuda < 0)
+            {
+                horasDeuda = 0;
+            }
+            bancoHoras -= horasTotales; // *-1 porque arriba estan en negativo, si no, se estarian sumando
+            if (bancoHoras < 0)
+            {
+                bancoHoras = 0;
+            }
+            horasMes -= horasTotales;
+            horasSemana -= horasTotales;
+            ActualizarDocumentoUsuario();
+            ctrlArchivos.EliminarUltimoRegistro("Salidas.txt");
         }
 
         public void ReiniciarSemana()
@@ -113,11 +134,11 @@ namespace BancHores.ClasesBBDD
             string ultimaEntrada = ctrlArchivos.LeerUltimoRegistro("Entradas.txt");
             string fechaUltimaEntrada = ultimaEntrada.Split(' ')[0];
             string fechaActual = DateTime.Today.ToString("dd/MM/yyyy");
-            if (fechaActual !=  fechaUltimaEntrada)
+            if (fechaActual != fechaUltimaEntrada)
             {
                 horasMes = 0;
                 ActualizarDocumentoUsuario();
-            }                     
+            }
         }
 
 

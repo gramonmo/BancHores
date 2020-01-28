@@ -94,13 +94,22 @@ namespace BancHores.Clases
 
         public bool YaHaySalidaEseDia()
         {
-            string fechaActual = DateTime.Now.ToShortDateString();
-            string ultimaSalida = File.ReadLines("Salidas.txt").Last();
-            if (ObtenerFechaDeString(ultimaSalida) == fechaActual)
+            try
             {
-                return true;
+                string fechaActual = DateTime.Now.ToShortDateString();
+                string ultimaSalida = File.ReadLines("Salidas.txt").Last();
+                if (ObtenerFechaDeString(ultimaSalida) == fechaActual)
+                {
+                    return true;
+                }
+                return false;
             }
-            return false;
+            catch (Exception) // Esto significa que no hay nada escrito en el txt
+            {
+                return false;
+                throw;
+            }
+            
         }
 
         // Calcula las horas de difernecia que hay entre la de inicio y fin
