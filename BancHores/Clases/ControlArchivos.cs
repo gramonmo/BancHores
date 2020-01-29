@@ -1,10 +1,6 @@
-﻿using BancHores.ClasesBBDD;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BancHores.Clases
 {
@@ -53,6 +49,13 @@ namespace BancHores.Clases
             {
                 sw.WriteLine(fechaYHora);
             }
+            sw.Close();
+        }
+
+        public void EscribirPausaCompleta(string path, string pausaCompleta)
+        {
+            StreamWriter sw = File.AppendText(path);
+            sw.WriteLine(pausaCompleta);
             sw.Close();
         }
 

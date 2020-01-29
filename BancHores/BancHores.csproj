@@ -34,6 +34,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>IconoTempo.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -62,6 +65,9 @@
     <Compile Include="RegistroMensual.xaml.cs">
       <DependentUpon>RegistroMensual.xaml</DependentUpon>
     </Compile>
+    <Compile Include="VentanaPausaCustom.xaml.cs">
+      <DependentUpon>VentanaPausaCustom.xaml</DependentUpon>
+    </Compile>
     <Compile Include="VentanaTrabajoReaunudado.xaml.cs">
       <DependentUpon>VentanaTrabajoReaunudado.xaml</DependentUpon>
     </Compile>
@@ -79,6 +85,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="RegistroMensual.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="VentanaPausaCustom.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -112,6 +122,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Recursos\IconoTempo.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="IconoTempo.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
