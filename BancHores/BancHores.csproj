@@ -74,6 +74,9 @@
     <Compile Include="Ventanas_Auxiliares\VentanaTrabajoReaunudado.xaml.cs">
       <DependentUpon>VentanaTrabajoReaunudado.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Ventanas_Auxiliares\VentanaModificarDeuda.xaml.cs">
+      <DependentUpon>VentanaModificarDeuda.xaml</DependentUpon>
+    </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -100,6 +103,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Ventanas_Auxiliares\VentanaTrabajoReaunudado.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Ventanas_Auxiliares\VentanaModificarDeuda.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

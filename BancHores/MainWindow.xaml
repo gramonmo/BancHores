@@ -80,10 +80,10 @@
 
         <Button x:Name="btSumarDeuda" Grid.Row="7" Grid.Column="1" Content="+ H.Deuda" MaxHeight="30" 
                 MaxWidth="140" FontWeight="SemiBold" Background="#FFE4B964" BorderBrush="Black" 
-                Margin="0"/>
+                Margin="0,0,0,5" Click="btSumarDeuda_Click"/>
         <Button x:Name="btRestarDeuda" Grid.Row="7" Grid.Column="3" Content="- H.Deuda" MaxHeight="30" 
                 MaxWidth="140" FontWeight="SemiBold" Background="#FFE4B964" BorderBrush="Black" 
-                Margin="0"/>
+                Margin="0,0,0,5" Click="btRestarDeuda_Click"/>
 
         <Ellipse x:Name="elActividad" Grid.Row="8" Grid.Column="1" Grid.RowSpan="2" Height="35" Width="35"
                  Fill="#FFCF2A2A" HorizontalAlignment="Left" Stroke="Black" Visibility="Visible"/>

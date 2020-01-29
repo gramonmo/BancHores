@@ -36,7 +36,6 @@ namespace BancHores
             this.Close();
         }
 
-
         // Rellena los string con las horas y minutos a mostrar en los combobox y los añade a estos.
         private void GenerarValoresComboBox()
         {

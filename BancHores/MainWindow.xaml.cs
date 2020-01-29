@@ -47,7 +47,7 @@ namespace BancHores
             {
                 usuario.ReiniciarMes();
             }
-            if (calculos_comp.DiaAnteriorSinSalida())
+            while (calculos_comp.DiaAnteriorSinSalida())
             {
                 MarcarSalidaUltimoDia();
             }
@@ -152,6 +152,22 @@ namespace BancHores
             VentanaPausaCustom ventana = new VentanaPausaCustom();
             ventana.ShowDialog();
         }
+
+        private void btSumarDeuda_Click(object sender, RoutedEventArgs e)
+        {
+            // Flag 0 añade deuda
+            VentanaModificarDeuda ventana = new VentanaModificarDeuda(0);
+            ventana.ShowDialog();
+            ActualizarTablaResumen();
+        }
+
+        private void btRestarDeuda_Click(object sender, RoutedEventArgs e)
+        {
+            // Flag 1 resta deuda
+            VentanaModificarDeuda ventana = new VentanaModificarDeuda(1);
+            ventana.ShowDialog();
+            ActualizarTablaResumen();
+        }
         #endregion
 
         #region Metodos
@@ -231,8 +247,10 @@ namespace BancHores
             ActualizarTablaResumen();
         }
 
+
+
         #endregion
 
-
+        
     }
 }

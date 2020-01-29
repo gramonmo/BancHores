@@ -7,6 +7,8 @@ namespace BancHores.Clases
 {
     class Calculos_Comp
     {
+        ControlArchivos ctrlArchivos = new ControlArchivos();
+
         // Retorna solamente la fecha del DateTime que recibe
         public string ObtenerFechaDeDateTime(DateTime fechaYHora)
         {
@@ -52,40 +54,35 @@ namespace BancHores.Clases
         // Retorna true si hay entrada ese dia, false en caso contrario.
         public bool YaHayEntradaEseDia(out string ultimaEntrada)
         {
-            string fechaActual = DateTime.Now.ToShortDateString();
             try
             {
-                ultimaEntrada = File.ReadLines("Entradas.txt").Last();
+                string fechaActual = DateTime.Now.ToShortDateString();
+
+                ultimaEntrada = ctrlArchivos.LeerUltimoRegistro("Entradas.txt");
                 if (ObtenerFechaDeString(ultimaEntrada) == fechaActual)
                 {
                     return true;
                 }
                 return false;
             }
-            catch // Si no se puede abrir el archivo o no hay nada escrito
+            catch
             {
                 ultimaEntrada = "";
                 return false;
             }
+
         }
 
         // Comprueba si la ultima pausa está cerrada o sigue en curso. 
         // Retorna true en caso de que esté abierta, false en caso de cerrada.
         public bool HayPausaEnCurso()
         {
-            try
+            string ultimaEntrada = ctrlArchivos.LeerUltimoRegistro("Pausas.txt");
+            if (ultimaEntrada.Length < 25) // Eso significaria que la ultima pausa no está cerrada
             {
-                string ultimaEntrada = File.ReadLines("Pausas.txt").Last();
-                if (ultimaEntrada.Length < 25) // Eso significaria que la ultima pausa no está cerrada
-                {
-                    return true;
-                }
-                return false;
+                return true;
             }
-            catch  // Si no se puede abrir el archivo o no hay nada escrito
-            {
-                return false;
-            }
+            return false;
         }
 
         public bool YaHaySalidaEseDia()
@@ -93,19 +90,17 @@ namespace BancHores.Clases
             try
             {
                 string fechaActual = DateTime.Now.ToShortDateString();
-                string ultimaSalida = File.ReadLines("Salidas.txt").Last();
+                string ultimaSalida = ctrlArchivos.LeerUltimoRegistro("Salidas.txt");
                 if (ObtenerFechaDeString(ultimaSalida) == fechaActual)
                 {
                     return true;
                 }
                 return false;
             }
-            catch (Exception) // Esto significa que no hay nada escrito en el txt
+            catch
             {
                 return false;
-                throw;
             }
-
         }
 
         // Calcula las horas de difernecia que hay entre la de inicio y fin
@@ -169,17 +164,22 @@ namespace BancHores.Clases
         // Comprueba si el dia anterior no tiene la salida marcada
         public bool DiaAnteriorSinSalida()
         {
-            ControlArchivos ctrlArchivos = new ControlArchivos();
-
-            string fechaEntradaUltimoDia = ctrlArchivos.LeerUltimoRegistro("Entradas.txt");
-            fechaEntradaUltimoDia = ObtenerFechaDeString(fechaEntradaUltimoDia);
-            string fechaSalidaUltimoDia = ctrlArchivos.LeerUltimoRegistro("Salidas.txt");
-            fechaSalidaUltimoDia = ObtenerFechaDeString(fechaSalidaUltimoDia);
-            if (fechaEntradaUltimoDia != fechaSalidaUltimoDia)
+            try
             {
-                return true;
+                string fechaEntradaUltimoDia = ctrlArchivos.LeerUltimoRegistro("Entradas.txt");
+                fechaEntradaUltimoDia = ObtenerFechaDeString(fechaEntradaUltimoDia);
+                string fechaSalidaUltimoDia = ctrlArchivos.LeerUltimoRegistro("Salidas.txt");
+                fechaSalidaUltimoDia = ObtenerFechaDeString(fechaSalidaUltimoDia);
+                if (fechaEntradaUltimoDia != fechaSalidaUltimoDia && fechaEntradaUltimoDia != "")
+                {
+                    return true;
+                }
+                return false;
             }
-            return false;
+            catch
+            {
+                return false;
+            }
         }
     }
 }

@@ -141,7 +141,6 @@ namespace BancHores.ClasesBBDD
             }
         }
 
-
         public void ActualizarDocumentoUsuario()
         {
             string texto = $"A trabajar semanalmente: {aTrabajarSemana}\nHoras este mes: {Math.Round(horasMes, 2)}\nHoras esta semana: {Math.Round(horasSemana, 2)}\n" +
