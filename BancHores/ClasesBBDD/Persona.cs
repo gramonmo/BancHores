@@ -21,11 +21,6 @@ namespace BancHores.ClasesBBDD
         ControlArchivos ctrlArchivos = new ControlArchivos();
         Jornada jornada = new Jornada();
 
-        public Persona()
-        {
-            LeerDocumentoUsuario();
-        }
-
         // Lee la info de usuario.txt y lo asigna a las propiedades
         public void LeerDocumentoUsuario()
         {

@@ -1,13 +1,15 @@
 ﻿using System;
 using System.IO;
 using System.Linq;
+using BancHores.Ventanas_Auxiliares;
 
 namespace BancHores.Clases
 {
     class ControlArchivos
     {
-        public void ComprovarArchivos()
+        public bool ComprovarArchivos()
         {
+            bool faltaUsuario = false;
             if (!File.Exists("Entradas.txt"))
             {
                 File.Create("Entradas.txt");
@@ -23,11 +25,14 @@ namespace BancHores.Clases
             if (!File.Exists("Usuario.txt"))
             {
                 File.Create("Usuario.txt");
+                faltaUsuario = true;
+                
             }
             if (!File.Exists("Registro.txt"))
             {
                 File.Create("Registro.txt");
             }
+            return faltaUsuario;
         }
 
         public void EscribirEntradaSalida(string path, string fechaYHora)

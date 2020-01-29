@@ -92,7 +92,7 @@
 
 
         <Label Grid.Row="3" Grid.Column="2" Content="   __   " Margin="0,4,0,0"/>
-        <Label Grid.Row="7" Grid.Column="2" Content="   __   " Margin="0,4,0,0"/>
+        <Label Grid.Row="7" Grid.Column="2" Content="   -   " Margin="0,4,0,0"/>
 
         <!-- TABLA RESUMEN -->
         <Grid x:Name="tablaResumen" Grid.Row="1" Grid.Column="4" Grid.RowSpan="5" Margin="30,15,0,10" >

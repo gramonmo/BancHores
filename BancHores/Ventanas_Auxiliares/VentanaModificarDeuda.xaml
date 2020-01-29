@@ -28,7 +28,7 @@
         </TextBlock>
 
         <TextBox x:Name="tbEntrada" Grid.Row="3" Grid.Column="2" Grid.ColumnSpan="2" MaxHeight="28"
-                 HorizontalContentAlignment="Right"/>
+                 HorizontalContentAlignment="Right" BorderBrush="Black" Background="White"/>
 
         <Button x:Name="btCancelar" Grid.Row="2" Grid.Column="4" Content="Cancelar" Height="30" Width="75" 
                 Margin="10,3" Click="btCancelar_Click"/>

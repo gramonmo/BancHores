@@ -36,7 +36,11 @@ namespace BancHores
         // Window_Loaded, Para que se ejecute al abrir el programa
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            ctrlArchivos.ComprovarArchivos();
+            if (ctrlArchivos.ComprovarArchivos())
+            {
+                VentanaConfigInicial ventana = new VentanaConfigInicial();
+                ventana.ShowDialog();
+            }
             EstablecerUI();
 
             if (calculos_comp.EsLunes())

@@ -65,6 +65,9 @@
     <Compile Include="Ventanas_Auxiliares\RegistroMensual.xaml.cs">
       <DependentUpon>RegistroMensual.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Ventanas_Auxiliares\VentanaConfigInicial.xaml.cs">
+      <DependentUpon>VentanaConfigInicial.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Ventanas_Auxiliares\VentanaMarcarSalida.xaml.cs">
       <DependentUpon>VentanaMarcarSalida.xaml</DependentUpon>
     </Compile>
@@ -91,6 +94,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Ventanas_Auxiliares\RegistroMensual.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Ventanas_Auxiliares\VentanaConfigInicial.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
