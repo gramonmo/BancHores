@@ -2,6 +2,8 @@
 using System;
 using System.IO;
 using System.Windows;
+using System.Windows.Input;
+using System.Windows.Forms;
 
 namespace BancHores.Ventanas_Auxiliares
 {
@@ -14,11 +16,6 @@ namespace BancHores.Ventanas_Auxiliares
         public VentanaConfigInicial()
         {
             InitializeComponent();
-        }
-
-        private void Window_Loaded(object sender, RoutedEventArgs e)
-        {
-           // EstablecerPlantillaUsuario();
         }
 
         private void btAceptar_Click(object sender, RoutedEventArgs e)
@@ -39,6 +36,24 @@ namespace BancHores.Ventanas_Auxiliares
             File.WriteAllText("Usuario.txt", texto);
         }
 
-        
+        private void tbHorasSemanales_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+            if (e.Key==Key.Enter)
+            {
+                usuario.LeerDocumentoUsuario();
+                double horasPracticas = double.Parse(tbHorasPracticas.Text);
+                double horasSemanales = double.Parse(tbHorasSemanales.Text);
+                usuario.horasPracticas = horasPracticas;
+                usuario.horasSemana = horasSemanales;
+                usuario.ActualizarDocumentoUsuario();
+                this.Close();
+            }
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            tbHorasPracticas.Focus();
+        }
     }
 }
+

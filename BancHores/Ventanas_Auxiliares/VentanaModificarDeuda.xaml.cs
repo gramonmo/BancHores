@@ -33,6 +33,7 @@ namespace BancHores.Ventanas_Auxiliares
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             EstablecerMensaje();
+            tbEntrada.Focus();
         }
 
         private void btCancelar_Click(object sender, RoutedEventArgs e)
@@ -87,6 +88,31 @@ namespace BancHores.Ventanas_Auxiliares
             if (usuario.horasDeuda < 0)
             {
                 usuario.horasDeuda = 0;
+            }
+        }
+
+        private void tbEntrada_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                try
+                {
+                    double valor = double.Parse(tbEntrada.Text);
+                    if (flag == 0)
+                    {
+                        SumarDeuda(valor);
+                    }
+                    else
+                    {
+                        RestarDeuda(valor);
+                    }
+                    usuario.ActualizarDocumentoUsuario();
+                    this.Close();
+                }
+                catch
+                {
+                    this.Close();
+                }
             }
         }
     }

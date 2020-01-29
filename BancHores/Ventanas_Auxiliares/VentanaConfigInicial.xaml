@@ -25,10 +25,10 @@
         <Label Grid.Row="1" Grid.Column="1" Content="Configuración Inicial" FontSize="20" FontWeight="Bold"/>
 
         <Label Grid.Row="2" Grid.Column="1" Content="Duración total pràcticas en horas:" HorizontalAlignment="Right" VerticalAlignment="Center"/>
-        <TextBox x:Name="tbHorasPracticas" Grid.Row="2" Grid.Column="2" MinHeight="30" MinWidth="70" Margin="7"/>
+        <TextBox x:Name="tbHorasPracticas" Grid.Row="2" Grid.Column="2" MinHeight="30" MinWidth="70" Margin="7" TabIndex="0"/>
 
         <Label Grid.Row="3" Grid.Column="1" Content="Horas de trabajo semanales:" HorizontalAlignment="Right" VerticalAlignment="Center"/>
-        <TextBox x:Name="tbHorasSemanales" Grid.Row="3" Grid.Column="2" MinHeight="30" MinWidth="50" Margin="7"/>
+        <TextBox x:Name="tbHorasSemanales" Grid.Row="3" Grid.Column="2" MinHeight="30" MinWidth="50" Margin="7" TabIndex="1" KeyDown="tbHorasSemanales_KeyDown"/>
 
         <Label Grid.Row="4" Grid.Column="1" Content="*Valores modificables en el documento Usuario.txt" FontSize="12" FontStyle="Italic"
                VerticalAlignment="Bottom" HorizontalAlignment="Left"/>
