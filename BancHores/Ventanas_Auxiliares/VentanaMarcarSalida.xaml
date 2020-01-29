@@ -4,8 +4,8 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BancHores.Ventanas_Auxiliares"
-        mc:Ignorable="d"
-        Title="VentanaMarcarSalida" Height="200" Width="310">
+        mc:Ignorable="d" FontSize="17" FontFamily="Calibri" WindowStartupLocation="CenterScreen"
+        Title="VentanaMarcarSalida" Height="200" Width="370">
     <Grid Background="#FFF0F0F0">
         <Grid.RowDefinitions>
             <RowDefinition Height="10"/>
