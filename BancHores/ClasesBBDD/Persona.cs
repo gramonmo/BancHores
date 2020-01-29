@@ -72,15 +72,23 @@ namespace BancHores.ClasesBBDD
         public void CalculoBalanceHoras(double totalHorasDia)
         {
             LeerDocumentoUsuario();
+
+            double horasExtraAnteriores = horasSemana - aTrabajarSemana;
+            if (horasExtraAnteriores < 0)
+            {
+                horasExtraAnteriores = 0;
+            }
+
             horasMes += totalHorasDia;
             horasSemana += totalHorasDia;
 
             if (horasSemana > aTrabajarSemana)
             {
-                double horasExtraSemana = horasSemana - aTrabajarSemana;
+                double horasExtraActual = horasSemana - aTrabajarSemana;
+                double horasARestar = horasExtraActual - horasExtraAnteriores;
                 if (horasDeuda > 0)
                 {
-                    horasDeuda -= horasExtraSemana;
+                    horasDeuda -= horasARestar;
                     if (horasDeuda < 0)
                     {
                         bancoHoras += horasDeuda * (-1); // Las horas de mas, las sumamos a bancoHoras *-1 porque estará en negativo
