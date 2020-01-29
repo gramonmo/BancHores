@@ -23,6 +23,7 @@ namespace BancHores
         public VentanaPausaCustom()
         {
             InitializeComponent();
+            GenerarValoresComboBox();
         }
 
         string[] horas = new string[24];

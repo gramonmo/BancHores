@@ -12,7 +12,7 @@ namespace BancHores
         public MainWindow()
         {
             InitializeComponent();
-        }     
+        }
 
         MetodosGenerales metodosGenerales = new MetodosGenerales();
         ControlArchivos ctrlArchivos = new ControlArchivos();
@@ -37,7 +37,7 @@ namespace BancHores
         {
             ctrlArchivos.ComprovarArchivos();
             EstablecerUI();
-            
+
             if (calculos_comp.EsLunes())
             {
                 usuario.ReiniciarSemana();
@@ -98,12 +98,12 @@ namespace BancHores
                         return;
                     }
                 }
-                jornada.RegistrarMarcaje(jornada, fechaYHora, lbSalida, 1);                
+                jornada.RegistrarMarcaje(jornada, fechaYHora, lbSalida, 1);
                 btEntrada.IsEnabled = true;
                 btSalida.IsEnabled = false;
                 btPausa.IsEnabled = false;
                 btPausaCustom.IsEnabled = false;
-                btContinuar.IsEnabled = false;             
+                btContinuar.IsEnabled = false;
                 metodosGenerales.cambiarColorEllipse(elActividad, "#FFCF2A2A"); // Pintamos Ellipse roja: #FFCF2A2A             
 
                 double horasTotales = jornada.ObtenerJornadaDia();
@@ -156,7 +156,7 @@ namespace BancHores
             metodosGenerales.InsertarFecha(lbFecha);
             Label[] labels = { lbEntrada, lbSalida, lbPausa, lbContinuar };
             metodosGenerales.OcultarLabels(labels);
-            
+
             string ultimaEntrada;
             if (calculos_comp.YaHayEntradaEseDia(out ultimaEntrada))
             {
@@ -201,11 +201,12 @@ namespace BancHores
             usuario.LeerDocumentoUsuario();
             lbHorasMes.Content = calculos_comp.SepararHorasYMinutos(usuario.horasMes);
             lbHorasSemana.Content = calculos_comp.SepararHorasYMinutos(usuario.horasSemana);
-            lbHorasAcumuladas.Content= calculos_comp.SepararHorasYMinutos(usuario.bancoHoras);
-            lbHorasDeuda.Content= calculos_comp.SepararHorasYMinutos(usuario.horasDeuda);
+            lbHorasAcumuladas.Content = calculos_comp.SepararHorasYMinutos(usuario.bancoHoras);
+            lbHorasDeuda.Content = calculos_comp.SepararHorasYMinutos(usuario.horasDeuda);
+            lbHorasPracticas.Content = $"{usuario.horasPracticas}h";
         }
         #endregion
 
-        
+
     }
 }

@@ -73,7 +73,7 @@
         <Label x:Name="lbContinuar" Grid.Row="4" Grid.Column="3" Content="Fin pausa: 00:00" FontSize="12" Visibility="Visible"/>
 
         <Button x:Name="btPausaCustom" Grid.Row="5" Grid.Column="1" Content="Pausa Custom" MaxHeight="30"
-                MaxWidth="140" FontWeight="SemiBold" Background="#FF8EF5FF" BorderBrush="Black"
+                MaxWidth="140" FontWeight="SemiBold" Background="#FF70D8FF" BorderBrush="Black"
                 IsEnabled="False" Click="btPausaCustom_Click"/>
 
         <Separator Grid.Row="6" Grid.Column="1" Grid.ColumnSpan="3" Margin="2"/>
@@ -102,13 +102,14 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="80"/>
             </Grid.ColumnDefinitions>
 
-            <Rectangle Grid.Row="0" Grid.Column="0" Grid.RowSpan="5" Grid.ColumnSpan="2" Stroke="Black" StrokeThickness="2" Fill="Transparent" />
+            <Rectangle Grid.Row="0" Grid.Column="0" Grid.RowSpan="6" Grid.ColumnSpan="2" Stroke="Black" StrokeThickness="2" Fill="Transparent" />
 
             <Rectangle Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Stroke="Black" StrokeThickness="2" Fill="#FF50DC9B"/>
             <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Content="RESUMEN" FontSize="28" 
@@ -133,14 +134,19 @@
             <Label Grid.Row="4" Grid.Column="0" Content="Horas deuda" Foreground="Red" FontWeight="SemiBold"/>
             <Rectangle Grid.Row="4" Grid.Column="1" Stroke="Black" Fill="Transparent"/>
             <Label x:Name="lbHorasDeuda" Grid.Row="4" Grid.Column="1" Content="00h 00m" Foreground="Red" FontWeight="SemiBold" HorizontalAlignment="Center"/>
+            
+            <Rectangle Grid.Row="5" Grid.Column="0" Stroke="Black" Fill="Transparent"/>
+            <Label Grid.Row="5" Grid.Column="0" Content="Horas practicas restantes" FontWeight="SemiBold"/>
+            <Rectangle Grid.Row="5" Grid.Column="1" Stroke="Black" Fill="Transparent"/>
+            <Label x:Name="lbHorasPracticas" Grid.Row="5" Grid.Column="1" Content="000h" FontWeight="SemiBold" HorizontalAlignment="Center"/>
         </Grid>
         <!-- FIN TABLA RESUMEN -->
 
         <Button x:Name="btRegistro" Grid.Row="6" Grid.Column="4" Content="Ver Registro" Height="30" Width="130" HorizontalAlignment="Right"
                 FontWeight="SemiBold" Background="#FF50DC9B" BorderBrush="Black" Margin="0,0,20,0" Click="btRegistro_Click" IsEnabled="False"/>
 
-        <Label x:Name="lbFecha" Grid.Row="9" Grid.Column="4" Content="Fecha Aqui" HorizontalAlignment="Right" 
-               VerticalAlignment="Bottom" Margin="15"/>
+        <Label x:Name="lbFecha" Grid.Row="8" Grid.Column="4" Content="Fecha Aqui" HorizontalAlignment="Right" 
+               VerticalAlignment="Bottom" Margin="10"/>
 
         <Label x:Name="lbClose" Grid.Row="0" Grid.Column="4" Content="X" VerticalAlignment="Top" 
                HorizontalAlignment="Right" FontSize="20" FontWeight="Bold" FontFamily="Verdana"
