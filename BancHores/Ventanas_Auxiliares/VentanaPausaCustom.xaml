@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:BancHores"
         mc:Ignorable="d" FontSize="17" FontFamily="Calibri" WindowStartupLocation="CenterScreen"
         Title="VentanaPausaCustom" Height="220" Width="370">
-    <Grid>
+    <Grid Background="#FFF0F0F0">
         <Grid.RowDefinitions>
             <RowDefinition Height="10"/>
             <RowDefinition Height="Auto"/>

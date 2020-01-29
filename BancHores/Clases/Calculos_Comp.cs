@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Linq;
+using System.Windows;
 
 namespace BancHores.Clases
 {
@@ -104,7 +105,7 @@ namespace BancHores.Clases
                 return false;
                 throw;
             }
-            
+
         }
 
         // Calcula las horas de difernecia que hay entre la de inicio y fin
@@ -159,6 +160,22 @@ namespace BancHores.Clases
             string fecha = DateTime.Today.ToString("dd/MM/yyyy");
             string diaMes = fecha.Split('/')[0];
             if (diaMes == "01")
+            {
+                return true;
+            }
+            return false;
+        }
+
+        // Comprueba si el dia anterior no tiene la salida marcada
+        public bool DiaAnteriorSinSalida()
+        {
+            ControlArchivos ctrlArchivos = new ControlArchivos();
+
+            string fechaEntradaUltimoDia = ctrlArchivos.LeerUltimoRegistro("Entradas.txt");
+            fechaEntradaUltimoDia = ObtenerFechaDeString(fechaEntradaUltimoDia);
+            string fechaSalidaUltimoDia = ctrlArchivos.LeerUltimoRegistro("Salidas.txt");
+            fechaSalidaUltimoDia = ObtenerFechaDeString(fechaSalidaUltimoDia);
+            if (fechaEntradaUltimoDia != fechaSalidaUltimoDia)
             {
                 return true;
             }

@@ -3,6 +3,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using BancHores.Clases;
 using BancHores.ClasesBBDD;
+using BancHores.Ventanas_Auxiliares;
 using System;
 
 namespace BancHores
@@ -46,6 +47,11 @@ namespace BancHores
             {
                 usuario.ReiniciarMes();
             }
+            if (calculos_comp.DiaAnteriorSinSalida())
+            {
+                MarcarSalidaUltimoDia();
+            }
+
             ActualizarTablaResumen();
         }
 
@@ -205,6 +211,26 @@ namespace BancHores
             lbHorasDeuda.Content = calculos_comp.SepararHorasYMinutos(usuario.horasDeuda);
             lbHorasPracticas.Content = $"{usuario.horasPracticas}h";
         }
+
+        public void MarcarSalidaUltimoDia()
+        {
+            VentanaMarcarSalida ventana = new VentanaMarcarSalida();
+            ventana.ShowDialog();
+            while (calculos_comp.HayPausaEnCurso())
+            {
+                VentanaTrabajoReaunudado vent = new VentanaTrabajoReaunudado();
+                vent.ShowDialog();
+            }
+
+            double horasTotales = jornada.ObtenerJornadaDia();
+            string horasTotalesStr = calculos_comp.SepararHorasYMinutos(horasTotales);
+            lbActividad.Content = $"Jornada finalizada. Trabajaste {horasTotalesStr}";
+
+            usuario.CalculoBalanceHoras(horasTotales);
+
+            ActualizarTablaResumen();
+        }
+
         #endregion
 
 

@@ -61,7 +61,14 @@ namespace BancHores.Clases
 
         public string LeerUltimoRegistro(string path)
         {
-            return File.ReadLines(path).Last();
+            try
+            {
+                return File.ReadLines(path).Last();
+            }
+            catch
+            {
+                return "";
+            }      
         }
 
         public void RegistrarJornada(string fecha, double horas)
