@@ -9,28 +9,32 @@ namespace BancHores.Clases
     {
         public bool ComprovarArchivos()
         {
+            if (!Directory.Exists(PathGlobal.pathData))
+            {
+                Directory.CreateDirectory(PathGlobal.pathData);
+            }
+
             bool faltaUsuario = false;
-            if (!File.Exists("Entradas.txt"))
+            if (!File.Exists($@"{PathGlobal.pathData}\Entradas.txt"))
             {
-                File.Create("Entradas.txt");
+                File.Create($@"{PathGlobal.pathData}\Entradas.txt");
             }
-            if (!File.Exists("Salidas.txt"))
+            if (!File.Exists($@"{PathGlobal.pathData}\Salidas.txt"))
             {
-                File.Create("Salidas.txt");
+                File.Create($@"{PathGlobal.pathData}\Salidas.txt");
             }
-            if (!File.Exists("Pausas.txt"))
+            if (!File.Exists($@"{PathGlobal.pathData}\Pausas.txt"))
             {
-                File.Create("Pausas.txt");
+                File.Create($@"{PathGlobal.pathData}\Pausas.txt");
             }
-            if (!File.Exists("Usuario.txt"))
+            if (!File.Exists($@"{PathGlobal.pathData}\Usuario.txt"))
             {
-                File.Create("Usuario.txt");
-                faltaUsuario = true;
-                
+                File.Create($@"{PathGlobal.pathData}\Usuario.txt");
+                faltaUsuario = true;              
             }
-            if (!File.Exists("Registro.txt"))
+            if (!File.Exists($@"{PathGlobal.pathData}\Registro.txt"))
             {
-                File.Create("Registro.txt");
+                File.Create($@"{PathGlobal.pathData}\Registro.txt");
             }
             return faltaUsuario;
         }
@@ -79,7 +83,7 @@ namespace BancHores.Clases
         public void RegistrarJornada(string fecha, double horas)
         {
             horas = Math.Round(horas, 2);
-            StreamWriter sw = File.AppendText("Registro.txt");
+            StreamWriter sw = File.AppendText($@"{PathGlobal.pathData}\Registro.txt");
             sw.WriteLine($"{fecha}: {horas}");
             sw.Close();
         }
@@ -89,10 +93,10 @@ namespace BancHores.Clases
             horasMesNuevas = Math.Round(horasMesNuevas, 2);
             horasSemanaNuevas = Math.Round(horasSemanaNuevas, 2);
 
-            string datos = File.ReadAllText("Usuario.txt");
+            string datos = File.ReadAllText($@"{PathGlobal.pathData}\Usuario.txt");
             datos = datos.Replace($"Horas este mes: {horasMesViejas.ToString()}", $"Horas este mes: {horasMesNuevas.ToString()}");
             datos = datos.Replace($"Horas esta semana: {horasSemanaViejas.ToString()}", $"Horas esta semana: {horasSemanaNuevas.ToString()}");
-            File.WriteAllText("Usuario.txt", datos);
+            File.WriteAllText($@"{PathGlobal.pathData}\Usuario.txt", datos);
         }
         
         public void EliminarUltimoRegistro(string archivo)

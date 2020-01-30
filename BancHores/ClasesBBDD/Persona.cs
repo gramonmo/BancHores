@@ -24,7 +24,7 @@ namespace BancHores.ClasesBBDD
         // Lee la info de usuario.txt y lo asigna a las propiedades
         public void LeerDocumentoUsuario()
         {
-            string[] datos = File.ReadAllLines("Usuario.txt");
+            string[] datos = File.ReadAllLines($@"{PathGlobal.pathData}\Usuario.txt");
             for (int i = 0; i < datos.Length; i++)
             {
                 double valor = double.Parse(datos[i].Split(':')[1]);
@@ -107,13 +107,13 @@ namespace BancHores.ClasesBBDD
             horasMes -= horasTotales;
             horasSemana -= horasTotales;
             ActualizarDocumentoUsuario();
-            ctrlArchivos.EliminarUltimoRegistro("Salidas.txt");
+            ctrlArchivos.EliminarUltimoRegistro($@"{PathGlobal.pathData}\Salidas.txt");
         }
 
         public void ReiniciarSemana()
         {
             LeerDocumentoUsuario();
-            string ultimaEntrada = ctrlArchivos.LeerUltimoRegistro("Entradas.txt");
+            string ultimaEntrada = ctrlArchivos.LeerUltimoRegistro($@"{PathGlobal.pathData}\Entradas.txt");
             string fechaUltimaEntrada = ultimaEntrada.Split(' ')[0];
             string fechaActual = DateTime.Today.ToString("dd/MM/yyyy");
             if (fechaActual != fechaUltimaEntrada)
@@ -126,7 +126,7 @@ namespace BancHores.ClasesBBDD
         public void ReiniciarMes()
         {
             LeerDocumentoUsuario();
-            string ultimaEntrada = ctrlArchivos.LeerUltimoRegistro("Entradas.txt");
+            string ultimaEntrada = ctrlArchivos.LeerUltimoRegistro($@"{PathGlobal.pathData}\Entradas.txt");
             string fechaUltimaEntrada = ultimaEntrada.Split(' ')[0];
             string fechaActual = DateTime.Today.ToString("dd/MM/yyyy");
             if (fechaActual != fechaUltimaEntrada)
@@ -140,7 +140,7 @@ namespace BancHores.ClasesBBDD
         {
             string texto = $"A trabajar semanalmente: {aTrabajarSemana}\nHoras este mes: {Math.Round(horasMes, 2)}\nHoras esta semana: {Math.Round(horasSemana, 2)}\n" +
                 $"Acumulado Banco horas: {Math.Round(bancoHoras, 2)}\nHoras deuda: {Math.Round(horasDeuda, 2)}\nHoras practicas: {Math.Round(horasPracticas, 2)}";
-            File.WriteAllText("Usuario.txt", texto);
+            File.WriteAllText($@"{PathGlobal.pathData}\Usuario.txt", texto);
         }
     }
 }

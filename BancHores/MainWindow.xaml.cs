@@ -6,6 +6,7 @@ using BancHores.ClasesBBDD;
 using BancHores.Ventanas_Auxiliares;
 using System;
 using System.Windows.Media.Animation;
+using System.IO;
 
 namespace BancHores
 {
@@ -21,6 +22,7 @@ namespace BancHores
         Calculos_Comp calculos_comp = new Calculos_Comp();
         Jornada jornada = new Jornada();
         Persona usuario = new Persona();
+        string userName = "";
 
         // Permite que se pueda arrastrar la ventana haciendo click en qualquier lado.
         protected override void OnMouseLeftButtonDown(MouseButtonEventArgs e)
@@ -37,6 +39,7 @@ namespace BancHores
         // Window_Loaded, Para que se ejecute al abrir el programa
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            PathGlobal.ObtenerPathData();
             if (ctrlArchivos.ComprovarArchivos())
             {
                 VentanaConfigInicial ventana = new VentanaConfigInicial();
@@ -60,9 +63,8 @@ namespace BancHores
             ActualizarTablaResumen();
         }
 
-        #region Eventos Botones
-        // Eventos botones
-        
+
+        #region Eventos Menu
         private void imgMenu_MouseMove(object sender, MouseEventArgs e)
         {
             metodosGenerales.cambiarImagen(imgMenu, "Recursos/menuBlanco.png");
@@ -75,10 +77,9 @@ namespace BancHores
 
         private void imgMenu_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            DoubleAnimation animWidth = new DoubleAnimation(0, 220, TimeSpan.FromSeconds(0.35));
+            DoubleAnimation animWidth = new DoubleAnimation(0, 220, TimeSpan.FromSeconds(0.25));
             spMenu.BeginAnimation(Window.WidthProperty, animWidth);
-            spMenu.Visibility = Visibility.Visible;
-            
+            spMenu.Visibility = Visibility.Visible;          
         }
 
         private void spMenu_MouseLeave(object sender, MouseEventArgs e)
@@ -86,6 +87,38 @@ namespace BancHores
             spMenu.Visibility = Visibility.Hidden;
         }
 
+        private void lbModificarSettings_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            VentanaConfigInicial ventana = new VentanaConfigInicial();
+            ventana.ShowDialog();
+            ActualizarTablaResumen();
+            e.Handled = true;
+        }
+        private void lbAbrirTxt_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            System.Diagnostics.Process.Start($@"{PathGlobal.pathData}\Usuario.txt");
+            e.Handled = true;
+        }
+
+        private void imgReload_MouseMove(object sender, MouseEventArgs e)
+        {
+            metodosGenerales.cambiarImagen(imgReload, "Recursos/reloadBlanco.png");
+        }
+        private void imgReload_MouseLeave(object sender, MouseEventArgs e)
+        {
+            metodosGenerales.cambiarImagen(imgReload, "Recursos/reloadNegro.png");
+        }
+        private void imgReload_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            ActualizarTablaResumen();
+            lbReload.Visibility = Visibility.Visible;
+            DoubleAnimation animFadeout = new DoubleAnimation(1, 0, TimeSpan.FromSeconds(1));
+            lbReload.BeginAnimation(OpacityProperty, animFadeout);
+        }
+        #endregion
+
+        #region Eventos Botones
+        // Eventos botones
         private void btRegistro_Click(object sender, RoutedEventArgs e)
         {
             RegistroMensual ventanaRegistro = new RegistroMensual();
@@ -275,6 +308,6 @@ namespace BancHores
 
             ActualizarTablaResumen();
         }
-        #endregion     
+        #endregion
     }
 }

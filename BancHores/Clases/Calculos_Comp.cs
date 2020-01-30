@@ -58,7 +58,7 @@ namespace BancHores.Clases
             {
                 string fechaActual = DateTime.Now.ToShortDateString();
 
-                ultimaEntrada = ctrlArchivos.LeerUltimoRegistro("Entradas.txt");
+                ultimaEntrada = ctrlArchivos.LeerUltimoRegistro($@"{PathGlobal.pathData}\Entradas.txt");
                 if (ObtenerFechaDeString(ultimaEntrada) == fechaActual)
                 {
                     return true;
@@ -77,7 +77,7 @@ namespace BancHores.Clases
         // Retorna true en caso de que esté abierta, false en caso de cerrada.
         public bool HayPausaEnCurso()
         {
-            string ultimaEntrada = ctrlArchivos.LeerUltimoRegistro("Pausas.txt");
+            string ultimaEntrada = ctrlArchivos.LeerUltimoRegistro($@"{PathGlobal.pathData}\Pausas.txt");
             if (ultimaEntrada.Length < 25) // Eso significaria que la ultima pausa no está cerrada
             {
                 return true;
@@ -90,7 +90,7 @@ namespace BancHores.Clases
             try
             {
                 string fechaActual = DateTime.Now.ToShortDateString();
-                string ultimaSalida = ctrlArchivos.LeerUltimoRegistro("Salidas.txt");
+                string ultimaSalida = ctrlArchivos.LeerUltimoRegistro($@"{PathGlobal.pathData}\Salidas.txt");
                 if (ObtenerFechaDeString(ultimaSalida) == fechaActual)
                 {
                     return true;
@@ -117,7 +117,7 @@ namespace BancHores.Clases
         {
             string fecha = ObtenerFechaDeDateTime(DateTime.Now);
 
-            string textoPausas = File.ReadAllText("Pausas.txt");
+            string textoPausas = File.ReadAllText($@"{PathGlobal.pathData}\Pausas.txt");
             string[] pausas = textoPausas.Split(new[] { Environment.NewLine }, StringSplitOptions.None); // Para rellenar el array con las lineas del string
 
             double horasPausas = 0;
@@ -166,9 +166,9 @@ namespace BancHores.Clases
         {
             try
             {
-                string fechaEntradaUltimoDia = ctrlArchivos.LeerUltimoRegistro("Entradas.txt");
+                string fechaEntradaUltimoDia = ctrlArchivos.LeerUltimoRegistro($@"{PathGlobal.pathData}\Entradas.txt");
                 fechaEntradaUltimoDia = ObtenerFechaDeString(fechaEntradaUltimoDia);
-                string fechaSalidaUltimoDia = ctrlArchivos.LeerUltimoRegistro("Salidas.txt");
+                string fechaSalidaUltimoDia = ctrlArchivos.LeerUltimoRegistro($@"{PathGlobal.pathData}\Salidas.txt");
                 fechaSalidaUltimoDia = ObtenerFechaDeString(fechaSalidaUltimoDia);
                 if (fechaEntradaUltimoDia != fechaSalidaUltimoDia && fechaEntradaUltimoDia != "")
                 {

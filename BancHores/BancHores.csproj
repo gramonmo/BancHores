@@ -63,6 +63,7 @@
     <Compile Include="ClasesBBDD\Persona.cs" />
     <Compile Include="Clases\Calculos_Comp.cs" />
     <Compile Include="Clases\ControlArchivos.cs" />
+    <Compile Include="Clases\PathGlobal.cs" />
     <Compile Include="Ventanas_Auxiliares\RegistroMensual.xaml.cs">
       <DependentUpon>RegistroMensual.xaml</DependentUpon>
     </Compile>
@@ -156,6 +157,12 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Recursos\menuBlanco.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Recursos\reloadNegro.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Recursos\reloadBlanco.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

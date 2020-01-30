@@ -32,7 +32,7 @@ namespace BancHores
             string minuto = cbMinuto.SelectedItem.ToString();
             string fechaYHoraStr = $"{fecha} {hora}:{minuto}";
 
-            ctrlArchivos.EscribirPausaContinuar("Pausas.txt", fechaYHoraStr, 1);
+            ctrlArchivos.EscribirPausaContinuar($@"{PathGlobal.pathData}\Pausas.txt", fechaYHoraStr, 1);
             this.Close();
         }
 

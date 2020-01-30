@@ -39,34 +39,34 @@ namespace BancHores.ClasesBBDD
             {
                 jornada.entrada = fechaYHora;
                 lbEscritura.Content = $"Entrada: {hora}";
-                ctrlArchivos.EscribirEntradaSalida("Entradas.txt", fechaYHoraStr);
+                ctrlArchivos.EscribirEntradaSalida($@"{PathGlobal.pathData}\Entradas.txt", fechaYHoraStr);
             }
             else if (flag == 1) // Salida
             {
                 jornada.salida = fechaYHora;
                 lbEscritura.Content = $"Salida: {hora}";
-                ctrlArchivos.EscribirEntradaSalida("Salidas.txt", fechaYHoraStr);
+                ctrlArchivos.EscribirEntradaSalida($@"{PathGlobal.pathData}\Salidas.txt", fechaYHoraStr);
 
             }
             else if (flag == 2) // Pausa
             {
                 jornada.entrada = fechaYHora;
                 lbEscritura.Content = $"Inicio pausa: {hora}";
-                ctrlArchivos.EscribirPausaContinuar("Pausas.txt", fechaYHoraStr, 0);
+                ctrlArchivos.EscribirPausaContinuar($@"{PathGlobal.pathData}\Pausas.txt", fechaYHoraStr, 0);
             }
             else // Continuar
             {
                 jornada.salida = fechaYHora;
                 lbEscritura.Content = $"Fin pausa: {hora}";
-                ctrlArchivos.EscribirPausaContinuar("Pausas.txt", fechaYHoraStr, 1);
+                ctrlArchivos.EscribirPausaContinuar($@"{PathGlobal.pathData}\Pausas.txt", fechaYHoraStr, 1);
             }
         }
 
         // Obtiene las horas hechas en el dia actual y lo registra en "Registro.txt"
         public double ObtenerJornadaDia()
         {
-            string entrada = ctrlArchivos.LeerUltimoRegistro("Entradas.txt");
-            string salida = ctrlArchivos.LeerUltimoRegistro("Salidas.txt");
+            string entrada = ctrlArchivos.LeerUltimoRegistro($@"{PathGlobal.pathData}\Entradas.txt");
+            string salida = ctrlArchivos.LeerUltimoRegistro($@"{PathGlobal.pathData}\Salidas.txt");
             double jornadaEntradaSalida = calculos_Comp.CalcularDiferenciaHoras(entrada, salida);
             double jornadaPausas = calculos_Comp.SumarPausasDia();
             double jornadaFinal = jornadaEntradaSalida - jornadaPausas;

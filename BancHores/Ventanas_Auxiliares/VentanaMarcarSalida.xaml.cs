@@ -28,12 +28,12 @@ namespace BancHores.Ventanas_Auxiliares
 
         private void btAceptar_Click(object sender, RoutedEventArgs e)
         {
-            string fechaEntradaUltimoDia = ctrlArchivos.LeerUltimoRegistro("Entradas.txt");
+            string fechaEntradaUltimoDia = ctrlArchivos.LeerUltimoRegistro($@"{PathGlobal.pathData}\Entradas.txt");
             fechaEntradaUltimoDia = calc_comp.ObtenerFechaDeString(fechaEntradaUltimoDia);
             string hora = cbHora.SelectedItem.ToString();
             string minuto = cbMinuto.SelectedItem.ToString();
             string fechaYHoraStr = $"{fechaEntradaUltimoDia} {hora}:{minuto}";
-            ctrlArchivos.EscribirEntradaSalida("Salidas.txt", fechaYHoraStr);
+            ctrlArchivos.EscribirEntradaSalida($@"{PathGlobal.pathData}\Salidas.txt", fechaYHoraStr);
             this.Close();
         }
 

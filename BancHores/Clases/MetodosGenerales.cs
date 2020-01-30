@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -65,6 +66,6 @@ namespace BancHores.Clases
             newImg.EndInit();
             tempImg.Stretch = Stretch.Fill;
             targetImg.Source = newImg;
-        }
+        }      
     }
 }

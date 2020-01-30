@@ -45,7 +45,7 @@ namespace BancHores
             string minutoFin = cbMinutoFin.SelectedItem.ToString();
 
             string pausaCustom = $"{fecha} {horaIni}:{minutoIni} - {fecha} {horaFin}:{minutoFin}";
-            ctrlArchivos.EscribirPausaCompleta("Pausas.txt", pausaCustom);
+            ctrlArchivos.EscribirPausaCompleta($@"{PathGlobal.pathData}\Pausas.txt", pausaCustom);
             this.Close();
         }
 

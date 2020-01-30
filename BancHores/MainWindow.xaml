@@ -117,6 +117,7 @@
             <Rectangle Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Stroke="Black" StrokeThickness="2" Fill="#FF50DC9B"/>
             <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Content="RESUMEN" FontSize="28" 
                     FontWeight="Bold" FontFamily="Verdana" HorizontalAlignment="Center"/>
+            <Image x:Name="imgReload" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Source="Recursos/reloadNegro.png" Height="21" HorizontalAlignment="Right" Margin="0,0,15,0" MouseMove="imgReload_MouseMove" MouseLeave="imgReload_MouseLeave" Cursor="Hand" MouseDown="imgReload_MouseDown"/>
 
             <Rectangle Grid.Row="1" Grid.Column="0" Stroke="Black" Fill="Transparent"/>
             <Label Grid.Row="1" Grid.Column="0" Content="Horas trabajadas este mes"/>
@@ -145,6 +146,9 @@
         </Grid>
         <!-- FIN TABLA RESUMEN -->
 
+        <Label x:Name="lbReload" Grid.Row="6" Grid.Column="4" VerticalAlignment="Top" Foreground="#FF1CB41C" Content="Actualizada!"
+               FontWeight="SemiBold" Margin="35, 0" Visibility="Hidden"/>
+
         <Button x:Name="btRegistro" Grid.Row="6" Grid.Column="4" Content="Ver Registro" Height="30" Width="130" HorizontalAlignment="Right"
                 FontWeight="SemiBold" Background="#FF50DC9B" BorderBrush="Black" Margin="0,0,20,0" Click="btRegistro_Click" IsEnabled="False"/>
 
@@ -168,7 +172,10 @@
         
         <StackPanel x:Name="spMenu" Grid.Row="1" Grid.Column="0" Grid.RowSpan="2" Grid.ColumnSpan="3" Background="#FF67BB94" 
                    Visibility="Hidden" MouseLeave="spMenu_MouseLeave">
-            <Label Content="Modificar Settings" Margin="2" FontWeight="SemiBold">
+            <StackPanel.Effect>
+                <DropShadowEffect/>
+            </StackPanel.Effect>
+            <Label x:Name="lbModificarSettings" Content="Modificar Settings" Margin="2" FontWeight="SemiBold" MouseDown="lbModificarSettings_MouseDown">
                 <Label.Style>
                     <Style TargetType="{x:Type Label}">
                         <Setter Property="Foreground" Value="Black"/>
@@ -181,7 +188,7 @@
                 </Label.Style>
             </Label>
             <Separator/>
-            <Label  Content="Abrir documento Usuario.txt" Margin="2" FontWeight="SemiBold">
+            <Label x:Name="lbAbrirTxt" Content="Abrir documento Usuario.txt" Margin="2" FontWeight="SemiBold" MouseDown="lbAbrirTxt_MouseDown">
                 <Label.Style>
                     <Style TargetType="{x:Type Label}">
                         <Setter Property="Foreground" Value="Black"/>
