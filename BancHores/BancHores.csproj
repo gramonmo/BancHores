@@ -151,6 +151,11 @@
   <ItemGroup>
     <Resource Include="IconoTempo.ico" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Recursos\menuNegro.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Recursos\menuBlanco.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

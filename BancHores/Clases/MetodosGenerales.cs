@@ -2,6 +2,7 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
 namespace BancHores.Clases
@@ -53,6 +54,17 @@ namespace BancHores.Clases
             SolidColorBrush pincel = new SolidColorBrush();
             pincel = (SolidColorBrush)(new BrushConverter().ConvertFrom(hexColor));
             ellipse.Fill = pincel;
+        }
+
+        public void cambiarImagen(Image targetImg, string imgPath)
+        {
+            Image tempImg = new Image();
+            BitmapImage newImg = new BitmapImage();
+            newImg.BeginInit();
+            newImg.UriSource = new Uri(imgPath, UriKind.Relative);
+            newImg.EndInit();
+            tempImg.Stretch = Stretch.Fill;
+            targetImg.Source = newImg;
         }
     }
 }

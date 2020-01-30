@@ -51,6 +51,9 @@
                    FontWeight="Bold" FontFamily="Verdana"/>
         </DockPanel>
 
+        <Image x:Name="imgMenu" Grid.Row="0" Grid.Column="1" Height="35" HorizontalAlignment="Left" Source="Recursos/menuNegro.png" Cursor="Hand" MouseMove="imgMenu_MouseMove" MouseLeave="imgMenu_MouseLeave" MouseDown="imgMenu_MouseDown"/>
+
+
         <Button x:Name="btEntrada" Grid.Row="1" Grid.Column="1" Content="Marcar Entrada" MinWidth="140" MaxHeight="30" 
                 MaxWidth="140" FontWeight="SemiBold" Background="#FF8EFFCA" BorderBrush="Black" Margin="10, 30, 10,0" Click="btEntrada_Click"/>
         <Label x:Name="lbEntrada" Grid.Row="2" Grid.Column="1" Content="Entrada:" FontSize="12" Visibility="Visible"/>
@@ -134,7 +137,7 @@
             <Label Grid.Row="4" Grid.Column="0" Content="Horas deuda" Foreground="Red" FontWeight="SemiBold"/>
             <Rectangle Grid.Row="4" Grid.Column="1" Stroke="Black" Fill="Transparent"/>
             <Label x:Name="lbHorasDeuda" Grid.Row="4" Grid.Column="1" Content="00h 00m" Foreground="Red" FontWeight="SemiBold" HorizontalAlignment="Center"/>
-            
+
             <Rectangle Grid.Row="5" Grid.Column="0" Stroke="Black" Fill="Transparent"/>
             <Label Grid.Row="5" Grid.Column="0" Content="Horas practicas restantes" FontWeight="SemiBold"/>
             <Rectangle Grid.Row="5" Grid.Column="1" Stroke="Black" Fill="Transparent"/>
@@ -162,5 +165,36 @@
                 </Style>
             </Label.Style>
         </Label>
+        
+        <StackPanel x:Name="spMenu" Grid.Row="1" Grid.Column="0" Grid.RowSpan="2" Grid.ColumnSpan="3" Background="#FF67BB94" 
+                   Visibility="Hidden" MouseLeave="spMenu_MouseLeave">
+            <Label Content="Modificar Settings" Margin="2" FontWeight="SemiBold">
+                <Label.Style>
+                    <Style TargetType="{x:Type Label}">
+                        <Setter Property="Foreground" Value="Black"/>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Foreground" Value="WhiteSmoke"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Label.Style>
+            </Label>
+            <Separator/>
+            <Label  Content="Abrir documento Usuario.txt" Margin="2" FontWeight="SemiBold">
+                <Label.Style>
+                    <Style TargetType="{x:Type Label}">
+                        <Setter Property="Foreground" Value="Black"/>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Foreground" Value="WhiteSmoke"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Label.Style>
+            </Label>
+            <Separator/>
+        </StackPanel>
     </Grid>
 </Window>
+    

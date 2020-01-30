@@ -5,6 +5,7 @@ using BancHores.Clases;
 using BancHores.ClasesBBDD;
 using BancHores.Ventanas_Auxiliares;
 using System;
+using System.Windows.Media.Animation;
 
 namespace BancHores
 {
@@ -61,6 +62,30 @@ namespace BancHores
 
         #region Eventos Botones
         // Eventos botones
+        
+        private void imgMenu_MouseMove(object sender, MouseEventArgs e)
+        {
+            metodosGenerales.cambiarImagen(imgMenu, "Recursos/menuBlanco.png");
+        }
+
+        private void imgMenu_MouseLeave(object sender, MouseEventArgs e)
+        {
+            metodosGenerales.cambiarImagen(imgMenu, "Recursos/menuNegro.png");
+        }
+
+        private void imgMenu_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            DoubleAnimation animWidth = new DoubleAnimation(0, 220, TimeSpan.FromSeconds(0.35));
+            spMenu.BeginAnimation(Window.WidthProperty, animWidth);
+            spMenu.Visibility = Visibility.Visible;
+            
+        }
+
+        private void spMenu_MouseLeave(object sender, MouseEventArgs e)
+        {
+            spMenu.Visibility = Visibility.Hidden;
+        }
+
         private void btRegistro_Click(object sender, RoutedEventArgs e)
         {
             RegistroMensual ventanaRegistro = new RegistroMensual();
@@ -250,11 +275,6 @@ namespace BancHores
 
             ActualizarTablaResumen();
         }
-
-
-
-        #endregion
-
-        
+        #endregion     
     }
 }
