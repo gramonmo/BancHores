@@ -33,6 +33,24 @@ namespace BancHores.Clases
             }
         }
 
+        public void LanzarInsert(string query)
+        {
+            try
+            {
+                MySqlConnection conexionDB = new MySqlConnection(datosBBDD.nombreDB);
+                MySqlCommand comandoDB = new MySqlCommand(query, conexionDB);
+                comandoDB.CommandTimeout = 60;
+
+                conexionDB.Open();
+                comandoDB.ExecuteReader();
+                conexionDB.Close();
+            }
+            catch
+            {
+                MessageBox.Show("No se ha podido acceder a la base de datos");
+            }
+        }
+
 
     }
 }
