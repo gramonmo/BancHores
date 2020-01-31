@@ -21,6 +21,11 @@ namespace BancHores.ClasesBBDD
         ControlArchivos ctrlArchivos = new ControlArchivos();
         Jornada jornada = new Jornada();
 
+        public void ObtenerInfoUsuario()
+        {
+            string query = $"SELECT * FROM persona WHERE persona.idPersona = '{datosBBDD.idUsuario}'";
+        }
+
         // Lee la info de usuario.txt y lo asigna a las propiedades
         public void LeerDocumentoUsuario()
         {

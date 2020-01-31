@@ -7,6 +7,7 @@ using BancHores.Ventanas_Auxiliares;
 using System;
 using System.Windows.Media.Animation;
 using System.IO;
+using Microsoft.VisualBasic;
 
 namespace BancHores
 {
@@ -19,6 +20,7 @@ namespace BancHores
 
         MetodosGenerales metodosGenerales = new MetodosGenerales();
         ControlArchivos ctrlArchivos = new ControlArchivos();
+        ControlDB ctrlDB = new ControlDB();
         Calculos_Comp calculos_comp = new Calculos_Comp();
         Jornada jornada = new Jornada();
         Persona usuario = new Persona();
@@ -38,11 +40,17 @@ namespace BancHores
         // Window_Loaded, Para que se ejecute al abrir el programa
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            if (true)
+            ctrlArchivos.ComprovarArchivos();
+            while (calculos_comp.FaltaNumeroTrabajador())
+            {
+                PedirNumeroTrabajador();
+            }
+            if (calculos_comp.FaltaConfiguracionInicial())
             {
                 VentanaConfigInicial ventana = new VentanaConfigInicial();
                 ventana.ShowDialog();
             }
+            datosBBDD.ObtenerIdUsuario();
             EstablecerUI();
 
             if (calculos_comp.EsLunes())
@@ -59,8 +67,6 @@ namespace BancHores
             }
 
             ActualizarTablaResumen();
-
-            datosBBDD.Insertar();
         }
 
 
@@ -79,7 +85,7 @@ namespace BancHores
         {
             DoubleAnimation animWidth = new DoubleAnimation(0, 220, TimeSpan.FromSeconds(0.25));
             spMenu.BeginAnimation(Window.WidthProperty, animWidth);
-            spMenu.Visibility = Visibility.Visible;          
+            spMenu.Visibility = Visibility.Visible;
         }
 
         private void spMenu_MouseLeave(object sender, MouseEventArgs e)
@@ -277,6 +283,19 @@ namespace BancHores
                 metodosGenerales.cambiarColorEllipse(elActividad, "#FFCF2A2A"); // Pintamos ellipse roja
                 lbActividad.Content = "Fuera de jornada";
             }
+        }
+
+        public void PedirNumeroTrabajador()
+        {
+            string numTrabajador;
+            do
+            {
+                numTrabajador = Interaction.InputBox("Introduce tu numero de trabajador: ");
+            } while (numTrabajador == "");
+
+            string query = "INSERT INTO persona (`Num_Trabajador`, `Horas_a_trabajar_semanalmente`, `Horas_totales_practicas`, `Banco_Horas`, `Horas_Deuda`, `Horas_Semana`, `Horas_Mes`) " +
+                $"VALUES ({numTrabajador}, 0, 0, 0, 0, 0, 0)";
+            ctrlDB.Insert_Update(query);
         }
 
         // Rellena la tabla resumen con la info del usuario

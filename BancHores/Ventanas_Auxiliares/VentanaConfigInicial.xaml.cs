@@ -22,7 +22,6 @@ namespace BancHores.Ventanas_Auxiliares
         {
             try
             {
-                usuario.LeerDocumentoUsuario();
                 double horasPracticas = double.Parse(tbHorasPracticas.Text);
                 double horasSemanales = double.Parse(tbHorasSemanales.Text);
                 usuario.horasPracticas = horasPracticas;

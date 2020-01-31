@@ -12,11 +12,11 @@ namespace BancHores.Clases
     class ControlDB
     {
 
-        public MySqlDataReader LanzarSelect(string query)
+        public MySqlDataReader Select(string query)
         {
             try
             {
-                MySqlConnection conexionDB = new MySqlConnection(datosBBDD.nombreDB);
+                MySqlConnection conexionDB = new MySqlConnection(datosBBDD.stringConexion);
                 MySqlCommand comandoDB = new MySqlCommand(query, conexionDB);
                 comandoDB.CommandTimeout = 60;
                 MySqlDataReader reader;
@@ -33,7 +33,7 @@ namespace BancHores.Clases
             }
         }
 
-        public void LanzarInsert(string query)
+        public void Insert_Update(string query)
         {
             try
             {
@@ -50,7 +50,5 @@ namespace BancHores.Clases
                 MessageBox.Show("No se ha podido acceder a la base de datos");
             }
         }
-
-
     }
 }

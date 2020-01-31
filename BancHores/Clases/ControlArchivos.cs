@@ -7,36 +7,16 @@ namespace BancHores.Clases
 {
     class ControlArchivos
     {
-        public bool ComprovarArchivos()
+        public void ComprovarArchivos()
         {
             if (!Directory.Exists(PathGlobal.pathData))
             {
                 Directory.CreateDirectory(PathGlobal.pathData);
             }
-
-            bool faltaUsuario = false;
-            if (!File.Exists($@"{PathGlobal.pathData}\Entradas.txt"))
-            {
-                File.Create($@"{PathGlobal.pathData}\Entradas.txt");
-            }
-            if (!File.Exists($@"{PathGlobal.pathData}\Salidas.txt"))
-            {
-                File.Create($@"{PathGlobal.pathData}\Salidas.txt");
-            }
-            if (!File.Exists($@"{PathGlobal.pathData}\Pausas.txt"))
-            {
-                File.Create($@"{PathGlobal.pathData}\Pausas.txt");
-            }
             if (!File.Exists($@"{PathGlobal.pathData}\Usuario.txt"))
             {
-                File.Create($@"{PathGlobal.pathData}\Usuario.txt");
-                faltaUsuario = true;              
-            }
-            if (!File.Exists($@"{PathGlobal.pathData}\Registro.txt"))
-            {
-                File.Create($@"{PathGlobal.pathData}\Registro.txt");
-            }
-            return faltaUsuario;
+                File.Create($@"{PathGlobal.pathData}\Usuario.txt");             
+            }         
         }
 
         public void EscribirEntradaSalida(string path, string fechaYHora)

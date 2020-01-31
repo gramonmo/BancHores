@@ -1,13 +1,17 @@
 ﻿using System;
 using System.IO;
+using MySql.Data.MySqlClient;
 using System.Linq;
 using System.Windows;
+using BancHores.ClasesBBDD;
 
 namespace BancHores.Clases
 {
     class Calculos_Comp
     {
         ControlArchivos ctrlArchivos = new ControlArchivos();
+        ControlDB ctrlDB = new ControlDB();
+        Persona usuario = new Persona();
 
         // Retorna solamente la fecha del DateTime que recibe
         public string ObtenerFechaDeDateTime(DateTime fechaYHora)
@@ -50,6 +54,35 @@ namespace BancHores.Clases
             return $"{horas}h {minutosInt}m";
         }
 
+        public bool FaltaNumeroTrabajador()
+        {
+            try
+            {
+                string numeroTrabajador = ctrlArchivos.LeerUltimoRegistro($@"{PathGlobal.pathData}/Usuario.txt");
+                if (numeroTrabajador == "")
+                {
+                    return true;
+                }
+                return false;
+            }
+            catch
+            {
+                return true;
+            }
+            
+        }
+
+        public bool FaltaConfiguracionInicial()
+        {
+            string query = $"SELECT Horas_a_trabajar_semanalmente, Horas_totales_practicas FROM persona WHERE persona.idPersona='{datosBBDD.idUsuario}'";
+            MySqlDataReader datos = ctrlDB.Select(query);
+            if (datos.GetString(0)=="0" || datos.GetString(1) == "0")
+            {
+                return true;
+            }
+            return false;
+        }
+
         // Comprueba si en el dia actual ya hay una entrada registrada.
         // Retorna true si hay entrada ese dia, false en caso contrario.
         public bool YaHayEntradaEseDia(out string ultimaEntrada)
@@ -57,13 +90,10 @@ namespace BancHores.Clases
             try
             {
                 string fechaActual = DateTime.Now.ToShortDateString();
-
-                ultimaEntrada = ctrlArchivos.LeerUltimoRegistro($@"{PathGlobal.pathData}\Entradas.txt");
-                if (ObtenerFechaDeString(ultimaEntrada) == fechaActual)
-                {
-                    return true;
-                }
-                return false;
+                string query = "";
+                MySqlDataReader datos = ctrlDB.Select(query);
+                ultimaEntrada = ""; // fora
+                return true; //fora
             }
             catch
             {
