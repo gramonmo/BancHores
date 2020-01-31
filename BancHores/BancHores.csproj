@@ -38,6 +38,7 @@
     <ApplicationIcon>IconoTempo.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="MySql.Data, Version=8.0.19.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Windows.Forms" />
@@ -59,6 +60,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ClasesBBDD\datosBBDD.cs" />
     <Compile Include="ClasesBBDD\Jornada.cs" />
     <Compile Include="ClasesBBDD\Persona.cs" />
     <Compile Include="Clases\Calculos_Comp.cs" />

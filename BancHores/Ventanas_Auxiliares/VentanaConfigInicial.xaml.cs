@@ -26,7 +26,7 @@ namespace BancHores.Ventanas_Auxiliares
                 double horasPracticas = double.Parse(tbHorasPracticas.Text);
                 double horasSemanales = double.Parse(tbHorasSemanales.Text);
                 usuario.horasPracticas = horasPracticas;
-                usuario.horasSemana = horasSemanales;
+                usuario.aTrabajarSemana = horasSemanales;
                 usuario.ActualizarDocumentoUsuario();
                 this.Close();
             }
@@ -36,7 +36,7 @@ namespace BancHores.Ventanas_Auxiliares
                 double horasPracticas = 0;
                 double horasSemanales = 0;
                 usuario.horasPracticas = horasPracticas;
-                usuario.horasSemana = horasSemanales;
+                usuario.aTrabajarSemana = horasSemanales;
                 usuario.ActualizarDocumentoUsuario();
                 this.Close();
             }
@@ -52,7 +52,7 @@ namespace BancHores.Ventanas_Auxiliares
                     double horasPracticas = double.Parse(tbHorasPracticas.Text);
                     double horasSemanales = double.Parse(tbHorasSemanales.Text);
                     usuario.horasPracticas = horasPracticas;
-                    usuario.horasSemana = horasSemanales;
+                    usuario.aTrabajarSemana = horasSemanales;
                     usuario.ActualizarDocumentoUsuario();
                     this.Close();
                 }
@@ -62,7 +62,7 @@ namespace BancHores.Ventanas_Auxiliares
                     double horasPracticas = 0;
                     double horasSemanales = 0;
                     usuario.horasPracticas = horasPracticas;
-                    usuario.horasSemana = horasSemanales;
+                    usuario.aTrabajarSemana = horasSemanales;
                     usuario.ActualizarDocumentoUsuario();
                     this.Close();
                 }
