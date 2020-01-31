@@ -22,7 +22,6 @@ namespace BancHores
         ControlArchivos ctrlArchivos = new ControlArchivos();
         ControlDB ctrlDB = new ControlDB();
         Calculos_Comp calculos_comp = new Calculos_Comp();
-        Jornada jornada = new Jornada();
         Persona usuario = new Persona();
 
         // Permite que se pueda arrastrar la ventana haciendo click en qualquier lado.
@@ -40,6 +39,7 @@ namespace BancHores
         // Window_Loaded, Para que se ejecute al abrir el programa
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            PathGlobal.ObtenerPathData();
             ctrlArchivos.ComprovarArchivos();
             while (calculos_comp.FaltaNumeroTrabajador())
             {
@@ -144,7 +144,7 @@ namespace BancHores
                 }
                 return;
             }
-            jornada.RegistrarMarcaje(jornada, fechaYHora, lbEntrada, 0);
+            ctrlArchivos.RegistrarMarcaje(fechaYHora, lbEntrada, 0);
             btEntrada.IsEnabled = false;
             btSalida.IsEnabled = true;
             btPausa.IsEnabled = true;
@@ -172,7 +172,7 @@ namespace BancHores
                         return;
                     }
                 }
-                jornada.RegistrarMarcaje(jornada, fechaYHora, lbSalida, 1);
+                ctrlArchivos.RegistrarMarcaje(fechaYHora, lbSalida, 1);
                 btEntrada.IsEnabled = true;
                 btSalida.IsEnabled = false;
                 btPausa.IsEnabled = false;
@@ -180,7 +180,7 @@ namespace BancHores
                 btContinuar.IsEnabled = false;
                 metodosGenerales.cambiarColorEllipse(elActividad, "#FFCF2A2A"); // Pintamos Ellipse roja: #FFCF2A2A             
 
-                double horasTotales = jornada.ObtenerJornadaDia();
+                double horasTotales = calculos_comp.ObtenerJornadaDia();
                 string horasTotalesStr = calculos_comp.SepararHorasYMinutos(horasTotales);
                 lbActividad.Content = $"Jornada finalizada. Has trabajado {horasTotalesStr}";
 
@@ -195,7 +195,7 @@ namespace BancHores
             DateTime fechaYHora = DateTime.Now;
             if (MessageBox.Show("Estás seguro que quieres pausar tu jornada?", "Confirmar pausa", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
             {
-                jornada.RegistrarMarcaje(jornada, fechaYHora, lbPausa, 2);
+                ctrlArchivos.RegistrarMarcaje(fechaYHora, lbPausa, 2);
                 btPausa.IsEnabled = false;
                 btPausaCustom.IsEnabled = false;
                 btContinuar.IsEnabled = true;
@@ -207,7 +207,7 @@ namespace BancHores
         private void btContinuar_Click(object sender, RoutedEventArgs e)
         {
             DateTime fechaYHora = DateTime.Now;
-            jornada.RegistrarMarcaje(jornada, fechaYHora, lbContinuar, 3);
+            ctrlArchivos.RegistrarMarcaje(fechaYHora, lbContinuar, 3);
             btPausa.IsEnabled = true;
             btPausaCustom.IsEnabled = true;
             btContinuar.IsEnabled = false;
@@ -293,8 +293,9 @@ namespace BancHores
                 numTrabajador = Interaction.InputBox("Introduce tu numero de trabajador: ");
             } while (numTrabajador == "");
 
+            ctrlArchivos.EscribirNumeroEmpleado(numTrabajador);
             string query = "INSERT INTO persona (`Num_Trabajador`, `Horas_a_trabajar_semanalmente`, `Horas_totales_practicas`, `Banco_Horas`, `Horas_Deuda`, `Horas_Semana`, `Horas_Mes`) " +
-                $"VALUES ({numTrabajador}, 0, 0, 0, 0, 0, 0)";
+                $"VALUES ('{numTrabajador}', 0, 0, 0, 0, 0, 0)";
             ctrlDB.Insert_Update(query);
         }
 
@@ -319,7 +320,7 @@ namespace BancHores
                 vent.ShowDialog();
             }
 
-            double horasTotales = jornada.ObtenerJornadaDia();
+            double horasTotales = calculos_comp.ObtenerJornadaDia();
             string horasTotalesStr = calculos_comp.SepararHorasYMinutos(horasTotales);
             lbActividad.Content = $"Jornada finalizada. Trabajaste {horasTotalesStr}";
 

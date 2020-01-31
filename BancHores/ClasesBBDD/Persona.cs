@@ -19,7 +19,7 @@ namespace BancHores.ClasesBBDD
         public double horasPracticas { get; set; }
 
         ControlArchivos ctrlArchivos = new ControlArchivos();
-        Jornada jornada = new Jornada();
+        Calculos_Comp calculos_comp = new Calculos_Comp();
 
         public void ObtenerInfoUsuario()
         {
@@ -97,7 +97,7 @@ namespace BancHores.ClasesBBDD
         public void RecalcularReEntrada()
         {
             LeerDocumentoUsuario();
-            double horasTotales = jornada.ObtenerJornadaDia();
+            double horasTotales = calculos_comp.ObtenerJornadaDia();
             horasPracticas += horasTotales;
             horasDeuda += horasTotales - bancoHoras;
             if (horasDeuda < 0)

@@ -11,7 +11,6 @@ namespace BancHores.Clases
     {
         ControlArchivos ctrlArchivos = new ControlArchivos();
         ControlDB ctrlDB = new ControlDB();
-        Persona usuario = new Persona();
 
         // Retorna solamente la fecha del DateTime que recibe
         public string ObtenerFechaDeDateTime(DateTime fechaYHora)
@@ -69,14 +68,15 @@ namespace BancHores.Clases
             {
                 return true;
             }
-            
+
         }
 
         public bool FaltaConfiguracionInicial()
         {
             string query = $"SELECT Horas_a_trabajar_semanalmente, Horas_totales_practicas FROM persona WHERE persona.idPersona='{datosBBDD.idUsuario}'";
             MySqlDataReader datos = ctrlDB.Select(query);
-            if (datos.GetString(0)=="0" || datos.GetString(1) == "0")
+            datos.Read();
+            if (datos.GetString(0) == "0" || datos.GetString(1) == "0")
             {
                 return true;
             }

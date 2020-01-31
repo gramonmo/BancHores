@@ -9,8 +9,6 @@ namespace BancHores.Clases
 {
     class ControlArchivos
     {
-        Calculos_Comp calc_comp = new Calculos_Comp();
-
         public void ComprovarArchivos()
         {
             if (!Directory.Exists(PathGlobal.pathData))
@@ -27,6 +25,8 @@ namespace BancHores.Clases
         // (flag=0 entrada, flag=1 salida, flag=2 pausa, flag=3 continuar)
         public void RegistrarMarcaje(DateTime fechaYHora, Label lbEscritura, int flag)
         {
+            Calculos_Comp calculos_Comp = new Calculos_Comp();
+
             if (flag < 0 || flag > 3)
             {
                 MessageBox.Show("No hay ninguna función para el flag indicado.");
@@ -39,28 +39,23 @@ namespace BancHores.Clases
             lbEscritura.Visibility = Visibility.Visible;
             if (flag == 0) // Entrada
             {
-                jornada.entrada = fechaYHora;
                 lbEscritura.Content = $"Entrada: {hora}";
-                ctrlArchivos.EscribirEntradaSalida($@"{PathGlobal.pathData}\Entradas.txt", fechaYHoraStr);
+                EscribirEntradaSalida($@"{PathGlobal.pathData}\Entradas.txt", fechaYHoraStr);
             }
             else if (flag == 1) // Salida
             {
-                jornada.salida = fechaYHora;
                 lbEscritura.Content = $"Salida: {hora}";
-                ctrlArchivos.EscribirEntradaSalida($@"{PathGlobal.pathData}\Salidas.txt", fechaYHoraStr);
-
+                EscribirEntradaSalida($@"{PathGlobal.pathData}\Salidas.txt", fechaYHoraStr);
             }
             else if (flag == 2) // Pausa
             {
-                jornada.entrada = fechaYHora;
                 lbEscritura.Content = $"Inicio pausa: {hora}";
-                ctrlArchivos.EscribirPausaContinuar($@"{PathGlobal.pathData}\Pausas.txt", fechaYHoraStr, 0);
+                EscribirPausaContinuar($@"{PathGlobal.pathData}\Pausas.txt", fechaYHoraStr, 0);
             }
             else // Continuar
             {
-                jornada.salida = fechaYHora;
                 lbEscritura.Content = $"Fin pausa: {hora}";
-                ctrlArchivos.EscribirPausaContinuar($@"{PathGlobal.pathData}\Pausas.txt", fechaYHoraStr, 1);
+                EscribirPausaContinuar($@"{PathGlobal.pathData}\Pausas.txt", fechaYHoraStr, 1);
             }
         }
 
@@ -68,6 +63,13 @@ namespace BancHores.Clases
         {
             StreamWriter sw = File.AppendText(path);
             sw.WriteLine(fechaYHora);
+            sw.Close();
+        }
+
+        public void EscribirNumeroEmpleado(string numEmpleado)
+        {
+            StreamWriter sw = new StreamWriter($@"{PathGlobal.pathData}/Usuario.txt");
+            sw.WriteLine(numEmpleado);
             sw.Close();
         }
 

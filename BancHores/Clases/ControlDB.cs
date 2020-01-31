@@ -23,7 +23,14 @@ namespace BancHores.Clases
 
                 conexionDB.Open();
                 reader = comandoDB.ExecuteReader();
-                conexionDB.Close();
+
+                while (reader.Read())
+                {
+
+                }
+
+
+                    conexionDB.Close();
                 return reader;
             }
             catch
@@ -37,7 +44,7 @@ namespace BancHores.Clases
         {
             try
             {
-                MySqlConnection conexionDB = new MySqlConnection(datosBBDD.nombreDB);
+                MySqlConnection conexionDB = new MySqlConnection(datosBBDD.stringConexion);
                 MySqlCommand comandoDB = new MySqlCommand(query, conexionDB);
                 comandoDB.CommandTimeout = 60;
 
