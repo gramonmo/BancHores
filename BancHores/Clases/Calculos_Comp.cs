@@ -27,7 +27,7 @@ namespace BancHores.Clases
         }
 
         // Retorna la hora del string que reciba en función del flag.
-        // flag=0 entrada/salida/pausa flag=1 pausa, flag=1 continuar
+        // flag=0 entrada/salida/pausa flag=1 continuar
         public string ObtenerHoraDeString(string fechaYHora, int flag)
         {
             if (flag == 0)
@@ -70,7 +70,6 @@ namespace BancHores.Clases
                 ultimaEntrada = "";
                 return false;
             }
-
         }
 
         // Comprueba si la ultima pausa está cerrada o sigue en curso. 

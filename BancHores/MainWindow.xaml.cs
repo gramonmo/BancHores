@@ -22,7 +22,6 @@ namespace BancHores
         Calculos_Comp calculos_comp = new Calculos_Comp();
         Jornada jornada = new Jornada();
         Persona usuario = new Persona();
-        string userName = "";
 
         // Permite que se pueda arrastrar la ventana haciendo click en qualquier lado.
         protected override void OnMouseLeftButtonDown(MouseButtonEventArgs e)
@@ -39,8 +38,7 @@ namespace BancHores
         // Window_Loaded, Para que se ejecute al abrir el programa
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            PathGlobal.ObtenerPathData();
-            if (ctrlArchivos.ComprovarArchivos())
+            if (true)
             {
                 VentanaConfigInicial ventana = new VentanaConfigInicial();
                 ventana.ShowDialog();
@@ -61,6 +59,8 @@ namespace BancHores
             }
 
             ActualizarTablaResumen();
+
+            datosBBDD.Insertar();
         }
 
 

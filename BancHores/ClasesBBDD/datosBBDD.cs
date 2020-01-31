@@ -9,18 +9,28 @@ namespace BancHores.ClasesBBDD
 {
     static class datosBBDD
     {
-        public static string nombreDB="banchoresprova";
+        public static string nombreDB="bhprova";
         public static string stringConexion = $"datasource=127.0.0.1;port=3306;username=root;password=;database={nombreDB}";
 
-        public static string query = "INSERT INTO persona";
+        public static string query = "INSERT INTO `persona` (`Num_Trabajador`, `Horas_a_trabajar_semanalmente`, `Horas_totales_practicas`, `Banco_Horas`, `Horas_Deuda`, `Horas_Semana`, `Horas_Mes`) " +
+            "VALUES ('11111', '20', '700', '0', '48', '32', '50');";
 
-        //public void Insertar()
-        //{
-        //    MySqlConnection databaseConnection = new MySqlConnection(stringConexion);
-        //    MySqlCommand commandDatabase = new MySqlCommand(query, databaseConnection);
-        //    commandDatabase.CommandTimeout = 60;
-        //    MySqlDataReader reader;
-        //}
+        public static void Insertar()
+        {
+            MySqlConnection databaseConnection = new MySqlConnection(stringConexion);
+            MySqlCommand commandDatabase = new MySqlCommand(query, databaseConnection);
+            commandDatabase.CommandTimeout = 60;
+
+            
+            for (int i = 0; i < 25; i++)
+            {
+                databaseConnection.Open();
+                MySqlDataReader myReader = commandDatabase.ExecuteReader();
+
+            }
+            
+            
+        }
 
         public static void ConsultaProva()
         {

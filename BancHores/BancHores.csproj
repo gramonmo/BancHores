@@ -65,6 +65,7 @@
     <Compile Include="ClasesBBDD\Persona.cs" />
     <Compile Include="Clases\Calculos_Comp.cs" />
     <Compile Include="Clases\ControlArchivos.cs" />
+    <Compile Include="Clases\ControlDB.cs" />
     <Compile Include="Clases\PathGlobal.cs" />
     <Compile Include="Ventanas_Auxiliares\RegistroMensual.xaml.cs">
       <DependentUpon>RegistroMensual.xaml</DependentUpon>
