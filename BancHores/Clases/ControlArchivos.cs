@@ -1,12 +1,16 @@
 ﻿using System;
 using System.IO;
 using System.Linq;
+using System.Windows;
+using System.Windows.Controls;
 using BancHores.Ventanas_Auxiliares;
 
 namespace BancHores.Clases
 {
     class ControlArchivos
     {
+        Calculos_Comp calc_comp = new Calculos_Comp();
+
         public void ComprovarArchivos()
         {
             if (!Directory.Exists(PathGlobal.pathData))
@@ -17,6 +21,47 @@ namespace BancHores.Clases
             {
                 File.Create($@"{PathGlobal.pathData}\Usuario.txt");             
             }         
+        }
+
+        // Registra la hora del marcaje de la jornada y lo muestra en el label en función del flag
+        // (flag=0 entrada, flag=1 salida, flag=2 pausa, flag=3 continuar)
+        public void RegistrarMarcaje(DateTime fechaYHora, Label lbEscritura, int flag)
+        {
+            if (flag < 0 || flag > 3)
+            {
+                MessageBox.Show("No hay ninguna función para el flag indicado.");
+                return;
+            }
+
+            string fechaYHoraStr = fechaYHora.ToString("dd/MM/yyyy HH:mm");
+            string hora = calculos_Comp.ObtenerHoraDeDateTime(fechaYHora);
+
+            lbEscritura.Visibility = Visibility.Visible;
+            if (flag == 0) // Entrada
+            {
+                jornada.entrada = fechaYHora;
+                lbEscritura.Content = $"Entrada: {hora}";
+                ctrlArchivos.EscribirEntradaSalida($@"{PathGlobal.pathData}\Entradas.txt", fechaYHoraStr);
+            }
+            else if (flag == 1) // Salida
+            {
+                jornada.salida = fechaYHora;
+                lbEscritura.Content = $"Salida: {hora}";
+                ctrlArchivos.EscribirEntradaSalida($@"{PathGlobal.pathData}\Salidas.txt", fechaYHoraStr);
+
+            }
+            else if (flag == 2) // Pausa
+            {
+                jornada.entrada = fechaYHora;
+                lbEscritura.Content = $"Inicio pausa: {hora}";
+                ctrlArchivos.EscribirPausaContinuar($@"{PathGlobal.pathData}\Pausas.txt", fechaYHoraStr, 0);
+            }
+            else // Continuar
+            {
+                jornada.salida = fechaYHora;
+                lbEscritura.Content = $"Fin pausa: {hora}";
+                ctrlArchivos.EscribirPausaContinuar($@"{PathGlobal.pathData}\Pausas.txt", fechaYHoraStr, 1);
+            }
         }
 
         public void EscribirEntradaSalida(string path, string fechaYHora)

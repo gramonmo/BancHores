@@ -132,6 +132,18 @@ namespace BancHores.Clases
             }
         }
 
+        // Obtiene las horas hechas en el dia actual y lo registra en "Registro.txt"
+        public double ObtenerJornadaDia()
+        {
+            string entrada = ctrlArchivos.LeerUltimoRegistro($@"{PathGlobal.pathData}\Entradas.txt");
+            string salida = ctrlArchivos.LeerUltimoRegistro($@"{PathGlobal.pathData}\Salidas.txt");
+            double jornadaEntradaSalida = CalcularDiferenciaHoras(entrada, salida);
+            double jornadaPausas = SumarPausasDia();
+            double jornadaFinal = jornadaEntradaSalida - jornadaPausas;
+            ctrlArchivos.RegistrarJornada(DateTime.Now.ToString("dd/MM/yyyy"), jornadaFinal);
+            return jornadaFinal;
+        }
+
         // Calcula las horas de difernecia que hay entre la de inicio y fin
         public double CalcularDiferenciaHoras(string hInicio, string hFin)
         {
