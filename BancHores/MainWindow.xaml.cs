@@ -45,12 +45,13 @@ namespace BancHores
             {
                 PedirNumeroTrabajador();
             }
+            datosBBDD.ObtenerIdUsuario();
             if (calculos_comp.FaltaConfiguracionInicial())
             {
                 VentanaConfigInicial ventana = new VentanaConfigInicial();
                 ventana.ShowDialog();
             }
-            datosBBDD.ObtenerIdUsuario();
+            
             EstablecerUI();
 
             if (calculos_comp.EsLunes())

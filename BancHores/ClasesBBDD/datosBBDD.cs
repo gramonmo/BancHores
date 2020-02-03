@@ -10,7 +10,7 @@ namespace BancHores.ClasesBBDD
 {
     static class datosBBDD
     {
-        public static string nombreDB="bhprova";
+        public static string nombreDB = "bhprova";
         public static string stringConexion = $"datasource=127.0.0.1;port=3306;username=root;password=;database={nombreDB}";
 
         public static string idUsuario;
@@ -22,7 +22,9 @@ namespace BancHores.ClasesBBDD
         {
             string numeroTrabajador = ctrlArchivos.LeerUltimoRegistro($@"{PathGlobal.pathData}/Usuario.txt");
             string query = $"SELECT persona.idPersona FROM persona WHERE Num_Trabajador='{numeroTrabajador}'";
-            idUsuario = ctrlDB.Select(query).ToString();
+            MySqlDataReader datos = ctrlDB.Select(query);
+            datos.Read();
+            idUsuario = datos.GetString(0);
         }
 
 
@@ -34,6 +36,6 @@ namespace BancHores.ClasesBBDD
         //                reader.GetString(6), reader.GetString(7), reader.GetString(8)};
         //        }
         //    }
-    
+
     }
 }
