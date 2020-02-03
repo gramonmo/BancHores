@@ -68,7 +68,6 @@ namespace BancHores.Clases
             {
                 return true;
             }
-
         }
 
         public bool FaltaConfiguracionInicial()
@@ -87,27 +86,31 @@ namespace BancHores.Clases
         // Retorna true si hay entrada ese dia, false en caso contrario.
         public bool YaHayEntradaEseDia(out string ultimaEntrada)
         {
-            try
+            string fechaActual = DateTime.Now.ToString("yyyy/MM/dd");
+            string query = $"SELECT jornada.Entrada FROM Jornada WHERE jornada.Persona_idPersona={datosBBDD.idUsuario} AND jornada.Fecha='{fechaActual}'";
+            MySqlDataReader datos = ctrlDB.Select(query);
+            datos.Read();
+            ultimaEntrada = datos.GetString(0);
+            fechaActual = DateTime.Now.ToString("dd/MM/yyyy");
+
+            if (ObtenerFechaDeString(ultimaEntrada) == fechaActual)
             {
-                string fechaActual = DateTime.Now.ToShortDateString();
-                string query = "";
-                MySqlDataReader datos = ctrlDB.Select(query);
-                ultimaEntrada = ""; // fora
-                return true; //fora
+                return true;
             }
-            catch
-            {
-                ultimaEntrada = "";
-                return false;
-            }
+            return false;
         }
 
         // Comprueba si la ultima pausa está cerrada o sigue en curso. 
         // Retorna true en caso de que esté abierta, false en caso de cerrada.
         public bool HayPausaEnCurso()
         {
-            string ultimaEntrada = ctrlArchivos.LeerUltimoRegistro($@"{PathGlobal.pathData}\Pausas.txt");
-            if (ultimaEntrada.Length < 25) // Eso significaria que la ultima pausa no está cerrada
+            string query = $"SELECT pausas.Cerrada FROM `pausas` INNER JOIN jornada ON pausas.Jornada_idJornada = jornada.idJornada " +
+            $"AND jornada.Persona_idPersona={datosBBDD.idUsuario} " +
+            $"ORDER BY pausas.idPausas DESC LIMIT 1";
+            MySqlDataReader datos = ctrlDB.Select(query);
+            datos.Read();
+            string estaCerrada = datos.GetString(0);
+            if (estaCerrada == "False")
             {
                 return true;
             }
