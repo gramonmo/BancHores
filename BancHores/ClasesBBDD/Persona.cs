@@ -1,16 +1,12 @@
 ﻿using BancHores.Clases;
+using MySql.Data.MySqlClient;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BancHores.ClasesBBDD
 {
     public class Persona
     {
-        public string nombre { get; set; }
         public double bancoHoras { get; set; }
         public double horasDeuda { get; set; }
         public double horasSemana { get; set; }
@@ -19,11 +15,20 @@ namespace BancHores.ClasesBBDD
         public double horasPracticas { get; set; }
 
         ControlArchivos ctrlArchivos = new ControlArchivos();
+        ControlDB ctrlDB = new ControlDB();
         Calculos_Comp calculos_comp = new Calculos_Comp();
 
         public void ObtenerInfoUsuario()
         {
             string query = $"SELECT * FROM persona WHERE persona.idPersona = '{datosBBDD.idUsuario}'";
+            MySqlDataReader datos = ctrlDB.Select(query);
+            datos.Read();
+            aTrabajarSemana = double.Parse(datos.GetString(2));
+            horasPracticas = double.Parse(datos.GetString(3));
+            bancoHoras = double.Parse(datos.GetString(4));
+            horasDeuda = double.Parse(datos.GetString(5));
+            horasSemana = double.Parse(datos.GetString(6));
+            horasMes = double.Parse(datos.GetString(7));
         }
 
         // Lee la info de usuario.txt y lo asigna a las propiedades
@@ -146,6 +151,18 @@ namespace BancHores.ClasesBBDD
             string texto = $"A trabajar semanalmente: {aTrabajarSemana}\nHoras este mes: {Math.Round(horasMes, 2)}\nHoras esta semana: {Math.Round(horasSemana, 2)}\n" +
                 $"Acumulado Banco horas: {Math.Round(bancoHoras, 2)}\nHoras deuda: {Math.Round(horasDeuda, 2)}\nHoras practicas: {Math.Round(horasPracticas, 2)}";
             File.WriteAllText($@"{PathGlobal.pathData}\Usuario.txt", texto);
+        }
+
+        public void UpdateConfigIni()
+        {
+            string query = $"UPDATE `persona` SET `Horas_a_trabajar_semanalmente` = '{aTrabajarSemana}', `Horas_totales_practicas` = '{horasPracticas}' " +
+                $"WHERE `persona`.`idPersona` = {datosBBDD.idUsuario}";
+        }
+
+        public void ActualizarInfoUsuario()
+        {
+            string query = $"INSERT INTO persona(`Num_Trabajador`, `Horas_a_trabajar_semanalmente`, `Horas_totales_practicas`, `Banco_Horas`, `Horas_Deuda`, `Horas_Semana`, `Horas_Mes`) " +
+                $"VALUES ('', 0, 0, 0, 0, 0, 0)";
         }
     }
 }

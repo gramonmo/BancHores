@@ -303,7 +303,7 @@ namespace BancHores
         // Rellena la tabla resumen con la info del usuario
         public void ActualizarTablaResumen()
         {
-            usuario.LeerDocumentoUsuario();
+            usuario.ObtenerInfoUsuario();
             lbHorasMes.Content = calculos_comp.SepararHorasYMinutos(usuario.horasMes);
             lbHorasSemana.Content = calculos_comp.SepararHorasYMinutos(usuario.horasSemana);
             lbHorasAcumuladas.Content = calculos_comp.SepararHorasYMinutos(usuario.bancoHoras);

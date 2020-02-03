@@ -26,17 +26,16 @@ namespace BancHores.Ventanas_Auxiliares
                 double horasSemanales = double.Parse(tbHorasSemanales.Text);
                 usuario.horasPracticas = horasPracticas;
                 usuario.aTrabajarSemana = horasSemanales;
-                usuario.ActualizarDocumentoUsuario();
+                usuario.UpdateConfigIni();
                 this.Close();
             }
             catch
             {
-                usuario.LeerDocumentoUsuario();
                 double horasPracticas = 0;
                 double horasSemanales = 0;
                 usuario.horasPracticas = horasPracticas;
                 usuario.aTrabajarSemana = horasSemanales;
-                usuario.ActualizarDocumentoUsuario();
+                usuario.UpdateConfigIni();
                 this.Close();
             }
         }    
@@ -47,22 +46,20 @@ namespace BancHores.Ventanas_Auxiliares
             {
                 try
                 {
-                    usuario.LeerDocumentoUsuario();
                     double horasPracticas = double.Parse(tbHorasPracticas.Text);
                     double horasSemanales = double.Parse(tbHorasSemanales.Text);
                     usuario.horasPracticas = horasPracticas;
                     usuario.aTrabajarSemana = horasSemanales;
-                    usuario.ActualizarDocumentoUsuario();
+                    usuario.UpdateConfigIni();
                     this.Close();
                 }
                 catch
                 {
-                    usuario.LeerDocumentoUsuario();
                     double horasPracticas = 0;
                     double horasSemanales = 0;
                     usuario.horasPracticas = horasPracticas;
                     usuario.aTrabajarSemana = horasSemanales;
-                    usuario.ActualizarDocumentoUsuario();
+                    usuario.UpdateConfigIni();
                     this.Close();
                 }
             }
@@ -72,6 +69,8 @@ namespace BancHores.Ventanas_Auxiliares
         {
             tbHorasPracticas.Focus();
         }
+
+        
     }
 }
 
