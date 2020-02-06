@@ -17,24 +17,38 @@ namespace BancHores.Ventanas_Auxiliares
 
         string[] horas = new string[24];
         string[] minutos = new string[60];
+        bool salidaMarcada = false;
 
         ControlArchivos ctrlArchivos = new ControlArchivos();
         Calculos_Comp calc_comp = new Calculos_Comp();
 
-        private void btCancelar_Click(object sender, RoutedEventArgs e)
-        {
-            this.Close();
-        }
-
         private void btAceptar_Click(object sender, RoutedEventArgs e)
         {
-            string fechaEntradaUltimoDia = ctrlArchivos.LeerUltimoRegistro($@"{PathGlobal.pathData}\Entradas.txt");
-            fechaEntradaUltimoDia = calc_comp.ObtenerFechaDeString(fechaEntradaUltimoDia);
-            string hora = cbHora.SelectedItem.ToString();
-            string minuto = cbMinuto.SelectedItem.ToString();
-            string fechaYHoraStr = $"{fechaEntradaUltimoDia} {hora}:{minuto}";
-            ctrlArchivos.EscribirEntradaSalida($@"{PathGlobal.pathData}\Salidas.txt", fechaYHoraStr);
-            this.Close();
+            if (cbHora.Text == "00" && cbMinuto.Text == "00")
+            {
+                if(MessageBox.Show("Estas seguro que tu jornada terminó a las 00:00?", "Es correcta la hora?", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+                {
+                    salidaMarcada = true;
+                    string fechaEntradaUltimoDia = ctrlArchivos.LeerUltimoRegistro($@"{PathGlobal.pathData}\Entradas.txt");
+                    fechaEntradaUltimoDia = calc_comp.ObtenerFechaDeString(fechaEntradaUltimoDia);
+                    string hora = "23";
+                    string minuto = "59";
+                    string fechaYHoraStr = $"{fechaEntradaUltimoDia} {hora}:{minuto}";
+                    ctrlArchivos.EscribirEntradaSalida($@"{PathGlobal.pathData}\Salidas.txt", fechaYHoraStr);
+                    this.Close();
+                }
+            }
+            else
+            {
+                salidaMarcada = true;
+                string fechaEntradaUltimoDia = ctrlArchivos.LeerUltimoRegistro($@"{PathGlobal.pathData}\Entradas.txt");
+                fechaEntradaUltimoDia = calc_comp.ObtenerFechaDeString(fechaEntradaUltimoDia);
+                string hora = cbHora.SelectedItem.ToString();
+                string minuto = cbMinuto.SelectedItem.ToString();
+                string fechaYHoraStr = $"{fechaEntradaUltimoDia} {hora}:{minuto}";
+                ctrlArchivos.EscribirEntradaSalida($@"{PathGlobal.pathData}\Salidas.txt", fechaYHoraStr);
+                this.Close();
+            }           
         }
 
         // Rellena los string con las horas y minutos a mostrar en los combobox y los añade a estos.
@@ -69,6 +83,15 @@ namespace BancHores.Ventanas_Auxiliares
             cbHora.SelectedIndex = 0;
             cbMinuto.ItemsSource = minutos;
             cbMinuto.SelectedIndex = 0;
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (!salidaMarcada)
+            {
+                MessageBox.Show("No has introducido la hora a la que terminaste la jornada.");
+                e.Cancel = true;
+            }           
         }
     }
 }
