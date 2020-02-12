@@ -73,6 +73,9 @@
     <Compile Include="Ventanas_Auxiliares\VentanaMarcarSalida.xaml.cs">
       <DependentUpon>VentanaMarcarSalida.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Ventanas_Auxiliares\VentanaModificarBancoHoras.xaml.cs">
+      <DependentUpon>VentanaModificarBancoHoras.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Ventanas_Auxiliares\VentanaPausaCustom.xaml.cs">
       <DependentUpon>VentanaPausaCustom.xaml</DependentUpon>
     </Compile>
@@ -106,6 +109,10 @@
     <Page Include="Ventanas_Auxiliares\VentanaMarcarSalida.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Ventanas_Auxiliares\VentanaModificarBancoHoras.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Ventanas_Auxiliares\VentanaPausaCustom.xaml">
       <SubType>Designer</SubType>
