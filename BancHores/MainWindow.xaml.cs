@@ -230,6 +230,22 @@ namespace BancHores
             ventana.ShowDialog();
             ActualizarTablaResumen();
         }
+
+        private void btSumarBancoHoras_Click(object sender, RoutedEventArgs e)
+        {
+            // Flag 0 añade banco horas
+            VentanaModificarBancoHoras ventana = new VentanaModificarBancoHoras(0);
+            ventana.ShowDialog();
+            ActualizarTablaResumen();
+        }
+
+        private void btRestarBancoHoras_Click(object sender, RoutedEventArgs e)
+        {
+            // Flag 1 añade banco horas
+            VentanaModificarBancoHoras ventana = new VentanaModificarBancoHoras(1);
+            ventana.ShowDialog();
+            ActualizarTablaResumen();
+        }
         #endregion
 
         #region Metodos
@@ -308,6 +324,9 @@ namespace BancHores
 
             ActualizarTablaResumen();
         }
+
         #endregion
+
+        
     }
 }

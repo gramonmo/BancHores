@@ -18,7 +18,7 @@ namespace BancHores.Ventanas_Auxiliares
     /// <summary>
     /// Lógica de interacción para Window1.xaml
     /// </summary>
-    public partial class VentanaModificarDeuda : Window
+    public partial class VentanaModificarBancoHoras : Window
     {
         public int flag; // flag indica si vas a sumar o restar horas.
 
@@ -27,17 +27,16 @@ namespace BancHores.Ventanas_Auxiliares
         string[] horasCB = new string[24];
         string[] minutosCB = new string[60];
 
-        public VentanaModificarDeuda(int flag)
+        public VentanaModificarBancoHoras(int flag)
         {
             InitializeComponent();
             this.flag = flag;
-            GenerarValoresComboBox();
+            GenerarValoresComboBox();       
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             EstablecerMensaje();
-            
         }
 
         private void btCancelar_Click(object sender, RoutedEventArgs e)
@@ -56,18 +55,18 @@ namespace BancHores.Ventanas_Auxiliares
 
                 if (flag == 0)
                 {
-                    SumarDeuda(horas);
+                    SumarBancoHoras(horas);
                 }
                 else
                 {
-                    RestarDeuda(horas);
+                    RestarBancoHoras(horas);
                 }
                 usuario.ActualizarDocumentoUsuario();
                 this.Close();
             }
             catch
             {
-                MessageBox.Show("Error, no se han modificado las horas de deuda correctamente.");
+                MessageBox.Show("Error, no se ha modificado el banco de horas correctamente.");
                 this.Close();
             }
         }
@@ -76,34 +75,15 @@ namespace BancHores.Ventanas_Auxiliares
         {
             if (flag == 0)
             {
-                tBlTexto.Text = "Quantas horas de deuda quieres AÑADIR?";
+                tBlText.Text = "Cuantas horas quieres AÑADIR al banco de horas?";
             }
             else
             {
-                tBlTexto.Text = "Quantas horas de deuda quieres QUITAR?";
+                tBlText.Text = "Cuantas horas quieres QUITAR al banco de horas?";
             }
         }
 
-        public void SumarDeuda(double valor)
-        {
-            usuario.LeerDocumentoUsuario();
-            if (usuario.bancoHoras > 0)
-            {
-                usuario.bancoHoras -= valor;
-                if (usuario.bancoHoras < 0)
-                {
-                    double diferencia = usuario.bancoHoras * (-1);
-                    usuario.bancoHoras = 0;
-                    usuario.horasDeuda += diferencia;
-                }
-            }
-            else
-            {
-                usuario.horasDeuda += valor;
-            }
-        }
-
-        public void RestarDeuda(double valor)
+        public void SumarBancoHoras(double valor)
         {
             usuario.LeerDocumentoUsuario();
             if (usuario.horasDeuda > 0)
@@ -119,6 +99,25 @@ namespace BancHores.Ventanas_Auxiliares
             else
             {
                 usuario.bancoHoras += valor;
+            }
+        }
+
+        public void RestarBancoHoras(double valor)
+        {
+            usuario.LeerDocumentoUsuario();
+            if (usuario.bancoHoras > 0)
+            {
+                usuario.bancoHoras -= valor;
+                if (usuario.bancoHoras < 0)
+                {
+                    double diferencia = usuario.bancoHoras * (-1);
+                    usuario.bancoHoras = 0;
+                    usuario.horasDeuda += diferencia;
+                }
+            }
+            else
+            {
+                usuario.horasDeuda += valor;
             }
         }
 
